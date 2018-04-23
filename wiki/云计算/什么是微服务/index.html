@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    
+    <title>什么是微服务 | polyval&#39;s Wiki</title>
+    
+    
+        <meta name="keywords" content="微服务">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="什么是微服务微服务，又称微服务架构。是一种新兴的软件架构模式。微服务架构模式通过将多种细小的服务进行整合来形成软件，这些服务运行在自己独立的进程上，服务之间通过轻量级机制(常用的是HTTP API)进行通讯。 微服务架构与传统架构的区别传统软件架构模式是一体化架构(Monolithic Architecture)，一体化架构是指软件最终以一个整体的形态呈现出来，是一个单一的可执行程序，改变其中任何">
+<meta name="keywords" content="微服务">
+<meta property="og:type" content="article">
+<meta property="og:title" content="什么是微服务">
+<meta property="og:url" content="http://polyval.github.io/wiki/wiki/云计算/什么是微服务/index.html">
+<meta property="og:site_name" content="polyval&#39;s Wiki">
+<meta property="og:description" content="什么是微服务微服务，又称微服务架构。是一种新兴的软件架构模式。微服务架构模式通过将多种细小的服务进行整合来形成软件，这些服务运行在自己独立的进程上，服务之间通过轻量级机制(常用的是HTTP API)进行通讯。 微服务架构与传统架构的区别传统软件架构模式是一体化架构(Monolithic Architecture)，一体化架构是指软件最终以一个整体的形态呈现出来，是一个单一的可执行程序，改变其中任何">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://polyval.github.io/wiki/wiki/云计算/什么是微服务/sketch.png">
+<meta property="og:updated_time" content="2018-04-23T03:37:44.502Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="什么是微服务">
+<meta name="twitter:description" content="什么是微服务微服务，又称微服务架构。是一种新兴的软件架构模式。微服务架构模式通过将多种细小的服务进行整合来形成软件，这些服务运行在自己独立的进程上，服务之间通过轻量级机制(常用的是HTTP API)进行通讯。 微服务架构与传统架构的区别传统软件架构模式是一体化架构(Monolithic Architecture)，一体化架构是指软件最终以一个整体的形态呈现出来，是一个单一的可执行程序，改变其中任何">
+<meta name="twitter:image" content="http://polyval.github.io/wiki/wiki/云计算/什么是微服务/sketch.png">
+    
+
+    
+
+    
+        <link rel="icon" href="/favicon.ico">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+    
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+</head>
+</html>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">polyval&#39;s Wiki</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id="categories">
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id="allExpand" href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree"> 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            云计算
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file active"><a href="/wiki/云计算/什么是微服务/">什么是微服务</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-云计算/什么是微服务" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/云计算/">云计算</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/微服务/">微服务</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/云计算/什么是微服务/">
+            <time datetime="2018-04-19T16:28:21.000Z" itemprop="datePublished">2018-04-20</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/raw/writing/source/_posts/云计算/什么是微服务.md" rel="external nofollow noopener noreferrer" target="_blank"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/edit/writing/source/_posts/云计算/什么是微服务.md" rel="external nofollow noopener noreferrer" target="_blank"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/commits/writing/source/_posts/云计算/什么是微服务.md" rel="external nofollow noopener noreferrer" target="_blank"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            什么是微服务
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">Catalogue</strong>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是微服务"><span class="toc-number">1.</span> <span class="toc-text">什么是微服务</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#微服务架构与传统架构的区别"><span class="toc-number">1.1.</span> <span class="toc-text">微服务架构与传统架构的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#微服务的优点"><span class="toc-number">1.2.</span> <span class="toc-text">微服务的优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#微服务的缺点"><span class="toc-number">1.3.</span> <span class="toc-text">微服务的缺点</span></a></li></ol></li></ol>
+                </div>
+            
+        
+        
+            <h3 id="什么是微服务"><a href="#什么是微服务" class="headerlink" title="什么是微服务"></a>什么是微服务</h3><p>微服务，又称微服务架构。是一种新兴的软件架构模式。微服务架构模式通过将多种细小的服务进行整合来形成软件，这些服务运行在自己独立的进程上，服务之间通过轻量级机制(常用的是HTTP API)进行通讯。</p>
+<h4 id="微服务架构与传统架构的区别"><a href="#微服务架构与传统架构的区别" class="headerlink" title="微服务架构与传统架构的区别"></a>微服务架构与传统架构的区别</h4><p>传统软件架构模式是一体化架构(Monolithic Architecture)，一体化架构是指软件最终以一个整体的形态呈现出来，是一个单一的可执行程序，改变其中任何一个部分都需要重新生成和部署这个软件。而在微服务架构，服务就是一个运行的程序，运行在独立的进程上，如果你改变了某个服务涉及的代码，只需要重新部署这个服务即可。</p>
+<h4 id="微服务的优点"><a href="#微服务的优点" class="headerlink" title="微服务的优点"></a>微服务的优点</h4><ul>
+<li><p><strong>易于扩展</strong></p>
+<blockquote>
+<p>一体化应用进行扩展时需要针对整个应用进行扩展 ，而微服务架构可以根据服务进行扩展</p>
+</blockquote>
+</li>
+</ul>
+<p><img src="/wiki/wiki/云计算/什么是微服务/sketch.png" alt="img"></p>
+<ul>
+<li><p><strong>便于持续交付</strong></p>
+<blockquote>
+<p>改变其中某个部分只需要重新生成和部署对应的服务</p>
+</blockquote>
+</li>
+<li><p><strong>服务可重用</strong></p>
+</li>
+<li><p><strong>容错性更强</strong></p>
+<blockquote>
+<p>通过功能分散，使得应用不会轻易因为一个错误而崩溃</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="微服务的缺点"><a href="#微服务的缺点" class="headerlink" title="微服务的缺点"></a>微服务的缺点</h4><ul>
+<li><strong>远程调用会有更多的延时</strong></li>
+<li><strong>测试更麻烦</strong></li>
+</ul>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            polyval &copy; 2018 
+            <a rel="external nofollow noopener noreferrer" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png"></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten" rel="external nofollow noopener noreferrer" target="_blank">wikitten</a>
+            
+                <br><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span></span> | 
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"><span id="busuanzi_value_site_uv"></span></i></span>
+            
+        </div>
+    </div>
+</footer>
+        
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>polyval&#39;s Wiki</title>
+  
+  <subtitle>知识不能碎片化，要结构化</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://polyval.github.io/wiki/"/>
+  <updated>2018-04-23T03:37:44.502Z</updated>
+  <id>http://polyval.github.io/wiki/</id>
+  
+  <author>
+    <name>polyval</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>什么是微服务</title>
+    <link href="http://polyval.github.io/wiki/wiki/%E4%BA%91%E8%AE%A1%E7%AE%97/%E4%BB%80%E4%B9%88%E6%98%AF%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+    <id>http://polyval.github.io/wiki/wiki/云计算/什么是微服务/</id>
+    <published>2018-04-19T16:28:21.000Z</published>
+    <updated>2018-04-23T03:37:44.502Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="什么是微服务"><a href="#什么是微服务" class="headerlink" title="什么是微服务"></a>什么是微服务</h3><p>微服务，又称微服务架构。是一种新兴的软件架构模式。微服务架构模式通过将多种细小的服务进行整合来形成软件，这些服务运行在自己独立的进程上，服务之间通过轻量级机制(常用的是HTTP API)进行通讯。</p><h4 id="微服务架构与传统架构的区别"><a href="#微服务架构与传统架构的区别" class="headerlink" title="微服务架构与传统架构的区别"></a>微服务架构与传统架构的区别</h4><p>传统软件架构模式是一体化架构(Monolithic Architecture)，一体化架构是指软件最终以一个整体的形态呈现出来，是一个单一的可执行程序，改变其中任何一个部分都需要重新生成和部署这个软件。而在微服务架构，服务就是一个运行的程序，运行在独立的进程上，如果你改变了某个服务涉及的代码，只需要重新部署这个服务即可。</p><h4 id="微服务的优点"><a href="#微服务的优点" class="headerlink" title="微服务的优点"></a>微服务的优点</h4><ul><li><p><strong>易于扩展</strong></p><blockquote><p>一体化应用进行扩展时需要针对整个应用进行扩展 ，而微服务架构可以根据服务进行扩展</p></blockquote></li></ul><p><img src="/wiki/wiki/云计算/什么是微服务/sketch.png" alt="img"></p><ul><li><p><strong>便于持续交付</strong></p><blockquote><p>改变其中某个部分只需要重新生成和部署对应的服务</p></blockquote></li><li><p><strong>服务可重用</strong></p></li><li><p><strong>容错性更强</strong></p><blockquote><p>通过功能分散，使得应用不会轻易因为一个错误而崩溃</p></blockquote></li></ul><h4 id="微服务的缺点"><a href="#微服务的缺点" class="headerlink" title="微服务的缺点"></a>微服务的缺点</h4><ul><li><strong>远程调用会有更多的延时</strong></li><li><strong>测试更麻烦</strong></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;什么是微服务&quot;&gt;&lt;a href=&quot;#什么是微服务&quot; class=&quot;headerlink&quot; title=&quot;什么是微服务&quot;&gt;&lt;/a&gt;什么是微服务&lt;/h3&gt;&lt;p&gt;微服务，又称微服务架构。是一种新兴的软件架构模式。微服务架构模式通过将多种细小的服务进行整合来形成软件，这些
+      
+    
+    </summary>
+    
+      <category term="云计算" scheme="http://polyval.github.io/wiki/categories/%E4%BA%91%E8%AE%A1%E7%AE%97/"/>
+    
+    
+      <category term="微服务" scheme="http://polyval.github.io/wiki/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+    
+  </entry>
+  
+</feed>
