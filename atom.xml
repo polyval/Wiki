@@ -6,7 +6,7 @@
   <link href="/Wiki/atom.xml" rel="self"/>
   
   <link href="http://polyval.github.io/Wiki/"/>
-  <updated>2018-04-23T03:37:44.502Z</updated>
+  <updated>2018-10-10T13:54:59.584Z</updated>
   <id>http://polyval.github.io/Wiki/</id>
   
   <author>
@@ -17,13 +17,90 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>什么是Java内存模型</title>
+    <link href="http://polyval.github.io/Wiki/wiki/Java/%E4%BB%80%E4%B9%88%E6%98%AFJava%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/"/>
+    <id>http://polyval.github.io/Wiki/wiki/Java/什么是Java内存模型/</id>
+    <published>2018-10-06T16:28:21.000Z</published>
+    <updated>2018-10-10T13:54:59.584Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="什么是Java内存模型"><a href="#什么是Java内存模型" class="headerlink" title="什么是Java内存模型"></a>什么是Java内存模型</h2><p><strong>Java内存模型定义了Java虚拟机与计算机内存的工作方式</strong>。Java虚拟机是计算机的模型，这个计算机模型自然包括了内存模型，即Java内存模型。</p><p><strong>Java内存模型描述了Java线程与内存的交互方式</strong>，它屏蔽了各种硬件和操作系统的访问差异，保证了Java程序在各平台下对内存的访问都能保持效果一致。<strong>解决由于多线程通过共享内存进行通信时，存在的本地内存数据不一致、编译器会对代码指令重排序、处理器会对代码乱序执行等带来的问题</strong>。目的是保证并发编程场景中的<strong>原子性</strong>、<strong>可见性</strong>和<strong>有序性</strong>。</p><p>Java内存模型规定了 <strong>所有的变量都存储在主内存中，每条线程还有自己的工作内存</strong>，线程的工作内存中保存了该线程中用到的变量的主内存副本拷贝，<strong>线程对变量的所有操作都必须在工作内存中进行，而不能直接读写主内存</strong>。不同的线程之间也无法直接访问对方工作内存中的变量，线程间变量的传递均需要自己的工作内存和主存之间进行数据同步进行。</p><p><img src="/Wiki/wiki/Java/什么是Java内存模型.assets/auto-orient.png" alt="img"></p><p>Java内存模型定义了Java线程与内存的交互方式，在Java语言层面，提供了volatile、synchronized、final等关键字来描述程序多线程行为，而Java内存模型则定义了这些关键字的行为。</p><h2 id="支撑Java内存模型的基本原理"><a href="#支撑Java内存模型的基本原理" class="headerlink" title="支撑Java内存模型的基本原理"></a>支撑Java内存模型的基本原理</h2><h3 id="指令重排序"><a href="#指令重排序" class="headerlink" title="指令重排序"></a>指令重排序</h3><p>在执行程序时，为了提高性能，编译器和处理器会对指令做重排序。但是，JMM确保在不同的编译器和不同的处理器平台之上，通过插入特定类型的<code>Memory Barrier</code>来禁止特定类型的编译器重排序和处理器重排序，为上层提供一致的内存可见性保证。</p><h3 id="Happens-Before原则"><a href="#Happens-Before原则" class="headerlink" title="Happens-Before原则"></a>Happens-Before原则</h3><p>先抛一个问题：当一个多线程共享变量被某个线程修改后，如何让这个修改被需要读取这个变量的线程感知到。</p><p>JMM定义了Happens-Before原则。只要我们理解了Happens-Before原则，无需了解JVM底层的内存操作，就可以利用Happens-Before原则来解决并发编程中的变量可见性问题，也可以理解什么时候变量对其他线程是可见的。</p><p>JMM定义的Happens-Before原则是一组偏序关系：<strong>对于两个操作A和B，这两个操作可以在不同的线程中执行。如果A Happens-Before B，那么可以保证，当A操作执行完后，A操作的执行结果对B操作是可见的。</strong></p><p>Happens-Before的规则包括：</p><ol><li>程序顺序规则</li><li>锁定规则</li><li>volatile变量规则</li><li>线程启动规则</li><li>线程结束规则</li><li>中断规则</li><li>终结器规则</li><li>传递性规则</li></ol><p>下面我们将详细讲述这8条规则的具体内容。</p><h4 id="程序顺序规则"><a href="#程序顺序规则" class="headerlink" title="程序顺序规则"></a>程序顺序规则</h4><p>在一个线程内部，按照程序代码的<strong>书写</strong>顺序，书写在前面的代码操作Happens-Before书写在后面的代码操作。这时因为<em>Java语言规范</em>要求JVM在单个线程内部要维护类似严格串行的语义，如果多个操作之间有先后依赖关系，则不允许对这些操作进行重排序。</p><h4 id="锁定规则"><a href="#锁定规则" class="headerlink" title="锁定规则"></a>锁定规则</h4><p>对锁M解锁之前的<strong>所有</strong>操作Happens-Before对锁M加锁之后的<strong>所有</strong>操作。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class HappensBeforeLock &#123;</span><br><span class="line">    private int value = 0;</span><br><span class="line">    </span><br><span class="line">    public synchronized void setValue(int value) &#123;</span><br><span class="line">        this.value = value;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public synchronized int getValue() &#123;</span><br><span class="line">        return value;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>上面这段代码，setValue和getValue两个方法共享同一个监视器锁。假设setValue方法在线程A中执行，getValue方法在线程B中执行。setValue方法会先对value变量赋值，然后释放锁。getValue方法会先获取到同一个锁后，再读取value的值。所以根据锁定原则，线程A中对value变量的修改，可以被线程B感知到。<br>如果这个两个方法上没有synchronized声明，则在线程A中执行setValue方法对value赋值后，线程B中getValue方法返回的value值并不能保证是最新值。<br>本条锁定规则对显示锁(ReentrantLock)和内置锁(synchronized)在加锁和解锁等操作上有着相同的内存语义。<br>对于锁定原则，可以像下面这样去理解：同一时刻只能有一个线程执行锁中的操作，所以锁中的操作被重排序外界是<strong>不关心</strong>的，只要最终结果能被外界感知到就好。除了重排序，剩下影响变量可见性的就是CPU缓存了。在锁被释放时，A线程会把释放锁之前所有的操作结果同步到主内存中，而在获取锁时，B线程会使自己CPU的缓存失效，重新从主内存中读取变量的值。这样，A线程中的操作结果就会被B线程感知到了。</p><h4 id="volatile变量规则"><a href="#volatile变量规则" class="headerlink" title="volatile变量规则"></a>volatile变量规则</h4><p>对一个volatile变量的写操作及这个写操作之前的所有操作Happens-Before对这个变量的读操作及这个读操作之后的所有操作。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Map configOptions;</span><br><span class="line">char[] configText; //线程间共享变量，用于保存配置信息</span><br><span class="line">// 此变量必须定义为volatile</span><br><span class="line">volatile boolean initialized = false;</span><br><span class="line"></span><br><span class="line">// 假设以下代码在线程A中执行</span><br><span class="line">// 模拟读取配置信息，当读取完成后将initialized设置为true以通知其他线程配置可用configOptions = new HashMap();</span><br><span class="line">configText = readConfigFile(fileName);</span><br><span class="line">processConfigOptions(configText, configOptions);</span><br><span class="line">initialized = true;</span><br><span class="line"></span><br><span class="line">// 假设以下代码在线程B中执行</span><br><span class="line">// 等待initialized为true，代表线程A已经把配置信息初始化完成</span><br><span class="line">while (!initialized) &#123;    </span><br><span class="line">    sleep();</span><br><span class="line">&#125;</span><br><span class="line">//使用线程A中初始化好的配置信息</span><br><span class="line">doSomethingWithConfig();</span><br></pre></td></tr></table></figure><p>上面这段代码，读取配置文件的操作和使用配置信息的操作分别在两个不同的线程A、B中执行，两个线程通过共享变量configOptions传递配置信息，并通过共享变量initialized作为初始化是否完成的通知。initialized变量被声明为volatile类型的，根据volatile变量规则，volatile变量的写入操作Happens-Before对这个变量的读操作，所以在线程A中将变量initialized设为true，线程B中是可以感知到这个修改操作的。<br>但是更牛逼的是，volatile变量不仅可以保证自己的变量可见性，还能保证<strong>书写</strong>在volatile变量写操作之前的操作对其它线程的可见性。考虑这样一种情况，如果volatile变量仅能保证自己的变量可见性，那么当线程B感知到initialized已经变成true然后执行doSomethingWithConfig操作时，可能无法获取到configOptions最新值而导致操作结果错误。所以volatile变量不仅可以保证自己的变量可见性，还能保证书写在volatile变量写操作之前的操作Happens-Before书写在volatile变量读操作之后的那些操作。<br>可以这样理解volatile变量的写入和读取操作流程：<br>首先，volatile变量的操作会禁止与其它普通变量的操作进行重排序，例如上面代码中会禁止initialized = true与它上面的两行代码进行重排序(但是它上面的代码之间是可以重排序的)，否则会导致程序结果错误。volatile变量的写操作就像是一条基准线，到达这条线之后，不管之前的代码有没有重排序，反正到达这条线之后，前面的操作都已完成并生成好结果。<br>然后，在volatile变量写操作发生后，A线程会把volatile变量本身和书写在它之前的那些操作的执行结果一起同步到主内存中。<br>最后，当B线程读取volatile变量时，B线程会使自己的CPU缓存失效，重新从主内存读取所需变量的值，这样无论是volatile本身，还是书写在volatile变量写操作之前的那些操作结果，都能让B线程感知到，也就是上面程序中的initialized和configOptions变量的最新值都可以让线程B感知到。<br>原子变量与volatile变量在读操作和写操作上有着相同的语义。</p><h4 id="线程启动规则"><a href="#线程启动规则" class="headerlink" title="线程启动规则"></a>线程启动规则</h4><p>Thread对象的start方法及<strong>书写</strong>在start方法前面的代码操作Happens-Before此线程的每一个动作。<br>start方法和新线程中的动作一定是在两个不同的线程中执行。<em>线程启动规则</em>可以这样去理解：调用start方法时，会将start方法之前所有操作的结果同步到主内存中，新线程创建好后，需要从主内存获取数据。这样在start方法调用之前的所有操作结果对于新创建的线程都是可见的。</p><h4 id="线程终止规则"><a href="#线程终止规则" class="headerlink" title="线程终止规则"></a>线程终止规则</h4><p>线程中的任何操作都Happens-Before其它线程检测到该线程已经结束。这个说法有些抽象，下面举例子对其进行说明。<br>假设两个线程s、t。在线程s中调用t.join()方法。则线程s会被挂起，等待t线程运行结束才能恢复执行。当t.join()成功返回时，s线程就知道t线程已经结束了。所以根据本条原则，在t线程中对共享变量的修改，对s线程都是可见的。类似的还有Thread.isAlive方法也可以检测到一个线程是否结束。<br>可以猜测，当一个线程结束时，会把自己所有操作的结果都同步到主内存。而任何其它线程当发现这个线程已经执行结束了，就会从主内存中重新刷新最新的变量值。所以结束的线程A对共享变量的修改，对于其它检测了A线程是否结束的线程是可见的。</p><h4 id="中断规则"><a href="#中断规则" class="headerlink" title="中断规则"></a>中断规则</h4><p>一个线程在另一个线程上调用interrupt,Happens-Before被中断线程检测到interrupt被调用。<br>假设两个线程A和B，A先做了一些操作operationA，然后调用B线程的interrupt方法。当B线程感知到自己的中断标识被设置时(通过抛出InterruptedException，或调用interrupted和isInterrupted),operationA中的操作结果对B都是可见的。</p><h4 id="终结器规则"><a href="#终结器规则" class="headerlink" title="终结器规则"></a>终结器规则</h4><p>一个对象的构造函数执行结束Happens-Before它的finalize()方法的开始。<br>“结束”和“开始”表明在时间上，一个对象的构造函数必须在它的finalize()方法调用时执行完。<br>根据这条原则，可以确保在对象的finalize方法执行时，该对象的所有field字段值都是可见的。</p><h4 id="传递性规则"><a href="#传递性规则" class="headerlink" title="传递性规则"></a>传递性规则</h4><p>如果操作A Happens-Before B，B Happens-Before C，那么可以得出操作A Happens-Before C。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;什么是Java内存模型&quot;&gt;&lt;a href=&quot;#什么是Java内存模型&quot; class=&quot;headerlink&quot; title=&quot;什么是Java内存模型&quot;&gt;&lt;/a&gt;什么是Java内存模型&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Java内存模型定义了Java虚拟机与计算机内存的工
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="http://polyval.github.io/Wiki/categories/Java/"/>
+    
+    
+      <category term="Java" scheme="http://polyval.github.io/Wiki/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CPU占用过高定位</title>
+    <link href="http://polyval.github.io/Wiki/wiki/Java/Java%E5%AE%9E%E6%88%98/CPU%E5%8D%A0%E7%94%A8%E8%BF%87%E9%AB%98%E5%AE%9A%E4%BD%8D/"/>
+    <id>http://polyval.github.io/Wiki/wiki/Java/Java实战/CPU占用过高定位/</id>
+    <published>2018-10-06T16:28:21.000Z</published>
+    <updated>2018-10-11T04:44:09.302Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="方法1"><a href="#方法1" class="headerlink" title="方法1"></a>方法1</h2><h3 id="找到CPU占用过高的线程"><a href="#找到CPU占用过高的线程" class="headerlink" title="找到CPU占用过高的线程"></a>找到CPU占用过高的线程</h3><p><code>top -p &lt;pid&gt;</code></p><p>输入H查看该进程的所有线程的统计情况，从而找到CPU占用过高的线程；</p><p>将线程id转化为16进制就是Java堆栈中对应的nid</p><h3 id="查看Java堆栈"><a href="#查看Java堆栈" class="headerlink" title="查看Java堆栈"></a>查看Java堆栈</h3><p><a href="http://0000-bigtree.github.io/blog/2017/03/05/get-java-process-stack.html" rel="external nofollow noopener noreferrer" target="_blank">获取Java堆栈</a></p><p>在线程堆栈中找到nid=上一步nid的线程堆栈</p><h4 id="找到对应的线程id"><a href="#找到对应的线程id" class="headerlink" title="找到对应的线程id"></a>找到对应的线程id</h4><ul><li><p>如果该线程正在执行Java代码，说明是该Java代码导致的CPU高</p></li><li><p>如果线程在执行native code，说明是本地代码导致的CPU高。通过<code>pstack pid</code>获取本地线程堆栈，在本地线程堆栈中找到对应线程，借助本地线程堆栈进行定位。</p></li></ul><h4 id="找不到对应的线程id"><a href="#找不到对应的线程id" class="headerlink" title="找不到对应的线程id"></a>找不到对应的线程id</h4><p>有两种可能</p><h5 id="虚拟机自身代码导致的"><a href="#虚拟机自身代码导致的" class="headerlink" title="虚拟机自身代码导致的"></a>虚拟机自身代码导致的</h5><p>如堆内存枯竭导致的频繁Full GC，或者虚拟机的bug。此时可以通过本地线程堆栈进行定位。</p><h5 id="重新创建了线程来执行"><a href="#重新创建了线程来执行" class="headerlink" title="重新创建了线程来执行"></a>重新创建了线程来执行</h5><h2 id="方法2"><a href="#方法2" class="headerlink" title="方法2"></a>方法2</h2><p>多次打印线程堆栈，找到相同的代码段</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;方法1&quot;&gt;&lt;a href=&quot;#方法1&quot; class=&quot;headerlink&quot; title=&quot;方法1&quot;&gt;&lt;/a&gt;方法1&lt;/h2&gt;&lt;h3 id=&quot;找到CPU占用过高的线程&quot;&gt;&lt;a href=&quot;#找到CPU占用过高的线程&quot; class=&quot;headerlink&quot; titl
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="http://polyval.github.io/Wiki/categories/Java/"/>
+    
+      <category term="Java实战" scheme="http://polyval.github.io/Wiki/categories/Java/Java%E5%AE%9E%E6%88%98/"/>
+    
+    
+      <category term="Java" scheme="http://polyval.github.io/Wiki/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>线程状态</title>
+    <link href="http://polyval.github.io/Wiki/wiki/Java/%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81/"/>
+    <id>http://polyval.github.io/Wiki/wiki/Java/线程状态/</id>
+    <published>2018-10-06T16:28:21.000Z</published>
+    <updated>2018-10-11T04:54:00.830Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="线程的状态转换关系"><a href="#线程的状态转换关系" class="headerlink" title="线程的状态转换关系"></a>线程的状态转换关系</h3><p><img src="/Wiki/wiki/Java/线程状态.assets/线程状态.png" alt="线程状态"></p><p>1）<strong>BLOCKED</strong>：线程等待监视器锁，就是线程在等待获取锁进入同步块或者同步方法中。两个死锁的线程即是Blocked。</p><p>2）<strong>WAITING</strong>：</p><p>三种方法可以使线程进入WAITING:</p><ul><li><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#wait--" rel="external nofollow noopener noreferrer" target="_blank">Object.wait</a> with no timeout</li><li><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Thread.html#join--" rel="external nofollow noopener noreferrer" target="_blank">Thread.join</a> with no timeout</li><li><a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/locks/LockSupport.html#park--" rel="external nofollow noopener noreferrer" target="_blank">LockSupport.park</a></li></ul><p>比BLOCKED状态进步一些，指我已经获得锁了，但由于有些条件不满足，我自己等会，调用object.wait()方法。等条件满足了，别的线程调用notify再叫我。另外也可以调用Thread.join()方法，顾名思义就是调用别的线程的join方法，让别人join进来先执行，那我就只能等会了。但是由于wait()和notify()以及notifyAll()用于协调对共享资源的存取，所以必须在synchronized块中使用，即调用wait的时候需要获取锁，调用后锁释放。所以即便wait状态的线程被notfiy唤醒了，也需要再次获得锁，所以唤醒后进入Blocked状态。</p><p>3）<strong>TIMED_WAITING</strong>：</p><p>如下方法使线程进入该状态</p><ul><li><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Thread.html#sleep-long-" rel="external nofollow noopener noreferrer" target="_blank">Thread.sleep</a></li><li><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#wait-long-" rel="external nofollow noopener noreferrer" target="_blank">Object.wait</a> with timeout</li><li><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Thread.html#join-long-" rel="external nofollow noopener noreferrer" target="_blank">Thread.join</a> with timeout</li><li><a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/locks/LockSupport.html#parkNanos-java.lang.Object-long-" rel="external nofollow noopener noreferrer" target="_blank">LockSupport.parkNanos</a></li><li><a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/locks/LockSupport.html#parkUntil-java.lang.Object-long-" rel="external nofollow noopener noreferrer" target="_blank">LockSupport.parkUntil</a></li></ul><p>类比WAITING，差异是不需要notify()或者notifyAlL()方法唤醒，时间到了我自己醒了。另外sleep比较好理解，就是让当前线程睡一会，与wait的区别是它不释放锁。</p><p>4）<strong>RUNNABLE</strong>不用多说，在JAVA虚拟机中已经在运行，但是有可能在等待操作系统资源，比如CPU时间片。</p><ul><li><p>处于Runnable的线程一定消耗cpu么</p><blockquote><p>不一定，比如线程处于io等待，实际上是线程是挂起，不消耗cpu的。</p></blockquote><h3 id="Java线程堆栈解读"><a href="#Java线程堆栈解读" class="headerlink" title="Java线程堆栈解读"></a>Java线程堆栈解读</h3></li></ul><h4 id="tid和nid"><a href="#tid和nid" class="headerlink" title="tid和nid"></a>tid和nid</h4><p>在采集Java线程堆栈时，有个nid和tid。tid表示Java层面的线程id，是Java给每个线程所分配的一个id，nid(Native thread ID)表示的本地线程id，与实际的操作系统线程id相一致。</p><h4 id="堆栈中与锁相关的三种状态"><a href="#堆栈中与锁相关的三种状态" class="headerlink" title="堆栈中与锁相关的三种状态"></a>堆栈中与锁相关的三种状态</h4><ul><li>当一个线程占有一个锁的时候，线程堆栈中会打印—locked <0x22bffb60> </0x22bffb60></li><li>当一个线程正在等待其它线程释放该锁，线程堆栈中会打印—<strong>waiting to lock</strong> <0x22bffb60> </0x22bffb60></li><li>当一个线程占有一个锁，但又执行到该锁的wait()上，线程堆栈中首先打印locked,然后又 会打印—<strong>waiting on</strong> <0x22c03c60> </0x22c03c60></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;线程的状态转换关系&quot;&gt;&lt;a href=&quot;#线程的状态转换关系&quot; class=&quot;headerlink&quot; title=&quot;线程的状态转换关系&quot;&gt;&lt;/a&gt;线程的状态转换关系&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;/Wiki/wiki/Java/线程状态.assets/线程状态
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="http://polyval.github.io/Wiki/categories/Java/"/>
+    
+    
+      <category term="Java" scheme="http://polyval.github.io/Wiki/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
     <title>什么是微服务</title>
-    <link href="http://polyval.github.io/Wiki/wiki/%E4%BA%91%E8%AE%A1%E7%AE%97/%E4%BB%80%E4%B9%88%E6%98%AF%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
-    <id>http://polyval.github.io/Wiki/wiki/云计算/什么是微服务/</id>
+    <link href="http://polyval.github.io/Wiki/wiki/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E4%BB%80%E4%B9%88%E6%98%AF%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+    <id>http://polyval.github.io/Wiki/wiki/微服务/什么是微服务/</id>
     <published>2018-04-19T16:28:21.000Z</published>
     <updated>2018-04-23T03:37:44.502Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="什么是微服务"><a href="#什么是微服务" class="headerlink" title="什么是微服务"></a>什么是微服务</h3><p>微服务，又称微服务架构。是一种新兴的软件架构模式。微服务架构模式通过将多种细小的服务进行整合来形成软件，这些服务运行在自己独立的进程上，服务之间通过轻量级机制(常用的是HTTP API)进行通讯。</p><h4 id="微服务架构与传统架构的区别"><a href="#微服务架构与传统架构的区别" class="headerlink" title="微服务架构与传统架构的区别"></a>微服务架构与传统架构的区别</h4><p>传统软件架构模式是一体化架构(Monolithic Architecture)，一体化架构是指软件最终以一个整体的形态呈现出来，是一个单一的可执行程序，改变其中任何一个部分都需要重新生成和部署这个软件。而在微服务架构，服务就是一个运行的程序，运行在独立的进程上，如果你改变了某个服务涉及的代码，只需要重新部署这个服务即可。</p><h4 id="微服务的优点"><a href="#微服务的优点" class="headerlink" title="微服务的优点"></a>微服务的优点</h4><ul><li><p><strong>易于扩展</strong></p><blockquote><p>一体化应用进行扩展时需要针对整个应用进行扩展 ，而微服务架构可以根据服务进行扩展</p></blockquote></li></ul><p><img src="/Wiki/wiki/云计算/什么是微服务/sketch.png" alt="img"></p><ul><li><p><strong>便于持续交付</strong></p><blockquote><p>改变其中某个部分只需要重新生成和部署对应的服务</p></blockquote></li><li><p><strong>服务可重用</strong></p></li><li><p><strong>容错性更强</strong></p><blockquote><p>通过功能分散，使得应用不会轻易因为一个错误而崩溃</p></blockquote></li></ul><h4 id="微服务的缺点"><a href="#微服务的缺点" class="headerlink" title="微服务的缺点"></a>微服务的缺点</h4><ul><li><strong>远程调用会有更多的延时</strong></li><li><strong>测试更麻烦</strong></li></ul>]]></content>
+    <content type="html"><![CDATA[<h3 id="什么是微服务"><a href="#什么是微服务" class="headerlink" title="什么是微服务"></a>什么是微服务</h3><p>微服务，又称微服务架构。是一种新兴的软件架构模式。微服务架构模式通过将多种细小的服务进行整合来形成软件，这些服务运行在自己独立的进程上，服务之间通过轻量级机制(常用的是HTTP API)进行通讯。</p><h4 id="微服务架构与传统架构的区别"><a href="#微服务架构与传统架构的区别" class="headerlink" title="微服务架构与传统架构的区别"></a>微服务架构与传统架构的区别</h4><p>传统软件架构模式是一体化架构(Monolithic Architecture)，一体化架构是指软件最终以一个整体的形态呈现出来，是一个单一的可执行程序，改变其中任何一个部分都需要重新生成和部署这个软件。而在微服务架构，服务就是一个运行的程序，运行在独立的进程上，如果你改变了某个服务涉及的代码，只需要重新部署这个服务即可。</p><h4 id="微服务的优点"><a href="#微服务的优点" class="headerlink" title="微服务的优点"></a>微服务的优点</h4><ul><li><p><strong>易于扩展</strong></p><blockquote><p>一体化应用进行扩展时需要针对整个应用进行扩展 ，而微服务架构可以根据服务进行扩展</p></blockquote></li></ul><p><img src="/Wiki/wiki/微服务/什么是微服务.assets/sketch.png" alt="img"></p><ul><li><p><strong>便于持续交付</strong></p><blockquote><p>改变其中某个部分只需要重新生成和部署对应的服务</p></blockquote></li><li><p><strong>服务可重用</strong></p></li><li><p><strong>容错性更强</strong></p><blockquote><p>通过功能分散，使得应用不会轻易因为一个错误而崩溃</p></blockquote></li></ul><h4 id="微服务的缺点"><a href="#微服务的缺点" class="headerlink" title="微服务的缺点"></a>微服务的缺点</h4><ul><li><strong>远程调用会有更多的延时</strong></li><li><strong>测试更麻烦</strong></li></ul>]]></content>
     
     <summary type="html">
     
@@ -34,7 +111,7 @@
     
     </summary>
     
-      <category term="云计算" scheme="http://polyval.github.io/Wiki/categories/%E4%BA%91%E8%AE%A1%E7%AE%97/"/>
+      <category term="微服务" scheme="http://polyval.github.io/Wiki/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
     
     
       <category term="微服务" scheme="http://polyval.github.io/Wiki/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>

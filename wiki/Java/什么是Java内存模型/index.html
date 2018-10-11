@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    
+    <title>什么是Java内存模型 | polyval&#39;s Wiki</title>
+    
+    
+        <meta name="keywords" content="Java">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="什么是Java内存模型Java内存模型定义了Java虚拟机与计算机内存的工作方式。Java虚拟机是计算机的模型，这个计算机模型自然包括了内存模型，即Java内存模型。 Java内存模型描述了Java线程与内存的交互方式，它屏蔽了各种硬件和操作系统的访问差异，保证了Java程序在各平台下对内存的访问都能保持效果一致。解决由于多线程通过共享内存进行通信时，存在的本地内存数据不一致、编译器会对代码指令重">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="什么是Java内存模型">
+<meta property="og:url" content="http://polyval.github.io/Wiki/wiki/Java/什么是Java内存模型/index.html">
+<meta property="og:site_name" content="polyval&#39;s Wiki">
+<meta property="og:description" content="什么是Java内存模型Java内存模型定义了Java虚拟机与计算机内存的工作方式。Java虚拟机是计算机的模型，这个计算机模型自然包括了内存模型，即Java内存模型。 Java内存模型描述了Java线程与内存的交互方式，它屏蔽了各种硬件和操作系统的访问差异，保证了Java程序在各平台下对内存的访问都能保持效果一致。解决由于多线程通过共享内存进行通信时，存在的本地内存数据不一致、编译器会对代码指令重">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://polyval.github.io/Wiki/wiki/Java/什么是Java内存模型.assets/auto-orient.png">
+<meta property="og:updated_time" content="2018-10-10T13:54:59.584Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="什么是Java内存模型">
+<meta name="twitter:description" content="什么是Java内存模型Java内存模型定义了Java虚拟机与计算机内存的工作方式。Java虚拟机是计算机的模型，这个计算机模型自然包括了内存模型，即Java内存模型。 Java内存模型描述了Java线程与内存的交互方式，它屏蔽了各种硬件和操作系统的访问差异，保证了Java程序在各平台下对内存的访问都能保持效果一致。解决由于多线程通过共享内存进行通信时，存在的本地内存数据不一致、编译器会对代码指令重">
+<meta name="twitter:image" content="http://polyval.github.io/Wiki/wiki/Java/什么是Java内存模型.assets/auto-orient.png">
+    
+
+    
+
+    
+        <link rel="icon" href="/Wiki/favicon.ico">
+    
+
+    <link rel="stylesheet" href="/Wiki/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/Wiki/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/Wiki/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/Wiki/css/style.css">
+    <script src="/Wiki/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/Wiki/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+    
+    
+        <link rel="stylesheet" href="/Wiki/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/Wiki/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+    
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+</head>
+</html>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/Wiki/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">polyval&#39;s Wiki</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/Wiki/">首页</a>
+                
+                    <a class="main-nav-link" href="/Wiki/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/Wiki/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/Wiki/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/Wiki/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/Wiki/',
+        CONTENT_URL: '/Wiki/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/Wiki/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/Wiki/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/Wiki/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/Wiki/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/Wiki/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/Wiki/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id="categories">
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id="allExpand" href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree"> 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            Java
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Java实战
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/Java/Java实战/CPU占用过高定位/">CPU占用过高定位</a></li>  </ul> 
+                    </li> 
+                     <li class="file active"><a href="/Wiki/wiki/Java/什么是Java内存模型/">什么是Java内存模型</a></li>  <li class="file"><a href="/Wiki/wiki/Java/线程状态/">线程状态</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            微服务
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/微服务/什么是微服务/">什么是微服务</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-Java/什么是Java内存模型" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/Wiki/categories/Java/">Java</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/Wiki/tags/Java/">Java</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/Wiki/wiki/Java/什么是Java内存模型/">
+            <time datetime="2018-10-06T16:28:21.000Z" itemprop="datePublished">2018-10-07</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/raw/writing/source/_posts/Java/什么是Java内存模型.md" rel="external nofollow noopener noreferrer" target="_blank"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/edit/writing/source/_posts/Java/什么是Java内存模型.md" rel="external nofollow noopener noreferrer" target="_blank"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/commits/writing/source/_posts/Java/什么是Java内存模型.md" rel="external nofollow noopener noreferrer" target="_blank"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            什么是Java内存模型
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">Catalogue</strong>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是Java内存模型"><span class="toc-number">1.</span> <span class="toc-text">什么是Java内存模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#支撑Java内存模型的基本原理"><span class="toc-number">2.</span> <span class="toc-text">支撑Java内存模型的基本原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#指令重排序"><span class="toc-number">2.1.</span> <span class="toc-text">指令重排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Happens-Before原则"><span class="toc-number">2.2.</span> <span class="toc-text">Happens-Before原则</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#程序顺序规则"><span class="toc-number">2.2.1.</span> <span class="toc-text">程序顺序规则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#锁定规则"><span class="toc-number">2.2.2.</span> <span class="toc-text">锁定规则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#volatile变量规则"><span class="toc-number">2.2.3.</span> <span class="toc-text">volatile变量规则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#线程启动规则"><span class="toc-number">2.2.4.</span> <span class="toc-text">线程启动规则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#线程终止规则"><span class="toc-number">2.2.5.</span> <span class="toc-text">线程终止规则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#中断规则"><span class="toc-number">2.2.6.</span> <span class="toc-text">中断规则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#终结器规则"><span class="toc-number">2.2.7.</span> <span class="toc-text">终结器规则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#传递性规则"><span class="toc-number">2.2.8.</span> <span class="toc-text">传递性规则</span></a></li></ol></li></ol></li></ol>
+                </div>
+            
+        
+        
+            <h2 id="什么是Java内存模型"><a href="#什么是Java内存模型" class="headerlink" title="什么是Java内存模型"></a>什么是Java内存模型</h2><p><strong>Java内存模型定义了Java虚拟机与计算机内存的工作方式</strong>。Java虚拟机是计算机的模型，这个计算机模型自然包括了内存模型，即Java内存模型。</p>
+<p><strong>Java内存模型描述了Java线程与内存的交互方式</strong>，它屏蔽了各种硬件和操作系统的访问差异，保证了Java程序在各平台下对内存的访问都能保持效果一致。<strong>解决由于多线程通过共享内存进行通信时，存在的本地内存数据不一致、编译器会对代码指令重排序、处理器会对代码乱序执行等带来的问题</strong>。目的是保证并发编程场景中的<strong>原子性</strong>、<strong>可见性</strong>和<strong>有序性</strong>。</p>
+<p>Java内存模型规定了 <strong>所有的变量都存储在主内存中，每条线程还有自己的工作内存</strong>，线程的工作内存中保存了该线程中用到的变量的主内存副本拷贝，<strong>线程对变量的所有操作都必须在工作内存中进行，而不能直接读写主内存</strong>。不同的线程之间也无法直接访问对方工作内存中的变量，线程间变量的传递均需要自己的工作内存和主存之间进行数据同步进行。</p>
+<p><img src="/Wiki/wiki/Java/什么是Java内存模型.assets/auto-orient.png" alt="img"></p>
+<p>Java内存模型定义了Java线程与内存的交互方式，在Java语言层面，提供了volatile、synchronized、final等关键字来描述程序多线程行为，而Java内存模型则定义了这些关键字的行为。</p>
+<h2 id="支撑Java内存模型的基本原理"><a href="#支撑Java内存模型的基本原理" class="headerlink" title="支撑Java内存模型的基本原理"></a>支撑Java内存模型的基本原理</h2><h3 id="指令重排序"><a href="#指令重排序" class="headerlink" title="指令重排序"></a>指令重排序</h3><p>在执行程序时，为了提高性能，编译器和处理器会对指令做重排序。但是，JMM确保在不同的编译器和不同的处理器平台之上，通过插入特定类型的<code>Memory Barrier</code>来禁止特定类型的编译器重排序和处理器重排序，为上层提供一致的内存可见性保证。</p>
+<h3 id="Happens-Before原则"><a href="#Happens-Before原则" class="headerlink" title="Happens-Before原则"></a>Happens-Before原则</h3><p>先抛一个问题：当一个多线程共享变量被某个线程修改后，如何让这个修改被需要读取这个变量的线程感知到。</p>
+<p>JMM定义了Happens-Before原则。只要我们理解了Happens-Before原则，无需了解JVM底层的内存操作，就可以利用Happens-Before原则来解决并发编程中的变量可见性问题，也可以理解什么时候变量对其他线程是可见的。</p>
+<p>JMM定义的Happens-Before原则是一组偏序关系：<strong>对于两个操作A和B，这两个操作可以在不同的线程中执行。如果A Happens-Before B，那么可以保证，当A操作执行完后，A操作的执行结果对B操作是可见的。</strong></p>
+<p>Happens-Before的规则包括：</p>
+<ol>
+<li>程序顺序规则</li>
+<li>锁定规则</li>
+<li>volatile变量规则</li>
+<li>线程启动规则</li>
+<li>线程结束规则</li>
+<li>中断规则</li>
+<li>终结器规则</li>
+<li>传递性规则</li>
+</ol>
+<p>下面我们将详细讲述这8条规则的具体内容。</p>
+<h4 id="程序顺序规则"><a href="#程序顺序规则" class="headerlink" title="程序顺序规则"></a>程序顺序规则</h4><p>在一个线程内部，按照程序代码的<strong>书写</strong>顺序，书写在前面的代码操作Happens-Before书写在后面的代码操作。这时因为<em>Java语言规范</em>要求JVM在单个线程内部要维护类似严格串行的语义，如果多个操作之间有先后依赖关系，则不允许对这些操作进行重排序。</p>
+<h4 id="锁定规则"><a href="#锁定规则" class="headerlink" title="锁定规则"></a>锁定规则</h4><p>对锁M解锁之前的<strong>所有</strong>操作Happens-Before对锁M加锁之后的<strong>所有</strong>操作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class HappensBeforeLock &#123;</span><br><span class="line">    private int value = 0;</span><br><span class="line">    </span><br><span class="line">    public synchronized void setValue(int value) &#123;</span><br><span class="line">        this.value = value;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public synchronized int getValue() &#123;</span><br><span class="line">        return value;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面这段代码，setValue和getValue两个方法共享同一个监视器锁。假设setValue方法在线程A中执行，getValue方法在线程B中执行。setValue方法会先对value变量赋值，然后释放锁。getValue方法会先获取到同一个锁后，再读取value的值。所以根据锁定原则，线程A中对value变量的修改，可以被线程B感知到。<br>如果这个两个方法上没有synchronized声明，则在线程A中执行setValue方法对value赋值后，线程B中getValue方法返回的value值并不能保证是最新值。<br>本条锁定规则对显示锁(ReentrantLock)和内置锁(synchronized)在加锁和解锁等操作上有着相同的内存语义。<br>对于锁定原则，可以像下面这样去理解：同一时刻只能有一个线程执行锁中的操作，所以锁中的操作被重排序外界是<strong>不关心</strong>的，只要最终结果能被外界感知到就好。除了重排序，剩下影响变量可见性的就是CPU缓存了。在锁被释放时，A线程会把释放锁之前所有的操作结果同步到主内存中，而在获取锁时，B线程会使自己CPU的缓存失效，重新从主内存中读取变量的值。这样，A线程中的操作结果就会被B线程感知到了。</p>
+<h4 id="volatile变量规则"><a href="#volatile变量规则" class="headerlink" title="volatile变量规则"></a>volatile变量规则</h4><p>对一个volatile变量的写操作及这个写操作之前的所有操作Happens-Before对这个变量的读操作及这个读操作之后的所有操作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Map configOptions;</span><br><span class="line">char[] configText; //线程间共享变量，用于保存配置信息</span><br><span class="line">// 此变量必须定义为volatile</span><br><span class="line">volatile boolean initialized = false;</span><br><span class="line"></span><br><span class="line">// 假设以下代码在线程A中执行</span><br><span class="line">// 模拟读取配置信息，当读取完成后将initialized设置为true以通知其他线程配置可用configOptions = new HashMap();</span><br><span class="line">configText = readConfigFile(fileName);</span><br><span class="line">processConfigOptions(configText, configOptions);</span><br><span class="line">initialized = true;</span><br><span class="line"></span><br><span class="line">// 假设以下代码在线程B中执行</span><br><span class="line">// 等待initialized为true，代表线程A已经把配置信息初始化完成</span><br><span class="line">while (!initialized) &#123;    </span><br><span class="line">    sleep();</span><br><span class="line">&#125;</span><br><span class="line">//使用线程A中初始化好的配置信息</span><br><span class="line">doSomethingWithConfig();</span><br></pre></td></tr></table></figure>
+<p>上面这段代码，读取配置文件的操作和使用配置信息的操作分别在两个不同的线程A、B中执行，两个线程通过共享变量configOptions传递配置信息，并通过共享变量initialized作为初始化是否完成的通知。initialized变量被声明为volatile类型的，根据volatile变量规则，volatile变量的写入操作Happens-Before对这个变量的读操作，所以在线程A中将变量initialized设为true，线程B中是可以感知到这个修改操作的。<br>但是更牛逼的是，volatile变量不仅可以保证自己的变量可见性，还能保证<strong>书写</strong>在volatile变量写操作之前的操作对其它线程的可见性。考虑这样一种情况，如果volatile变量仅能保证自己的变量可见性，那么当线程B感知到initialized已经变成true然后执行doSomethingWithConfig操作时，可能无法获取到configOptions最新值而导致操作结果错误。所以volatile变量不仅可以保证自己的变量可见性，还能保证书写在volatile变量写操作之前的操作Happens-Before书写在volatile变量读操作之后的那些操作。<br>可以这样理解volatile变量的写入和读取操作流程：<br>首先，volatile变量的操作会禁止与其它普通变量的操作进行重排序，例如上面代码中会禁止initialized = true与它上面的两行代码进行重排序(但是它上面的代码之间是可以重排序的)，否则会导致程序结果错误。volatile变量的写操作就像是一条基准线，到达这条线之后，不管之前的代码有没有重排序，反正到达这条线之后，前面的操作都已完成并生成好结果。<br>然后，在volatile变量写操作发生后，A线程会把volatile变量本身和书写在它之前的那些操作的执行结果一起同步到主内存中。<br>最后，当B线程读取volatile变量时，B线程会使自己的CPU缓存失效，重新从主内存读取所需变量的值，这样无论是volatile本身，还是书写在volatile变量写操作之前的那些操作结果，都能让B线程感知到，也就是上面程序中的initialized和configOptions变量的最新值都可以让线程B感知到。<br>原子变量与volatile变量在读操作和写操作上有着相同的语义。</p>
+<h4 id="线程启动规则"><a href="#线程启动规则" class="headerlink" title="线程启动规则"></a>线程启动规则</h4><p>Thread对象的start方法及<strong>书写</strong>在start方法前面的代码操作Happens-Before此线程的每一个动作。<br>start方法和新线程中的动作一定是在两个不同的线程中执行。<em>线程启动规则</em>可以这样去理解：调用start方法时，会将start方法之前所有操作的结果同步到主内存中，新线程创建好后，需要从主内存获取数据。这样在start方法调用之前的所有操作结果对于新创建的线程都是可见的。</p>
+<h4 id="线程终止规则"><a href="#线程终止规则" class="headerlink" title="线程终止规则"></a>线程终止规则</h4><p>线程中的任何操作都Happens-Before其它线程检测到该线程已经结束。这个说法有些抽象，下面举例子对其进行说明。<br>假设两个线程s、t。在线程s中调用t.join()方法。则线程s会被挂起，等待t线程运行结束才能恢复执行。当t.join()成功返回时，s线程就知道t线程已经结束了。所以根据本条原则，在t线程中对共享变量的修改，对s线程都是可见的。类似的还有Thread.isAlive方法也可以检测到一个线程是否结束。<br>可以猜测，当一个线程结束时，会把自己所有操作的结果都同步到主内存。而任何其它线程当发现这个线程已经执行结束了，就会从主内存中重新刷新最新的变量值。所以结束的线程A对共享变量的修改，对于其它检测了A线程是否结束的线程是可见的。</p>
+<h4 id="中断规则"><a href="#中断规则" class="headerlink" title="中断规则"></a>中断规则</h4><p>一个线程在另一个线程上调用interrupt,Happens-Before被中断线程检测到interrupt被调用。<br>假设两个线程A和B，A先做了一些操作operationA，然后调用B线程的interrupt方法。当B线程感知到自己的中断标识被设置时(通过抛出InterruptedException，或调用interrupted和isInterrupted),operationA中的操作结果对B都是可见的。</p>
+<h4 id="终结器规则"><a href="#终结器规则" class="headerlink" title="终结器规则"></a>终结器规则</h4><p>一个对象的构造函数执行结束Happens-Before它的finalize()方法的开始。<br>“结束”和“开始”表明在时间上，一个对象的构造函数必须在它的finalize()方法调用时执行完。<br>根据这条原则，可以确保在对象的finalize方法执行时，该对象的所有field字段值都是可见的。</p>
+<h4 id="传递性规则"><a href="#传递性规则" class="headerlink" title="传递性规则"></a>传递性规则</h4><p>如果操作A Happens-Before B，B Happens-Before C，那么可以得出操作A Happens-Before C。</p>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+    
+        <a href="/Wiki/wiki/Java/Java实战/CPU占用过高定位/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">CPU占用过高定位</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            polyval &copy; 2018 
+            <a rel="external nofollow noopener noreferrer" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png"></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten" rel="external nofollow noopener noreferrer" target="_blank">wikitten</a>
+            
+                <br><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span></span> | 
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"><span id="busuanzi_value_site_uv"></span></i></span>
+            
+        </div>
+    </div>
+</footer>
+        
+
+    
+        <script src="/Wiki/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/Wiki/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/Wiki/js/main.js"></script>
+
+    </div>
+</body>

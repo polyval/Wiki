@@ -158,9 +158,27 @@
                         <a href="#" data-role="directory">
                             <i class="fa fa-folder"></i>
                             &nbsp;
-                            云计算
+                            Java
                         </a>
-                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/云计算/什么是微服务/">什么是微服务</a></li>  </ul> 
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Java实战
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/Java/Java实战/CPU占用过高定位/">CPU占用过高定位</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/Wiki/wiki/Java/什么是Java内存模型/">什么是Java内存模型</a></li>  <li class="file"><a href="/Wiki/wiki/Java/线程状态/">线程状态</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            微服务
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/微服务/什么是微服务/">什么是微服务</a></li>  </ul> 
                     </li> 
                      </ul> 
     </div>
@@ -234,7 +252,7 @@
 </aside>
             
             <section id="main">
-        <article id="post-云计算/什么是微服务" class="article article-type-post" itemscope="" itemprop="blogPost">
+        <article id="post-Java/什么是Java内存模型" class="article article-type-post" itemscope="" itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -244,7 +262,319 @@
                         
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/Wiki/categories/云计算/">云计算</a>
+        <a class="article-category-link" href="/Wiki/categories/Java/">Java</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/Wiki/tags/Java/">Java</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/Wiki/wiki/Java/什么是Java内存模型/">
+            <time datetime="2018-10-06T16:28:21.000Z" itemprop="datePublished">2018-10-07</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/raw/writing/source/_posts/Java/什么是Java内存模型.md" rel="external nofollow noopener noreferrer" target="_blank"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/edit/writing/source/_posts/Java/什么是Java内存模型.md" rel="external nofollow noopener noreferrer" target="_blank"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/commits/writing/source/_posts/Java/什么是Java内存模型.md" rel="external nofollow noopener noreferrer" target="_blank"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/Wiki/wiki/Java/什么是Java内存模型/">什么是Java内存模型</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                
+                    
+                    <p></p><h2 id="什么是Java内存模型"><a href="#什么是Java内存模型" class="headerlink" title="什么是Java内存模型"></a>什么是Java内存模型</h2><p><strong>Java内存模型定义了Java虚拟机与计算机内存的工作方式</strong>。Java虚拟机是计算机的模型，这个计算机模型自然包括了内存模型，即Java内存模型。</p>
+<p><strong>Java内存模型描述了Java线程与内存的交互方式</strong>，它屏蔽了各种硬件和操作系统的访问差异，保证了Java程序在各平台下对内存的访问都能保持效果一致。<strong>解决由于多线程通过共享内存进行通信时，存在的本地内存数据不一致、编译器会对代码指令重排序、处理器会对代码乱序执行等带来的问题</strong>。目的是保证并发编程场景中的<strong>原子性</strong>、<strong>可见性</strong>和<strong>有序性</strong>。</p>
+<p>Java内存模型规定了 <strong>所有的变量都存储在主内存中，每条线程还有自己的工作内存</strong>，线程的工作内存中保存了该线程中用到的变量的主内存副本拷贝，<strong>线程对变量的所有操作都必须在工作内存中进行，而不能直接读写主内存</strong>。不同的线程之间也无法直接访问对方工作内存中的变量，线程间变量的传递均需要自己的工作内存和主存之间进行数据同步进行。</p>
+<p><img src="/Wiki/wiki/Java/什么是Java内存模型.assets/auto-orient.png" alt="img"></p>
+<p>Java内存模型定义了Java线程与内存的交互方式，在Java语言层面，提供了volatile、synchronized、final等关键字来描述程序多线程行为，而Java内存模型则定义了这些关键字的行为。</p>
+<p>
+                
+            
+        
+        
+            </p></div>   
+            <div class="article-more-link">
+                <a href="/Wiki/wiki/Java/什么是Java内存模型/#more">Read More</a>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
+        <article id="post-Java/Java实战/CPU占用过高定位" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/Wiki/categories/Java/">Java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/Wiki/categories/Java/Java实战/">Java实战</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/Wiki/tags/Java/">Java</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/Wiki/wiki/Java/Java实战/CPU占用过高定位/">
+            <time datetime="2018-10-06T16:28:21.000Z" itemprop="datePublished">2018-10-07</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/raw/writing/source/_posts/Java/Java实战/CPU占用过高定位.md" rel="external nofollow noopener noreferrer" target="_blank"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/edit/writing/source/_posts/Java/Java实战/CPU占用过高定位.md" rel="external nofollow noopener noreferrer" target="_blank"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/commits/writing/source/_posts/Java/Java实战/CPU占用过高定位.md" rel="external nofollow noopener noreferrer" target="_blank"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/Wiki/wiki/Java/Java实战/CPU占用过高定位/">CPU占用过高定位</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                
+                    
+                    <p></p><h2 id="方法1"><a href="#方法1" class="headerlink" title="方法1"></a>方法1</h2><h3 id="找到CPU占用过高的线程"><a href="#找到CPU占用过高的线程" class="headerlink" title="找到CPU占用过高的线程"></a>找到CPU占用过高的线程</h3><p><code>top -p &lt;pid&gt;</code></p>
+<p>输入H查看该进程的所有线程的统计情况，从而找到CPU占用过高的线程；</p>
+<p>将线程id转化为16进制就是Java堆栈中对应的nid</p>
+<h3 id="查看Java堆栈"><a href="#查看Java堆栈" class="headerlink" title="查看Java堆栈"></a>查看Java堆栈</h3><p><a href="http://0000-bigtree.github.io/blog/2017/03/05/get-java-process-stack.html" rel="external nofollow noopener noreferrer" target="_blank">获取Java堆栈</a></p>
+<p>在线程堆栈中找到nid=上一步nid的线程堆栈</p>
+<p>
+                
+            
+        
+        
+            </p></div>   
+            <div class="article-more-link">
+                <a href="/Wiki/wiki/Java/Java实战/CPU占用过高定位/#more">Read More</a>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
+        <article id="post-Java/线程状态" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/Wiki/categories/Java/">Java</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/Wiki/tags/Java/">Java</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/Wiki/wiki/Java/线程状态/">
+            <time datetime="2018-10-06T16:28:21.000Z" itemprop="datePublished">2018-10-07</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/raw/writing/source/_posts/Java/线程状态.md" rel="external nofollow noopener noreferrer" target="_blank"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/edit/writing/source/_posts/Java/线程状态.md" rel="external nofollow noopener noreferrer" target="_blank"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/commits/writing/source/_posts/Java/线程状态.md" rel="external nofollow noopener noreferrer" target="_blank"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/Wiki/wiki/Java/线程状态/">线程状态</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                
+                    
+                    <p></p><h3 id="线程的状态转换关系"><a href="#线程的状态转换关系" class="headerlink" title="线程的状态转换关系"></a>线程的状态转换关系</h3><p><img src="/Wiki/wiki/Java/线程状态.assets/线程状态.png" alt="线程状态"></p>
+<p>1）<strong>BLOCKED</strong>：线程等待监视器锁，就是线程在等待获取锁进入同步块或者同步方法中。两个死锁的线程即是Blocked。</p>
+<p>2）<strong>WAITING</strong>：</p>
+<p>三种方法可以使线程进入WAITING:</p>
+<ul>
+<p>
+                
+            
+        
+        
+            </p></ul></div>   
+            <div class="article-more-link">
+                <a href="/Wiki/wiki/Java/线程状态/#more">Read More</a>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
+        <article id="post-微服务/什么是微服务" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/Wiki/categories/微服务/">微服务</a>
     </div>
 
                         
@@ -256,7 +586,7 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/Wiki/wiki/云计算/什么是微服务/">
+        <a href="/Wiki/wiki/微服务/什么是微服务/">
             <time datetime="2018-04-19T16:28:21.000Z" itemprop="datePublished">2018-04-20</time>
         </a>
     </div>
@@ -268,13 +598,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href="https://github.com/polyval/Wiki/raw/writing/source/_posts/云计算/什么是微服务.md" rel="external nofollow noopener noreferrer" target="_blank"> Source </a>
+                                <a href="https://github.com/polyval/Wiki/raw/writing/source/_posts/微服务/什么是微服务.md" rel="external nofollow noopener noreferrer" target="_blank"> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href="https://github.com/polyval/Wiki/edit/writing/source/_posts/云计算/什么是微服务.md" rel="external nofollow noopener noreferrer" target="_blank"> Edit </a>
+                                <a href="https://github.com/polyval/Wiki/edit/writing/source/_posts/微服务/什么是微服务.md" rel="external nofollow noopener noreferrer" target="_blank"> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href="https://github.com/polyval/Wiki/commits/writing/source/_posts/云计算/什么是微服务.md" rel="external nofollow noopener noreferrer" target="_blank"> History </a>
+                                <a href="https://github.com/polyval/Wiki/commits/writing/source/_posts/微服务/什么是微服务.md" rel="external nofollow noopener noreferrer" target="_blank"> History </a>
                             </div>
                         
                     </div>
@@ -282,7 +612,7 @@
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/Wiki/wiki/云计算/什么是微服务/">什么是微服务</a>
+            <a class="article-title" href="/Wiki/wiki/微服务/什么是微服务/">什么是微服务</a>
         </h1>
     
 
@@ -324,7 +654,7 @@
         
             </p></blockquote></li></ul></div>   
             <div class="article-more-link">
-                <a href="/Wiki/wiki/云计算/什么是微服务/#more">Read More</a>
+                <a href="/Wiki/wiki/微服务/什么是微服务/#more">Read More</a>
             </div>
         
         <footer class="article-footer">

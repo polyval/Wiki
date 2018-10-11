@@ -3,19 +3,26 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Archive | polyval&#39;s Wiki</title>
+    <title>线程状态 | polyval&#39;s Wiki</title>
     
     
-        <meta name="keywords" content="polyval&#39;s Wiki">
+        <meta name="keywords" content="Java">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta property="og:type" content="website">
-<meta property="og:title" content="polyval&#39;s Wiki">
-<meta property="og:url" content="http://polyval.github.io/Wiki/archives/index.html">
+    <meta name="description" content="线程的状态转换关系 1）BLOCKED：线程等待监视器锁，就是线程在等待获取锁进入同步块或者同步方法中。两个死锁的线程即是Blocked。 2）WAITING： 三种方法可以使线程进入WAITING:  Object.wait with no timeout Thread.join with no timeout LockSupport.park  比BLOCKED状态进步一些，指我已经获得锁了，">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线程状态">
+<meta property="og:url" content="http://polyval.github.io/Wiki/wiki/Java/线程状态/index.html">
 <meta property="og:site_name" content="polyval&#39;s Wiki">
+<meta property="og:description" content="线程的状态转换关系 1）BLOCKED：线程等待监视器锁，就是线程在等待获取锁进入同步块或者同步方法中。两个死锁的线程即是Blocked。 2）WAITING： 三种方法可以使线程进入WAITING:  Object.wait with no timeout Thread.join with no timeout LockSupport.park  比BLOCKED状态进步一些，指我已经获得锁了，">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="http://polyval.github.io/Wiki/wiki/Java/线程状态.assets/线程状态.png">
+<meta property="og:updated_time" content="2018-10-11T04:54:00.830Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="polyval&#39;s Wiki">
+<meta name="twitter:title" content="线程状态">
+<meta name="twitter:description" content="线程的状态转换关系 1）BLOCKED：线程等待监视器锁，就是线程在等待获取锁进入同步块或者同步方法中。两个死锁的线程即是Blocked。 2）WAITING： 三种方法可以使线程进入WAITING:  Object.wait with no timeout Thread.join with no timeout LockSupport.park  比BLOCKED状态进步一些，指我已经获得锁了，">
+<meta name="twitter:image" content="http://polyval.github.io/Wiki/wiki/Java/线程状态.assets/线程状态.png">
     
 
     
@@ -154,9 +161,9 @@
         
         
          <ul class="unstyled" id="tree"> 
-                    <li class="directory">
+                    <li class="directory open">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
+                            <i class="fa fa-folder-open"></i>
                             &nbsp;
                             Java
                         </a>
@@ -169,7 +176,7 @@
                         </a>
                          <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/Java/Java实战/CPU占用过高定位/">CPU占用过高定位</a></li>  </ul> 
                     </li> 
-                     <li class="file"><a href="/Wiki/wiki/Java/什么是Java内存模型/">什么是Java内存模型</a></li>  <li class="file"><a href="/Wiki/wiki/Java/线程状态/">线程状态</a></li>  </ul> 
+                     <li class="file"><a href="/Wiki/wiki/Java/什么是Java内存模型/">什么是Java内存模型</a></li>  <li class="file active"><a href="/Wiki/wiki/Java/线程状态/">线程状态</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -251,80 +258,149 @@
     <div id="toTop" class="fa fa-angle-up"></div>
 </aside>
             
-            <section id="main"><div class="timeline timeline-wrap">
-    
-            <div class="timeline-row timeline-row-major">
-                <span class="node"><i class="fa fa-calendar-o"></i></span>
-                <h1 class="title"><a href="/archives/2018/">2018</a></h1>
-            </div>
-    
-            <div class="timeline-row timeline-row-major">
-                <span class="node"><i class="fa fa-calendar"></i></span>
-                <h1 class="title"><a href="/archives/2018/10/">2018-10</a><span class="archive-list-count">3</span></h1>
-            </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
+            <section id="main"><article id="post-Java/线程状态" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/Wiki/categories/Java/">Java</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/Wiki/tags/Java/">Java</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/Wiki/wiki/Java/线程状态/">
+            <time datetime="2018-10-06T16:28:21.000Z" itemprop="datePublished">2018-10-07</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/raw/writing/source/_posts/Java/线程状态.md" rel="external nofollow noopener noreferrer" target="_blank"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/edit/writing/source/_posts/Java/线程状态.md" rel="external nofollow noopener noreferrer" target="_blank"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/commits/writing/source/_posts/Java/线程状态.md" rel="external nofollow noopener noreferrer" target="_blank"> History </a>
+                            </div>
+                        
+                    </div>
+                
                 
     
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/Wiki/wiki/Java/什么是Java内存模型/">什么是Java内存模型</a>
+        <h1 class="article-title" itemprop="name">
+            线程状态
         </h1>
     
 
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">Catalogue</strong>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#线程的状态转换关系"><span class="toc-number">1.</span> <span class="toc-text">线程的状态转换关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java线程堆栈解读"><span class="toc-number">2.</span> <span class="toc-text">Java线程堆栈解读</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#tid和nid"><span class="toc-number">2.1.</span> <span class="toc-text">tid和nid</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#堆栈中与锁相关的三种状态"><span class="toc-number">2.2.</span> <span class="toc-text">堆栈中与锁相关的三种状态</span></a></li></ol></li></ol>
+                </div>
+            
+        
+        
+            <h3 id="线程的状态转换关系"><a href="#线程的状态转换关系" class="headerlink" title="线程的状态转换关系"></a>线程的状态转换关系</h3><p><img src="/Wiki/wiki/Java/线程状态.assets/线程状态.png" alt="线程状态"></p>
+<p>1）<strong>BLOCKED</strong>：线程等待监视器锁，就是线程在等待获取锁进入同步块或者同步方法中。两个死锁的线程即是Blocked。</p>
+<p>2）<strong>WAITING</strong>：</p>
+<p>三种方法可以使线程进入WAITING:</p>
+<ul>
+<li><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#wait--" rel="external nofollow noopener noreferrer" target="_blank">Object.wait</a> with no timeout</li>
+<li><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Thread.html#join--" rel="external nofollow noopener noreferrer" target="_blank">Thread.join</a> with no timeout</li>
+<li><a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/locks/LockSupport.html#park--" rel="external nofollow noopener noreferrer" target="_blank">LockSupport.park</a></li>
+</ul>
+<p>比BLOCKED状态进步一些，指我已经获得锁了，但由于有些条件不满足，我自己等会，调用object.wait()方法。等条件满足了，别的线程调用notify再叫我。另外也可以调用Thread.join()方法，顾名思义就是调用别的线程的join方法，让别人join进来先执行，那我就只能等会了。但是由于wait()和notify()以及notifyAll()用于协调对共享资源的存取，所以必须在synchronized块中使用，即调用wait的时候需要获取锁，调用后锁释放。所以即便wait状态的线程被notfiy唤醒了，也需要再次获得锁，所以唤醒后进入Blocked状态。</p>
+<p>3）<strong>TIMED_WAITING</strong>：</p>
+<p>如下方法使线程进入该状态</p>
+<ul>
+<li><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Thread.html#sleep-long-" rel="external nofollow noopener noreferrer" target="_blank">Thread.sleep</a></li>
+<li><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#wait-long-" rel="external nofollow noopener noreferrer" target="_blank">Object.wait</a> with timeout</li>
+<li><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Thread.html#join-long-" rel="external nofollow noopener noreferrer" target="_blank">Thread.join</a> with timeout</li>
+<li><a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/locks/LockSupport.html#parkNanos-java.lang.Object-long-" rel="external nofollow noopener noreferrer" target="_blank">LockSupport.parkNanos</a></li>
+<li><a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/locks/LockSupport.html#parkUntil-java.lang.Object-long-" rel="external nofollow noopener noreferrer" target="_blank">LockSupport.parkUntil</a></li>
+</ul>
+<p>类比WAITING，差异是不需要notify()或者notifyAlL()方法唤醒，时间到了我自己醒了。另外sleep比较好理解，就是让当前线程睡一会，与wait的区别是它不释放锁。</p>
+<p>4）<strong>RUNNABLE</strong>不用多说，在JAVA虚拟机中已经在运行，但是有可能在等待操作系统资源，比如CPU时间片。</p>
+<ul>
+<li><p>处于Runnable的线程一定消耗cpu么</p>
+<blockquote>
+<p>不一定，比如线程处于io等待，实际上是线程是挂起，不消耗cpu的。</p>
+</blockquote>
+<h3 id="Java线程堆栈解读"><a href="#Java线程堆栈解读" class="headerlink" title="Java线程堆栈解读"></a>Java线程堆栈解读</h3></li>
+</ul>
+<h4 id="tid和nid"><a href="#tid和nid" class="headerlink" title="tid和nid"></a>tid和nid</h4><p>在采集Java线程堆栈时，有个nid和tid。tid表示Java层面的线程id，是Java给每个线程所分配的一个id，nid(Native thread ID)表示的本地线程id，与实际的操作系统线程id相一致。</p>
+<h4 id="堆栈中与锁相关的三种状态"><a href="#堆栈中与锁相关的三种状态" class="headerlink" title="堆栈中与锁相关的三种状态"></a>堆栈中与锁相关的三种状态</h4><ul>
+<li>当一个线程占有一个锁的时候，线程堆栈中会打印—locked <0x22bffb60> </0x22bffb60></li>
+<li>当一个线程正在等待其它线程释放该锁，线程堆栈中会打印—<strong>waiting to lock</strong> <0x22bffb60> </0x22bffb60></li>
+<li>当一个线程占有一个锁，但又执行到该锁的wait()上，线程堆栈中首先打印locked,然后又 会打印—<strong>waiting on</strong> <0x22c03c60> </0x22c03c60></li>
+</ul>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/Wiki/wiki/Java/Java实战/CPU占用过高定位/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    CPU占用过高定位
                 
             </div>
-        </div>
+        </a>
     
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
     
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/Wiki/wiki/Java/Java实战/CPU占用过高定位/">CPU占用过高定位</a>
-        </h1>
+        <a href="/Wiki/wiki/微服务/什么是微服务/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">什么是微服务</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
     
 
-                
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/Wiki/wiki/Java/线程状态/">线程状态</a>
-        </h1>
-    
 
-                
-            </div>
-        </div>
-    
-            <div class="timeline-row timeline-row-major">
-                <span class="node"><i class="fa fa-calendar"></i></span>
-                <h1 class="title"><a href="/archives/2018/04/">2018-04</a><span class="archive-list-count">1</span></h1>
-            </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/Wiki/wiki/微服务/什么是微服务/">什么是微服务</a>
-        </h1>
-    
 
-                
-            </div>
-        </div>
-    
-</div>
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
 </section>
         </div>
         <footer id="footer">

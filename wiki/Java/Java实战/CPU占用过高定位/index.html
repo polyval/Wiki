@@ -3,26 +3,24 @@
 <head>
     <meta charset="utf-8">
     
-    <title>什么是微服务 | polyval&#39;s Wiki</title>
+    <title>CPU占用过高定位 | polyval&#39;s Wiki</title>
     
     
-        <meta name="keywords" content="微服务">
+        <meta name="keywords" content="Java">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="什么是微服务微服务，又称微服务架构。是一种新兴的软件架构模式。微服务架构模式通过将多种细小的服务进行整合来形成软件，这些服务运行在自己独立的进程上，服务之间通过轻量级机制(常用的是HTTP API)进行通讯。 微服务架构与传统架构的区别传统软件架构模式是一体化架构(Monolithic Architecture)，一体化架构是指软件最终以一个整体的形态呈现出来，是一个单一的可执行程序，改变其中任何">
-<meta name="keywords" content="微服务">
+    <meta name="description" content="方法1找到CPU占用过高的线程top -p &amp;lt;pid&amp;gt; 输入H查看该进程的所有线程的统计情况，从而找到CPU占用过高的线程； 将线程id转化为16进制就是Java堆栈中对应的nid 查看Java堆栈获取Java堆栈 在线程堆栈中找到nid=上一步nid的线程堆栈 找到对应的线程id 如果该线程正在执行Java代码，说明是该Java代码导致的CPU高  如果线程在执行native cod">
+<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="什么是微服务">
-<meta property="og:url" content="http://polyval.github.io/Wiki/wiki/云计算/什么是微服务/index.html">
+<meta property="og:title" content="CPU占用过高定位">
+<meta property="og:url" content="http://polyval.github.io/Wiki/wiki/Java/Java实战/CPU占用过高定位/index.html">
 <meta property="og:site_name" content="polyval&#39;s Wiki">
-<meta property="og:description" content="什么是微服务微服务，又称微服务架构。是一种新兴的软件架构模式。微服务架构模式通过将多种细小的服务进行整合来形成软件，这些服务运行在自己独立的进程上，服务之间通过轻量级机制(常用的是HTTP API)进行通讯。 微服务架构与传统架构的区别传统软件架构模式是一体化架构(Monolithic Architecture)，一体化架构是指软件最终以一个整体的形态呈现出来，是一个单一的可执行程序，改变其中任何">
+<meta property="og:description" content="方法1找到CPU占用过高的线程top -p &amp;lt;pid&amp;gt; 输入H查看该进程的所有线程的统计情况，从而找到CPU占用过高的线程； 将线程id转化为16进制就是Java堆栈中对应的nid 查看Java堆栈获取Java堆栈 在线程堆栈中找到nid=上一步nid的线程堆栈 找到对应的线程id 如果该线程正在执行Java代码，说明是该Java代码导致的CPU高  如果线程在执行native cod">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://polyval.github.io/Wiki/wiki/云计算/什么是微服务/sketch.png">
-<meta property="og:updated_time" content="2018-04-23T03:37:44.502Z">
+<meta property="og:updated_time" content="2018-10-11T04:44:09.302Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="什么是微服务">
-<meta name="twitter:description" content="什么是微服务微服务，又称微服务架构。是一种新兴的软件架构模式。微服务架构模式通过将多种细小的服务进行整合来形成软件，这些服务运行在自己独立的进程上，服务之间通过轻量级机制(常用的是HTTP API)进行通讯。 微服务架构与传统架构的区别传统软件架构模式是一体化架构(Monolithic Architecture)，一体化架构是指软件最终以一个整体的形态呈现出来，是一个单一的可执行程序，改变其中任何">
-<meta name="twitter:image" content="http://polyval.github.io/Wiki/wiki/云计算/什么是微服务/sketch.png">
+<meta name="twitter:title" content="CPU占用过高定位">
+<meta name="twitter:description" content="方法1找到CPU占用过高的线程top -p &amp;lt;pid&amp;gt; 输入H查看该进程的所有线程的统计情况，从而找到CPU占用过高的线程； 将线程id转化为16进制就是Java堆栈中对应的nid 查看Java堆栈获取Java堆栈 在线程堆栈中找到nid=上一步nid的线程堆栈 找到对应的线程id 如果该线程正在执行Java代码，说明是该Java代码导致的CPU高  如果线程在执行native cod">
     
 
     
@@ -165,9 +163,27 @@
                         <a href="#" data-role="directory">
                             <i class="fa fa-folder-open"></i>
                             &nbsp;
-                            云计算
+                            Java
                         </a>
-                         <ul class="unstyled" id="tree">  <li class="file active"><a href="/Wiki/wiki/云计算/什么是微服务/">什么是微服务</a></li>  </ul> 
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            Java实战
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file active"><a href="/Wiki/wiki/Java/Java实战/CPU占用过高定位/">CPU占用过高定位</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/Wiki/wiki/Java/什么是Java内存模型/">什么是Java内存模型</a></li>  <li class="file"><a href="/Wiki/wiki/Java/线程状态/">线程状态</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            微服务
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/微服务/什么是微服务/">什么是微服务</a></li>  </ul> 
                     </li> 
                      </ul> 
     </div>
@@ -240,7 +256,7 @@
     <div id="toTop" class="fa fa-angle-up"></div>
 </aside>
             
-            <section id="main"><article id="post-云计算/什么是微服务" class="article article-type-post" itemscope="" itemprop="blogPost">
+            <section id="main"><article id="post-Java/Java实战/CPU占用过高定位" class="article article-type-post" itemscope="" itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -250,20 +266,20 @@
                         
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/Wiki/categories/云计算/">云计算</a>
+        <a class="article-category-link" href="/Wiki/categories/Java/">Java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/Wiki/categories/Java/Java实战/">Java实战</a>
     </div>
 
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/Wiki/tags/微服务/">微服务</a>
+        <a class="tag-link" href="/Wiki/tags/Java/">Java</a>
     </div>
 
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/Wiki/wiki/云计算/什么是微服务/">
-            <time datetime="2018-04-19T16:28:21.000Z" itemprop="datePublished">2018-04-20</time>
+        <a href="/Wiki/wiki/Java/Java实战/CPU占用过高定位/">
+            <time datetime="2018-10-06T16:28:21.000Z" itemprop="datePublished">2018-10-07</time>
         </a>
     </div>
 
@@ -274,13 +290,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href="https://github.com/polyval/Wiki/raw/writing/source/_posts/云计算/什么是微服务.md" rel="external nofollow noopener noreferrer" target="_blank"> Source </a>
+                                <a href="https://github.com/polyval/Wiki/raw/writing/source/_posts/Java/Java实战/CPU占用过高定位.md" rel="external nofollow noopener noreferrer" target="_blank"> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href="https://github.com/polyval/Wiki/edit/writing/source/_posts/云计算/什么是微服务.md" rel="external nofollow noopener noreferrer" target="_blank"> Edit </a>
+                                <a href="https://github.com/polyval/Wiki/edit/writing/source/_posts/Java/Java实战/CPU占用过高定位.md" rel="external nofollow noopener noreferrer" target="_blank"> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href="https://github.com/polyval/Wiki/commits/writing/source/_posts/云计算/什么是微服务.md" rel="external nofollow noopener noreferrer" target="_blank"> History </a>
+                                <a href="https://github.com/polyval/Wiki/commits/writing/source/_posts/Java/Java实战/CPU占用过高定位.md" rel="external nofollow noopener noreferrer" target="_blank"> History </a>
                             </div>
                         
                     </div>
@@ -288,7 +304,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            什么是微服务
+            CPU占用过高定位
         </h1>
     
 
@@ -301,39 +317,25 @@
             
                 <div id="toc" class="toc-article">
                 <strong class="toc-title">Catalogue</strong>
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是微服务"><span class="toc-number">1.</span> <span class="toc-text">什么是微服务</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#微服务架构与传统架构的区别"><span class="toc-number">1.1.</span> <span class="toc-text">微服务架构与传统架构的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#微服务的优点"><span class="toc-number">1.2.</span> <span class="toc-text">微服务的优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#微服务的缺点"><span class="toc-number">1.3.</span> <span class="toc-text">微服务的缺点</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#方法1"><span class="toc-number">1.</span> <span class="toc-text">方法1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#找到CPU占用过高的线程"><span class="toc-number">1.1.</span> <span class="toc-text">找到CPU占用过高的线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看Java堆栈"><span class="toc-number">1.2.</span> <span class="toc-text">查看Java堆栈</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#找到对应的线程id"><span class="toc-number">1.2.1.</span> <span class="toc-text">找到对应的线程id</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#找不到对应的线程id"><span class="toc-number">1.2.2.</span> <span class="toc-text">找不到对应的线程id</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#虚拟机自身代码导致的"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">虚拟机自身代码导致的</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#重新创建了线程来执行"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">重新创建了线程来执行</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方法2"><span class="toc-number">2.</span> <span class="toc-text">方法2</span></a></li></ol>
                 </div>
             
         
         
-            <h3 id="什么是微服务"><a href="#什么是微服务" class="headerlink" title="什么是微服务"></a>什么是微服务</h3><p>微服务，又称微服务架构。是一种新兴的软件架构模式。微服务架构模式通过将多种细小的服务进行整合来形成软件，这些服务运行在自己独立的进程上，服务之间通过轻量级机制(常用的是HTTP API)进行通讯。</p>
-<h4 id="微服务架构与传统架构的区别"><a href="#微服务架构与传统架构的区别" class="headerlink" title="微服务架构与传统架构的区别"></a>微服务架构与传统架构的区别</h4><p>传统软件架构模式是一体化架构(Monolithic Architecture)，一体化架构是指软件最终以一个整体的形态呈现出来，是一个单一的可执行程序，改变其中任何一个部分都需要重新生成和部署这个软件。而在微服务架构，服务就是一个运行的程序，运行在独立的进程上，如果你改变了某个服务涉及的代码，只需要重新部署这个服务即可。</p>
-<h4 id="微服务的优点"><a href="#微服务的优点" class="headerlink" title="微服务的优点"></a>微服务的优点</h4><ul>
-<li><p><strong>易于扩展</strong></p>
-<blockquote>
-<p>一体化应用进行扩展时需要针对整个应用进行扩展 ，而微服务架构可以根据服务进行扩展</p>
-</blockquote>
+            <h2 id="方法1"><a href="#方法1" class="headerlink" title="方法1"></a>方法1</h2><h3 id="找到CPU占用过高的线程"><a href="#找到CPU占用过高的线程" class="headerlink" title="找到CPU占用过高的线程"></a>找到CPU占用过高的线程</h3><p><code>top -p &lt;pid&gt;</code></p>
+<p>输入H查看该进程的所有线程的统计情况，从而找到CPU占用过高的线程；</p>
+<p>将线程id转化为16进制就是Java堆栈中对应的nid</p>
+<h3 id="查看Java堆栈"><a href="#查看Java堆栈" class="headerlink" title="查看Java堆栈"></a>查看Java堆栈</h3><p><a href="http://0000-bigtree.github.io/blog/2017/03/05/get-java-process-stack.html" rel="external nofollow noopener noreferrer" target="_blank">获取Java堆栈</a></p>
+<p>在线程堆栈中找到nid=上一步nid的线程堆栈</p>
+<h4 id="找到对应的线程id"><a href="#找到对应的线程id" class="headerlink" title="找到对应的线程id"></a>找到对应的线程id</h4><ul>
+<li><p>如果该线程正在执行Java代码，说明是该Java代码导致的CPU高</p>
+</li>
+<li><p>如果线程在执行native code，说明是本地代码导致的CPU高。通过<code>pstack pid</code>获取本地线程堆栈，在本地线程堆栈中找到对应线程，借助本地线程堆栈进行定位。</p>
 </li>
 </ul>
-<p><img src="/Wiki/wiki/云计算/什么是微服务/sketch.png" alt="img"></p>
-<ul>
-<li><p><strong>便于持续交付</strong></p>
-<blockquote>
-<p>改变其中某个部分只需要重新生成和部署对应的服务</p>
-</blockquote>
-</li>
-<li><p><strong>服务可重用</strong></p>
-</li>
-<li><p><strong>容错性更强</strong></p>
-<blockquote>
-<p>通过功能分散，使得应用不会轻易因为一个错误而崩溃</p>
-</blockquote>
-</li>
-</ul>
-<h4 id="微服务的缺点"><a href="#微服务的缺点" class="headerlink" title="微服务的缺点"></a>微服务的缺点</h4><ul>
-<li><strong>远程调用会有更多的延时</strong></li>
-<li><strong>测试更麻烦</strong></li>
-</ul>
+<h4 id="找不到对应的线程id"><a href="#找不到对应的线程id" class="headerlink" title="找不到对应的线程id"></a>找不到对应的线程id</h4><p>有两种可能</p>
+<h5 id="虚拟机自身代码导致的"><a href="#虚拟机自身代码导致的" class="headerlink" title="虚拟机自身代码导致的"></a>虚拟机自身代码导致的</h5><p>如堆内存枯竭导致的频繁Full GC，或者虚拟机的bug。此时可以通过本地线程堆栈进行定位。</p>
+<h5 id="重新创建了线程来执行"><a href="#重新创建了线程来执行" class="headerlink" title="重新创建了线程来执行"></a>重新创建了线程来执行</h5><h2 id="方法2"><a href="#方法2" class="headerlink" title="方法2"></a>方法2</h2><p>多次打印线程堆栈，找到相同的代码段</p>
 
             </div>
         
@@ -344,6 +346,25 @@
 
 
     
+<nav id="article-nav">
+    
+        <a href="/Wiki/wiki/Java/什么是Java内存模型/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    什么是Java内存模型
+                
+            </div>
+        </a>
+    
+    
+        <a href="/Wiki/wiki/Java/线程状态/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">线程状态</div>
+        </a>
+    
+</nav>
+
 
 
 
