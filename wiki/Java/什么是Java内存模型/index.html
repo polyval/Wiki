@@ -17,12 +17,12 @@
 <meta property="og:site_name" content="polyval&#39;s Wiki">
 <meta property="og:description" content="什么是Java内存模型Java内存模型定义了Java虚拟机与计算机内存的工作方式。Java虚拟机是计算机的模型，这个计算机模型自然包括了内存模型，即Java内存模型。 Java内存模型描述了Java线程与内存的交互方式，它屏蔽了各种硬件和操作系统的访问差异，保证了Java程序在各平台下对内存的访问都能保持效果一致。解决由于多线程通过共享内存进行通信时，存在的本地内存数据不一致、编译器会对代码指令重">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://polyval.github.io/Wiki/wiki/Java/什么是Java内存模型.assets/auto-orient.png">
+<meta property="og:image" content="http://polyval.github.io/Wiki/wiki/Java/什么是Java内存模型/auto-orient.png">
 <meta property="og:updated_time" content="2018-10-10T13:54:59.584Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="什么是Java内存模型">
 <meta name="twitter:description" content="什么是Java内存模型Java内存模型定义了Java虚拟机与计算机内存的工作方式。Java虚拟机是计算机的模型，这个计算机模型自然包括了内存模型，即Java内存模型。 Java内存模型描述了Java线程与内存的交互方式，它屏蔽了各种硬件和操作系统的访问差异，保证了Java程序在各平台下对内存的访问都能保持效果一致。解决由于多线程通过共享内存进行通信时，存在的本地内存数据不一致、编译器会对代码指令重">
-<meta name="twitter:image" content="http://polyval.github.io/Wiki/wiki/Java/什么是Java内存模型.assets/auto-orient.png">
+<meta name="twitter:image" content="http://polyval.github.io/Wiki/wiki/Java/什么是Java内存模型/auto-orient.png">
     
 
     
@@ -176,7 +176,7 @@
                         </a>
                          <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/Java/Java实战/CPU占用过高定位/">CPU占用过高定位</a></li>  </ul> 
                     </li> 
-                     <li class="file active"><a href="/Wiki/wiki/Java/什么是Java内存模型/">什么是Java内存模型</a></li>  <li class="file"><a href="/Wiki/wiki/Java/线程状态/">线程状态</a></li>  </ul> 
+                     <li class="file"><a href="/Wiki/wiki/Java/线程状态/">线程状态</a></li>  <li class="file active"><a href="/Wiki/wiki/Java/什么是Java内存模型/">什么是Java内存模型</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -327,7 +327,7 @@
             <h2 id="什么是Java内存模型"><a href="#什么是Java内存模型" class="headerlink" title="什么是Java内存模型"></a>什么是Java内存模型</h2><p><strong>Java内存模型定义了Java虚拟机与计算机内存的工作方式</strong>。Java虚拟机是计算机的模型，这个计算机模型自然包括了内存模型，即Java内存模型。</p>
 <p><strong>Java内存模型描述了Java线程与内存的交互方式</strong>，它屏蔽了各种硬件和操作系统的访问差异，保证了Java程序在各平台下对内存的访问都能保持效果一致。<strong>解决由于多线程通过共享内存进行通信时，存在的本地内存数据不一致、编译器会对代码指令重排序、处理器会对代码乱序执行等带来的问题</strong>。目的是保证并发编程场景中的<strong>原子性</strong>、<strong>可见性</strong>和<strong>有序性</strong>。</p>
 <p>Java内存模型规定了 <strong>所有的变量都存储在主内存中，每条线程还有自己的工作内存</strong>，线程的工作内存中保存了该线程中用到的变量的主内存副本拷贝，<strong>线程对变量的所有操作都必须在工作内存中进行，而不能直接读写主内存</strong>。不同的线程之间也无法直接访问对方工作内存中的变量，线程间变量的传递均需要自己的工作内存和主存之间进行数据同步进行。</p>
-<p><img src="/Wiki/wiki/Java/什么是Java内存模型.assets/auto-orient.png" alt="img"></p>
+<p><img src="/Wiki/wiki/Java/什么是Java内存模型/auto-orient.png" alt="img"></p>
 <p>Java内存模型定义了Java线程与内存的交互方式，在Java语言层面，提供了volatile、synchronized、final等关键字来描述程序多线程行为，而Java内存模型则定义了这些关键字的行为。</p>
 <h2 id="支撑Java内存模型的基本原理"><a href="#支撑Java内存模型的基本原理" class="headerlink" title="支撑Java内存模型的基本原理"></a>支撑Java内存模型的基本原理</h2><h3 id="指令重排序"><a href="#指令重排序" class="headerlink" title="指令重排序"></a>指令重排序</h3><p>在执行程序时，为了提高性能，编译器和处理器会对指令做重排序。但是，JMM确保在不同的编译器和不同的处理器平台之上，通过插入特定类型的<code>Memory Barrier</code>来禁止特定类型的编译器重排序和处理器重排序，为上层提供一致的内存可见性保证。</p>
 <h3 id="Happens-Before原则"><a href="#Happens-Before原则" class="headerlink" title="Happens-Before原则"></a>Happens-Before原则</h3><p>先抛一个问题：当一个多线程共享变量被某个线程修改后，如何让这个修改被需要读取这个变量的线程感知到。</p>
@@ -368,6 +368,15 @@
 
     
 <nav id="article-nav">
+    
+        <a href="/Wiki/wiki/Java/线程状态/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    线程状态
+                
+            </div>
+        </a>
     
     
         <a href="/Wiki/wiki/Java/Java实战/CPU占用过高定位/" id="article-nav-older" class="article-nav-link-wrap">
