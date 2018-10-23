@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    
+    <title>操作系统是如何实现虚拟内存的 | polyval&#39;s Wiki</title>
+    
+    
+        <meta name="keywords" content="操作系统">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="要明白操作系统是如何实现虚拟内存的，首先应该明白操作系统为什么要需要虚拟内存 为什么需要虚拟内存早期的程序中访问的内存地址都是实际的物理内存地址。 程序需要加载在内存上运行，即形成进程。起初，只有一个进程信息可以被加载到内存，需要运行另一个进程时，需要将当前进程的信息先存储到磁盘上，然后从磁盘上读取另一个进程的信息。但是磁盘I/O是很慢的，导致任务切换的效率很低 。因此，人们希望将多个进程可以共同">
+<meta name="keywords" content="操作系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统是如何实现虚拟内存的">
+<meta property="og:url" content="http://polyval.github.io/Wiki/wiki/操作系统/操作系统是如何实现虚拟内存的/index.html">
+<meta property="og:site_name" content="polyval&#39;s Wiki">
+<meta property="og:description" content="要明白操作系统是如何实现虚拟内存的，首先应该明白操作系统为什么要需要虚拟内存 为什么需要虚拟内存早期的程序中访问的内存地址都是实际的物理内存地址。 程序需要加载在内存上运行，即形成进程。起初，只有一个进程信息可以被加载到内存，需要运行另一个进程时，需要将当前进程的信息先存储到磁盘上，然后从磁盘上读取另一个进程的信息。但是磁盘I/O是很慢的，导致任务切换的效率很低 。因此，人们希望将多个进程可以共同">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://polyval.github.io/Wiki/wiki/操作系统/操作系统是如何实现虚拟内存的/内部碎片.png">
+<meta property="og:image" content="http://polyval.github.io/Wiki/wiki/操作系统/操作系统是如何实现虚拟内存的/段.png">
+<meta property="og:image" content="http://polyval.github.io/Wiki/wiki/操作系统/操作系统是如何实现虚拟内存的/段寄存器.png">
+<meta property="og:image" content="http://polyval.github.io/Wiki/wiki/操作系统/操作系统是如何实现虚拟内存的/分段的缺点.png">
+<meta property="og:image" content="http://polyval.github.io/Wiki/wiki/操作系统/操作系统是如何实现虚拟内存的/分页.png">
+<meta property="og:updated_time" content="2018-10-11T04:48:14.995Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="操作系统是如何实现虚拟内存的">
+<meta name="twitter:description" content="要明白操作系统是如何实现虚拟内存的，首先应该明白操作系统为什么要需要虚拟内存 为什么需要虚拟内存早期的程序中访问的内存地址都是实际的物理内存地址。 程序需要加载在内存上运行，即形成进程。起初，只有一个进程信息可以被加载到内存，需要运行另一个进程时，需要将当前进程的信息先存储到磁盘上，然后从磁盘上读取另一个进程的信息。但是磁盘I/O是很慢的，导致任务切换的效率很低 。因此，人们希望将多个进程可以共同">
+<meta name="twitter:image" content="http://polyval.github.io/Wiki/wiki/操作系统/操作系统是如何实现虚拟内存的/内部碎片.png">
+    
+
+    
+
+    
+        <link rel="icon" href="/Wiki/favicon.ico">
+    
+
+    <link rel="stylesheet" href="/Wiki/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/Wiki/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/Wiki/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/Wiki/css/style.css">
+    <script src="/Wiki/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/Wiki/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+    
+    
+        <link rel="stylesheet" href="/Wiki/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/Wiki/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+    
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+</head>
+</html>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/Wiki/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">polyval&#39;s Wiki</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/Wiki/">首页</a>
+                
+                    <a class="main-nav-link" href="/Wiki/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/Wiki/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/Wiki/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/Wiki/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/Wiki/',
+        CONTENT_URL: '/Wiki/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/Wiki/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/Wiki/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/Wiki/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/Wiki/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/Wiki/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/Wiki/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id="categories">
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id="allExpand" href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Go
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/Go/Go语言入门/"></a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Java
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/Java/Btrace-生产环境调试/"></a></li>  <li class="file"><a href="/Wiki/wiki/Java/线程状态/">线程状态</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java分析工具/">Java分析工具</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java内存优化/">Java内存优化</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Netty/"></a></li>  <li class="file"><a href="/Wiki/wiki/Java/TODO/"></a></li>  <li class="file"><a href="/Wiki/wiki/Java/性能瓶颈/">性能瓶颈</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Spring Boot/"></a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java基础/"></a></li>  <li class="file"><a href="/Wiki/wiki/Java/CPU占用过高定位/">CPU占用过高定位</a></li>  <li class="file"><a href="/Wiki/wiki/Java/什么是Java内存模型/">什么是Java内存模型</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java内存溢出的情况/">Java内存溢出的情况</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            psychology
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/psychology/面质(confrontation)/"></a></li>  <li class="file"><a href="/Wiki/wiki/psychology/亲密关系中的沟通/">亲密关系中的沟通</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            云计算
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/云计算/云计算/">云计算</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分布式
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/分布式/CAP定理/">CAP定理</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            前端
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/前端/React Vitual DOM/">React Virtual DOM</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            工具
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/工具/Git/">Git</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            微服务
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/微服务/Spring Cloud/">Spring Cloud</a></li>  <li class="file"><a href="/Wiki/wiki/微服务/什么是微服务/">什么是微服务</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            操作系统
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/操作系统/Linux命令/">Linux命令</a></li>  <li class="file active"><a href="/Wiki/wiki/操作系统/操作系统是如何实现虚拟内存的/">操作系统是如何实现虚拟内存的</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/Wiki/wiki/程序员的自我修养/"></a></li>  <li class="file"><a href="/Wiki/wiki/高质量代码/"></a></li>  </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-操作系统/操作系统是如何实现虚拟内存的" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/Wiki/categories/操作系统/">操作系统</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/Wiki/tags/操作系统/">操作系统</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/Wiki/wiki/操作系统/操作系统是如何实现虚拟内存的/">
+            <time datetime="2018-10-06T16:28:21.000Z" itemprop="datePublished">2018-10-07</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/raw/writing/source/_posts/操作系统/操作系统是如何实现虚拟内存的.md" rel="external nofollow noopener noreferrer" target="_blank"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/edit/writing/source/_posts/操作系统/操作系统是如何实现虚拟内存的.md" rel="external nofollow noopener noreferrer" target="_blank"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/commits/writing/source/_posts/操作系统/操作系统是如何实现虚拟内存的.md" rel="external nofollow noopener noreferrer" target="_blank"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            操作系统是如何实现虚拟内存的
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">Catalogue</strong>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么需要虚拟内存"><span class="toc-number">1.</span> <span class="toc-text">为什么需要虚拟内存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何实现虚拟内存"><span class="toc-number">2.</span> <span class="toc-text">如何实现虚拟内存</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#虚拟内存的几个目标"><span class="toc-number">2.1.</span> <span class="toc-text">虚拟内存的几个目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#动态重定位"><span class="toc-number">2.2.</span> <span class="toc-text">动态重定位</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#动态重定位的缺点"><span class="toc-number">2.2.1.</span> <span class="toc-text">动态重定位的缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分段-Segmentation"><span class="toc-number">2.3.</span> <span class="toc-text">分段(Segmentation)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#如何确定虚拟地址属于哪个段"><span class="toc-number">2.3.1.</span> <span class="toc-text">如何确定虚拟地址属于哪个段</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#将地址前面几位当作段标志"><span class="toc-number">2.3.1.1.</span> <span class="toc-text">将地址前面几位当作段标志</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#根据虚拟地址如何产生的来判断"><span class="toc-number">2.3.1.2.</span> <span class="toc-text">根据虚拟地址如何产生的来判断</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MMU记录的其它信息"><span class="toc-number">2.3.2.</span> <span class="toc-text">MMU记录的其它信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分段的缺点"><span class="toc-number">2.3.3.</span> <span class="toc-text">分段的缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分页-Paging"><span class="toc-number">2.4.</span> <span class="toc-text">分页(Paging)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#如何寻址"><span class="toc-number">2.4.1.</span> <span class="toc-text">如何寻址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#页表存放在哪"><span class="toc-number">2.4.2.</span> <span class="toc-text">页表存放在哪</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分页的缺点"><span class="toc-number">2.4.3.</span> <span class="toc-text">分页的缺点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#给分页加加速"><span class="toc-number">2.4.4.</span> <span class="toc-text">给分页加加速</span></a></li></ol></li></ol></li></ol>
+                </div>
+            
+        
+        
+            <p>要明白操作系统是如何实现虚拟内存的，首先应该明白操作系统为什么要需要虚拟内存</p>
+<h2 id="为什么需要虚拟内存"><a href="#为什么需要虚拟内存" class="headerlink" title="为什么需要虚拟内存"></a>为什么需要虚拟内存</h2><p>早期的程序中访问的内存地址都是实际的物理内存地址。</p>
+<p>程序需要加载在内存上运行，即形成进程。起初，只有一个进程信息可以被加载到内存，需要运行另一个进程时，需要将当前进程的信息先存储到磁盘上，然后从磁盘上读取另一个进程的信息。但是磁盘I/O是很慢的，导致任务切换的效率很低 。因此，人们希望将多个进程可以共同存放在内存上，这就出现了一个问题：如何避免一个进程读取、篡改另一个进程的内存信息，即对进程间实现<strong>隔离</strong>和<strong>保护</strong>。</p>
+<p>同时，程序在编写时，其访问数据和指令跳转时的目标地址很多是固定的。但是程序在加载在内存时，不可能说每次我们都能够分配固定地址的内存给它。尤其是在我们想运行同一程序的多个实例的时候，由于同一程序使用的物理地址是一样的，一起运行就会有冲突。</p>
+<p>另外，程序使用的内存会被物理内存所限制，即程序使用的内存不能超过物理内存。</p>
+<p>内存虚拟化就是为了解决这些问题出现的，它将程序给的地址看作是虚拟地址(Virtual Address)，然后通过将虚拟地址转换为实际的物理地址，通过操作系统对这个转化过程的控制，来实现<strong>隔离、保护、和易用</strong>。</p>
+<h2 id="如何实现虚拟内存"><a href="#如何实现虚拟内存" class="headerlink" title="如何实现虚拟内存"></a>如何实现虚拟内存</h2><p>我们可以把我们为什么需要虚拟内存抽象成虚拟内存要实现的几个目标。</p>
+<h3 id="虚拟内存的几个目标"><a href="#虚拟内存的几个目标" class="headerlink" title="虚拟内存的几个目标"></a>虚拟内存的几个目标</h3><ul>
+<li><p><strong>不可见性</strong></p>
+<blockquote>
+<p>即对于程序来说，并不知道内存被虚拟化了，程序认为自己拥有独自的物理内存</p>
+</blockquote>
+</li>
+<li><p><strong>高效率</strong></p>
+<blockquote>
+<p>虚拟内存的效率要高,不能让程序运行变得太慢(时间效率),也不能因为实现虚拟内存占用太大空间(空间效率)。为了保证时间效率，需要用到硬件的支持。</p>
+</blockquote>
+</li>
+<li><p><strong>保护</strong></p>
+<blockquote>
+<p>操作系统需要保证进程间相互隔离，同时也要将操作系统与进程隔离开来。</p>
+</blockquote>
+</li>
+</ul>
+<p>实现虚拟内存的关键技术是：地址转化，实现地址转化的硬件称为内存管理单元<strong>MMU</strong>(Memory Management Unit)。我们先来看看地址转化最初的原型：<strong>base and bounds</strong>，也叫<strong>动态重定位</strong>(dynamic relocation)。</p>
+<h3 id="动态重定位"><a href="#动态重定位" class="headerlink" title="动态重定位"></a>动态重定位</h3><p>在动态重定位方法中，每个CPU需要两个寄存器来帮助它实现地址转化：base register 和 bounds register。</p>
+<p>程序在编写和编译时，其使用的内存地址从0开始。当程序运行时，如OS打算在32KB处开始载入程序，则OS将base寄存器的值设为32KB。程序的地址转化成：<br>$$<br>实际物理地址 = 虚拟地址 + base<br>$$<br>因此，base寄存器实现了地址转化的作用，而bounds寄存器的作用则是进行保护，限制地址引用的范围。</p>
+<p>当进行进程间切换时，需要保存base-bounds寄存器的值，以便恢复进程。这个值保存在进程控制块PCB(process control block)里。</p>
+<h4 id="动态重定位的缺点"><a href="#动态重定位的缺点" class="headerlink" title="动态重定位的缺点"></a>动态重定位的缺点</h4><p>动态重定位的缺点在于它会造成<strong>内部碎片(internal fragmentation)</strong>，造成内存的浪费。如图所示，由于进程的堆和栈不是很大，其中的内存就被浪费掉了</p>
+<p><img src="/Wiki/wiki/操作系统/操作系统是如何实现虚拟内存的/内部碎片.png" alt="内部碎片">。</p>
+<p><strong>为了解决内部碎片的问题，出现了分段技术。</strong></p>
+<h3 id="分段-Segmentation"><a href="#分段-Segmentation" class="headerlink" title="分段(Segmentation)"></a>分段(Segmentation)</h3><p>分段技术的出现是为了解决程序因占用连续的内存空间而产生内部碎片的问题，利用分段解决内部碎片问题的思想很简单：将进程的内存空间按照逻辑进行分段，每段可存放在物理内存的不同位置，在动态重定位一对base-bounds寄存器的基础上，<strong>给进程的每段都分配一对base-bounds寄存器</strong>。常见分段方式分为三段：代码段、栈和堆。比如说我们要对某个代码段的虚拟地址进行寻址，只需要根据代码段的base-bounds寄存器，按照动态重定位的方式寻址即可。那么，给定一个虚拟地址，如何判断它是属于哪个段的呢？</p>
+<h4 id="如何确定虚拟地址属于哪个段"><a href="#如何确定虚拟地址属于哪个段" class="headerlink" title="如何确定虚拟地址属于哪个段"></a>如何确定虚拟地址属于哪个段</h4><p>有两种方法进行确定。</p>
+<h5 id="将地址前面几位当作段标志"><a href="#将地址前面几位当作段标志" class="headerlink" title="将地址前面几位当作段标志"></a>将地址前面几位当作段标志</h5><p>比如一个14位的虚拟内存，我们可以将其前两位当做段的标志位，如00表示代码段，01表示堆，11表示栈。</p>
+<p><img src="/Wiki/wiki/操作系统/操作系统是如何实现虚拟内存的/段.png" alt="段"></p>
+<h5 id="根据虚拟地址如何产生的来判断"><a href="#根据虚拟地址如何产生的来判断" class="headerlink" title="根据虚拟地址如何产生的来判断"></a>根据虚拟地址如何产生的来判断</h5><p>如果虚拟地址由程序计数器(program count)产生的，则为代码段，如果为栈指针，则为栈段，否则为堆段。</p>
+<h4 id="MMU记录的其它信息"><a href="#MMU记录的其它信息" class="headerlink" title="MMU记录的其它信息"></a>MMU记录的其它信息</h4><p>除了每段的base-bounds寄存器外，MMU还记录了段的其它一些信息。</p>
+<p><img src="/Wiki/wiki/操作系统/操作系统是如何实现虚拟内存的/段寄存器.png" alt="段寄存器"></p>
+<p>因为栈是反方向扩张的，因此需要记录内存扩张的方向。Protection用来表示段的属性，可以用来共享一些段。</p>
+<h4 id="分段的缺点"><a href="#分段的缺点" class="headerlink" title="分段的缺点"></a>分段的缺点</h4><p>每个程序都不一样，其各段所占用的内存空间大小也不一样，造成内存的占用情况如下图所示</p>
+<p><img src="/Wiki/wiki/操作系统/操作系统是如何实现虚拟内存的/分段的缺点.png" alt="分段的缺点"></p>
+<p>内存上出现了各种大小的小洞，如果我们需要分配一个新段，比这个新段大小小的内存空间对于我们来说都是没有用的，这就造成了内存的浪费，这种浪费称为<strong>外部碎片(external fragmentation)</strong>。为了解决这个问题，出现了各种方法，如<strong>内存整理</strong>(compact)，各种<strong>内存管理算法</strong>(best fit、first fit)。但是并没有完美的方法解决这个问题。</p>
+<h3 id="分页-Paging"><a href="#分页-Paging" class="headerlink" title="分页(Paging)"></a>分页(Paging)</h3><p>分段中引起外部碎片的原因是每段的大小都不一样。分页对内存的处理方式是:将虚拟内存和物理内存分为若干个固定长度的单元，这个单元称为页。</p>
+<h4 id="如何寻址"><a href="#如何寻址" class="headerlink" title="如何寻址"></a>如何寻址</h4><p>每个进程都对应一个<strong>页表</strong>(page table)，页表存储着虚拟内存页对应的实际物理内存页。虚拟地址需要分为两部分：虚拟页号VPN(virtual page number)和偏移量offset。通过页表可以知道VPN对应的PFN，通过offset进行准确寻址。</p>
+<p><img src="/Wiki/wiki/操作系统/操作系统是如何实现虚拟内存的/分页.png" alt="分页"></p>
+<h4 id="页表存放在哪"><a href="#页表存放在哪" class="headerlink" title="页表存放在哪"></a>页表存放在哪</h4><p>页表占用空间很大。举个例子，假设一个32位的地址空间，每页大小为4KB，则虚拟内存分为20位的VPN和12位的偏移量(10位1KB，4KB则为12位)。20位的VPN表示存在$2^{20}$条转化映射，假设每条映射占用4字节，则一个页表需要占用4M的大小。</p>
+<p>由于页表太大，因此将内部存储在内存中。在MMU中的<strong>页表基(page-table base)寄存器</strong>中存放页表在内存中的起始位置。</p>
+<h4 id="分页的缺点"><a href="#分页的缺点" class="headerlink" title="分页的缺点"></a>分页的缺点</h4><p>因为页表存放在内存上，在对虚拟地址进行转化时，首先需要从内存中的页表读到其对应物理页，相当于多了一次内存的读操作，<strong>因此分页会降低速度，同时页表的存储占用过多内存。</strong></p>
+<h4 id="给分页加加速"><a href="#给分页加加速" class="headerlink" title="给分页加加速"></a>给分页加加速</h4><p>要想加加速，就需要硬件来帮个忙。<strong>TLB</strong> (Translation-Lookaside Buffer)，中文译为<strong>快表</strong>。TLB是集成在MMU上的缓存，用来存储部分页表记录。</p>
+<p>查询页表时，首先去TLB查，查到了称为TLB命中(hit)，如果没查到，称为TLB失败(miss)，此时去内存中的页表查。缓存大小有限，当有新记录放入到TLB，需要进行缓存置换，缓存置换有许多方法，这里不再展开。</p>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/Wiki/wiki/Java/CPU占用过高定位/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    CPU占用过高定位
+                
+            </div>
+        </a>
+    
+    
+        <a href="/Wiki/wiki/前端/React Vitual DOM/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">React Virtual DOM</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            polyval &copy; 2018 
+            <a rel="external nofollow noopener noreferrer" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png"></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten" rel="external nofollow noopener noreferrer" target="_blank">wikitten</a>
+            
+                <br><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span></span> | 
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"><span id="busuanzi_value_site_uv"></span></i></span>
+            
+        </div>
+    </div>
+</footer>
+        
+
+    
+        <script src="/Wiki/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/Wiki/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/Wiki/js/main.js"></script>
+
+    </div>
+</body>

@@ -6,7 +6,7 @@
   <link href="/Wiki/atom.xml" rel="self"/>
   
   <link href="http://polyval.github.io/Wiki/"/>
-  <updated>2018-10-11T04:54:00.830Z</updated>
+  <updated>2018-10-23T14:27:06.632Z</updated>
   <id>http://polyval.github.io/Wiki/</id>
   
   <author>
@@ -15,6 +15,276 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux命令</title>
+    <link href="http://polyval.github.io/Wiki/wiki/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux%E5%91%BD%E4%BB%A4/"/>
+    <id>http://polyval.github.io/Wiki/wiki/操作系统/Linux命令/</id>
+    <published>2018-10-21T05:08:29.000Z</published>
+    <updated>2018-10-23T14:27:06.632Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h1><p><code>ps -ef | grep &quot;&quot;</code></p><h1 id="zgrep"><a href="#zgrep" class="headerlink" title="zgrep"></a>zgrep</h1><h1 id="xargs"><a href="#xargs" class="headerlink" title="xargs"></a>xargs</h1><h1 id="find"><a href="#find" class="headerlink" title="find"></a>find</h1><p><code>find . -name &quot;&quot; | xargs zgrep &quot;&quot;</code></p><h1 id="查找端口被占用的程序"><a href="#查找端口被占用的程序" class="headerlink" title="查找端口被占用的程序"></a>查找端口被占用的程序</h1><p><code>lsof -i :&lt;port&gt;</code></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;ps&quot;&gt;&lt;a href=&quot;#ps&quot; class=&quot;headerlink&quot; title=&quot;ps&quot;&gt;&lt;/a&gt;ps&lt;/h1&gt;&lt;p&gt;&lt;code&gt;ps -ef | grep &amp;quot;&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;h1 id=&quot;zgrep&quot;&gt;&lt;a href=&quot;#z
+      
+    
+    </summary>
+    
+      <category term="操作系统" scheme="http://polyval.github.io/Wiki/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Spring Cloud</title>
+    <link href="http://polyval.github.io/Wiki/wiki/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Spring%20Cloud/"/>
+    <id>http://polyval.github.io/Wiki/wiki/微服务/Spring Cloud/</id>
+    <published>2018-10-21T03:28:21.000Z</published>
+    <updated>2018-10-21T03:58:14.321Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="配置管理"><a href="#配置管理" class="headerlink" title="配置管理"></a>配置管理</h2><h2 id="服务治理"><a href="#服务治理" class="headerlink" title="服务治理"></a>服务治理</h2><h3 id="服务注册"><a href="#服务注册" class="headerlink" title="服务注册"></a>服务注册</h3><p>服务向注册中心登记自己提供的服务</p><h3 id="服务发现"><a href="#服务发现" class="headerlink" title="服务发现"></a>服务发现</h3><p>通过服务名发起请求调用</p><h2 id="断路器"><a href="#断路器" class="headerlink" title="断路器"></a>断路器</h2><h2 id="智能路由"><a href="#智能路由" class="headerlink" title="智能路由"></a>智能路由</h2>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;配置管理&quot;&gt;&lt;a href=&quot;#配置管理&quot; class=&quot;headerlink&quot; title=&quot;配置管理&quot;&gt;&lt;/a&gt;配置管理&lt;/h2&gt;&lt;h2 id=&quot;服务治理&quot;&gt;&lt;a href=&quot;#服务治理&quot; class=&quot;headerlink&quot; title=&quot;服务治理&quot;&gt;&lt;/a
+      
+    
+    </summary>
+    
+      <category term="微服务" scheme="http://polyval.github.io/Wiki/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+    
+    
+      <category term="微服务" scheme="http://polyval.github.io/Wiki/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Git</title>
+    <link href="http://polyval.github.io/Wiki/wiki/%E5%B7%A5%E5%85%B7/Git/"/>
+    <id>http://polyval.github.io/Wiki/wiki/工具/Git/</id>
+    <published>2018-10-21T03:28:21.000Z</published>
+    <updated>2018-10-21T05:06:54.216Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><h2 id="四大区"><a href="#四大区" class="headerlink" title="四大区"></a>四大区</h2><ul><li>工作区(Working Directory)</li><li>暂存区(Stage or index)</li><li>本地库</li><li>远程库</li></ul><p>各区的转换图如下</p><p><img src="/Wiki/wiki/工具/Git/git-reset_drbfhd.png" alt="Imagem de capa"></p><h2 id="HEAD"><a href="#HEAD" class="headerlink" title="HEAD"></a>HEAD</h2><p>HEAD是一个特殊的指针，指向当前工作分支的最新commit</p><h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><h2 id="cherry-pick"><a href="#cherry-pick" class="headerlink" title="cherry-pick"></a>cherry-pick</h2><p>再次应用已经存在的commits，可以将其他分支的某些commit应用到当前分支。</p><h3 id="git-cherry-pick-lt-commit-id-gt"><a href="#git-cherry-pick-lt-commit-id-gt" class="headerlink" title="git cherry-pick &lt;commit id&gt;"></a><code>git cherry-pick &lt;commit id&gt;</code></h3><h3 id="git-cherry-pick-lt-start-commit-id-gt-lt-end-commit-id-gt"><a href="#git-cherry-pick-lt-start-commit-id-gt-lt-end-commit-id-gt" class="headerlink" title="git cherry-pick &lt;start-commit-id&gt;^..&lt;end-commit-id&gt;"></a><code>git cherry-pick &lt;start-commit-id&gt;^..&lt;end-commit-id&gt;</code></h3><p>应用这一区段的commits，左闭右闭。</p><h3 id="git-cherry-pick-abort"><a href="#git-cherry-pick-abort" class="headerlink" title="git cherry-pick --abort"></a><code>git cherry-pick --abort</code></h3><p>取消操作</p><h2 id="stash"><a href="#stash" class="headerlink" title="stash"></a>stash</h2><p>在某些分支上进行了改动，但是还没有完成，也没有提交，这个时候又要切到另外一个分支上进行工作。</p><h3 id="git-stash"><a href="#git-stash" class="headerlink" title="git stash"></a><code>git stash</code></h3><h3 id="git-stash-list"><a href="#git-stash-list" class="headerlink" title="git stash list"></a><code>git stash list</code></h3><h3 id="git-stash-apply"><a href="#git-stash-apply" class="headerlink" title="git stash apply"></a><code>git stash apply</code></h3><p>恢复到上次stash的状态</p><h3 id="git-stash-pop"><a href="#git-stash-pop" class="headerlink" title="git stash pop"></a><code>git stash pop</code></h3><p>恢复到上次stash的状态并去掉上次的stash</p><h2 id="revert"><a href="#revert" class="headerlink" title="revert"></a>revert</h2><p>将某些commit回退掉，同时会生成新的commit来记录这次操作</p><h3 id="git-revert-lt-commit-gt"><a href="#git-revert-lt-commit-gt" class="headerlink" title="git revert &lt;commit&gt;"></a><code>git revert &lt;commit&gt;</code></h3><h3 id="git-revert-HEAD-3"><a href="#git-revert-HEAD-3" class="headerlink" title="git revert HEAD~3"></a><code>git revert HEAD~3</code></h3><p>撤销倒数第四次commit。</p><h2 id="reset"><a href="#reset" class="headerlink" title="reset"></a>reset</h2><h3 id="三种模式"><a href="#三种模式" class="headerlink" title="三种模式"></a>三种模式</h3><ul><li>– mixed。回退暂存区，工作区不动。也就是说改动的文件不会动但是会回退到未提交状态。—mixed是默认选项。</li><li>– hard。 暂存区和工作区都会被回退掉。</li><li>– soft。 暂存区和工作区都不会动，回退到指定的commit之后，这个commit之后的文件都处于changed to be committed状态。</li></ul><h3 id="git-reset"><a href="#git-reset" class="headerlink" title="git reset"></a><code>git reset</code></h3><p>git add 之后想撤销就可以用这个命令</p><h3 id="git-reset-hard-HEAD-3"><a href="#git-reset-hard-HEAD-3" class="headerlink" title="git reset --hard HEAD~3"></a><code>git reset --hard HEAD~3</code></h3><p>最近三次提交不想要了，也不想再看到它们。可以使用这个命令。</p><h3 id="git-reset-lt-file-gt"><a href="#git-reset-lt-file-gt" class="headerlink" title="git reset -- &lt;file&gt;"></a><code>git reset -- &lt;file&gt;</code></h3><p>回退单个文件。</p><h2 id="reflog"><a href="#reflog" class="headerlink" title="reflog"></a>reflog</h2><p>ref + log</p><p>reflog命令可以查看所有的历史操作记录</p><p>比如误操作用了<code>git reset --hard HEAD^</code></p><p>这时候用<code>git log</code>是找不到原来的commit的，这时候可以用<code>git reflog</code>找到commit id来进行恢复。</p><h2 id="rebase"><a href="#rebase" class="headerlink" title="rebase"></a>rebase</h2><p>将某个分支的修改移动到当前分支，依次将提交作用到当前分支，作用到过程中生成新的提交记录，提交信息默认与原来的一致。</p><h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;原理&quot;&gt;&lt;a href=&quot;#原理&quot; class=&quot;headerlink&quot; title=&quot;原理&quot;&gt;&lt;/a&gt;原理&lt;/h1&gt;&lt;h2 id=&quot;四大区&quot;&gt;&lt;a href=&quot;#四大区&quot; class=&quot;headerlink&quot; title=&quot;四大区&quot;&gt;&lt;/a&gt;四大区&lt;/h2&gt;&lt;u
+      
+    
+    </summary>
+    
+      <category term="工具" scheme="http://polyval.github.io/Wiki/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>CAP定理</title>
+    <link href="http://polyval.github.io/Wiki/wiki/%E5%88%86%E5%B8%83%E5%BC%8F/CAP%E5%AE%9A%E7%90%86/"/>
+    <id>http://polyval.github.io/Wiki/wiki/分布式/CAP定理/</id>
+    <published>2018-10-21T03:28:21.000Z</published>
+    <updated>2018-10-21T03:58:02.665Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="CAP定理"><a href="#CAP定理" class="headerlink" title="CAP定理"></a>CAP定理</h2><p>分布式系统中有三个指标</p><ul><li>Consistency 一致性</li><li>Avaliability 可用性</li><li>Partition tolerance 分区容错</li></ul><p>CAP定理认为这三个指标不可能同时做到。</p><h2 id="Patition-tolerance"><a href="#Patition-tolerance" class="headerlink" title="Patition tolerance"></a>Patition tolerance</h2><p>分区容错指分布式系统在遇到某节点或网络分区故障的时候，仍然能够对外提供满足一致性和可用性的服务。</p><h2 id="Consistency"><a href="#Consistency" class="headerlink" title="Consistency"></a>Consistency</h2><p>等同于所有节点访问同一份最新的数据副本</p><h2 id="Avaliability"><a href="#Avaliability" class="headerlink" title="Avaliability"></a>Avaliability</h2><p>可用性指“<code>Reads and writes always succeed</code>”，即服务一直可用，而且是正常响应时间。</p><h2 id="CAP权衡"><a href="#CAP权衡" class="headerlink" title="CAP权衡"></a>CAP权衡</h2><p>CAP权衡有三种情况</p><h3 id="CA-without-P"><a href="#CA-without-P" class="headerlink" title="CA without P"></a>CA without P</h3><p>这种情况在分布式系统中几乎是不存在的。首先在分布式环境下，网络分区是一个自然的事实。因为分区是必然的，所以如果舍弃P，意味着要舍弃分布式系统。那也就没有必要再讨论CAP理论了。    </p><p>对于一个分布式系统来说。P是一个基本要求，CAP三者中，只能在CA两者之间做权衡，并且要想尽办法提升P。</p><h3 id="CP-without-A"><a href="#CP-without-A" class="headerlink" title="CP without A"></a>CP without A</h3><p>如果一个分布式系统不要求强的可用性，即容许系统停机或者长时间无响应的话，就可以在CAP三者中保障CP而舍弃A。</p><p>一个保证了CP而一个舍弃了A的分布式系统，一旦发生网络故障或者消息丢失等情况，就要牺牲用户的体验，等待所有数据全部一致了之后再让用户访问系统。</p><h3 id="AP-wihtout-C"><a href="#AP-wihtout-C" class="headerlink" title="AP wihtout C"></a>AP wihtout C</h3><p>要高可用并允许分区，则需放弃一致性。一旦网络问题发生，节点之间可能会失去联系。为了保证高可用，需要在用户访问时可以马上得到返回，则每个节点只能用本地数据提供服务，而这样会导致全局数据的不一致性。</p><p>这种舍弃强一致性而保证系统的分区容错性和可用性的场景和案例非常多。前面我们介绍可用性的时候说到过，很多系统在可用性方面会做很多事情来保证系统的全年可用性可以达到N个9，所以，对于很多业务系统来说，比如淘宝的购物，12306的买票。都是在可用性和一致性之间舍弃了一致性而选择可用性。</p><p>你在12306买票的时候肯定遇到过这种场景，当你购买的时候提示你是有票的（但是可能实际已经没票了），你也正常的去输入验证码，下单了。但是过了一会系统提示你下单失败，余票不足。这其实就是先在可用性方面保证系统可以正常的服务，然后在数据的一致性方面做了些牺牲，会影响一些用户体验，但是也不至于造成用户流程的严重阻塞。</p><p>但是，我们说很多网站牺牲了一致性，选择了可用性，这其实也不准确的。就比如上面的买票的例子，其实舍弃的只是<strong>强一致性</strong>。退而求其次保证了<strong>最终一致性</strong>。也就是说，虽然下单的瞬间，关于车票的库存可能存在数据不一致的情况，但是过了一段时间，还是要保证最终一致性的。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;CAP定理&quot;&gt;&lt;a href=&quot;#CAP定理&quot; class=&quot;headerlink&quot; title=&quot;CAP定理&quot;&gt;&lt;/a&gt;CAP定理&lt;/h2&gt;&lt;p&gt;分布式系统中有三个指标&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Consistency 一致性&lt;/li&gt;
+&lt;li&gt;Avaliabi
+      
+    
+    </summary>
+    
+      <category term="分布式" scheme="http://polyval.github.io/Wiki/categories/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+    
+      <category term="分布式" scheme="http://polyval.github.io/Wiki/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java分析工具</title>
+    <link href="http://polyval.github.io/Wiki/wiki/Java/Java%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7/"/>
+    <id>http://polyval.github.io/Wiki/wiki/Java/Java分析工具/</id>
+    <published>2018-10-21T03:28:21.000Z</published>
+    <updated>2018-10-22T04:32:23.553Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="jmap"><a href="#jmap" class="headerlink" title="jmap"></a>jmap</h1><h2 id="输出对象实例个数"><a href="#输出对象实例个数" class="headerlink" title="输出对象实例个数"></a>输出对象实例个数</h2><p><code>jmap -histo &lt;pid&gt; &gt; a.log</code></p><p>查看应用代码实例的个数，对于出现内存泄露的情况，可以快速定位出是哪个对象引起的。</p><h2 id="输出堆文件"><a href="#输出堆文件" class="headerlink" title="输出堆文件"></a>输出堆文件</h2><p><code>jmap -dump:format=b,file = a.dat &lt;pid&gt;</code></p><h2 id="查看进程堆内存使用情况"><a href="#查看进程堆内存使用情况" class="headerlink" title="查看进程堆内存使用情况"></a>查看进程堆内存使用情况</h2><p><code>jmap -heap &lt;pid&gt;</code></p><h1 id="jhat"><a href="#jhat" class="headerlink" title="jhat"></a>jhat</h1><h4 id="查看dump文件"><a href="#查看dump文件" class="headerlink" title="查看dump文件"></a>查看dump文件</h4><p><code>jhat -port 9998 /tmp/var/dump.dat</code></p><p>然后在浏览器中输入localhost:9998即可查看</p><h1 id="jstack"><a href="#jstack" class="headerlink" title="jstack"></a>jstack</h1><h1 id="jstat"><a href="#jstat" class="headerlink" title="jstat"></a>jstat</h1><h2 id="监控GC"><a href="#监控GC" class="headerlink" title="监控GC"></a>监控GC</h2><p><code>jstat -gcutil  &lt;pid&gt; &lt;interval&gt; &lt;count&gt;</code></p><h1 id="jps"><a href="#jps" class="headerlink" title="jps"></a>jps</h1><p>输出JVM中运行的进程状态信息</p><h1 id="jConsole"><a href="#jConsole" class="headerlink" title="jConsole"></a>jConsole</h1><h1 id="jinfo"><a href="#jinfo" class="headerlink" title="jinfo"></a>jinfo</h1><h1 id="jVisualvm"><a href="#jVisualvm" class="headerlink" title="jVisualvm"></a>jVisualvm</h1><h1 id="eclipse-memory-analyzer"><a href="#eclipse-memory-analyzer" class="headerlink" title="eclipse memory analyzer"></a>eclipse memory analyzer</h1><p>dump分析工具</p><h1 id="Btrace"><a href="#Btrace" class="headerlink" title="Btrace"></a>Btrace</h1><h1 id="Greys-Anatomy"><a href="#Greys-Anatomy" class="headerlink" title="Greys-Anatomy"></a><a href="https://github.com/oldmanpushcart/greys-anatomy" rel="external nofollow noopener noreferrer" target="_blank">Greys-Anatomy</a></h1><p>在线问题诊断工具</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;jmap&quot;&gt;&lt;a href=&quot;#jmap&quot; class=&quot;headerlink&quot; title=&quot;jmap&quot;&gt;&lt;/a&gt;jmap&lt;/h1&gt;&lt;h2 id=&quot;输出对象实例个数&quot;&gt;&lt;a href=&quot;#输出对象实例个数&quot; class=&quot;headerlink&quot; title=&quot;输
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="http://polyval.github.io/Wiki/categories/Java/"/>
+    
+    
+      <category term="Java" scheme="http://polyval.github.io/Wiki/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java内存优化</title>
+    <link href="http://polyval.github.io/Wiki/wiki/Java/Java%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/"/>
+    <id>http://polyval.github.io/Wiki/wiki/Java/Java内存优化/</id>
+    <published>2018-10-21T03:28:21.000Z</published>
+    <updated>2018-10-22T05:08:42.122Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="常驻内存"><a href="#常驻内存" class="headerlink" title="常驻内存"></a>常驻内存</h1><h2 id="排查内存泄漏"><a href="#排查内存泄漏" class="headerlink" title="排查内存泄漏"></a>排查内存泄漏</h2><h2 id="重用对象"><a href="#重用对象" class="headerlink" title="重用对象"></a>重用对象</h2><h3 id="String-intern"><a href="#String-intern" class="headerlink" title="String.intern()"></a>String.intern()</h3><p>在某服务中，通过与其他进程通讯获取到格式为byte[]的字段，将byte[]转化成String的时候利用new String(byte[])方法，但是string很多是相同的，产生了大量相同的string对象，而且这些对象是程序中当作缓存来用一直存在于内存中，采用String.intern()对String对象进行缓存，降低了内存占用30M。</p><h2 id="Integer-valueOf"><a href="#Integer-valueOf" class="headerlink" title="Integer.valueOf()"></a>Integer.valueOf()</h2><h3 id="只需一个实例的对象一定要使用单例"><a href="#只需一个实例的对象一定要使用单例" class="headerlink" title="只需一个实例的对象一定要使用单例"></a>只需一个实例的对象一定要使用单例</h3><h3 id="对象池技术"><a href="#对象池技术" class="headerlink" title="对象池技术"></a>对象池技术</h3><h2 id="使用小数据类型"><a href="#使用小数据类型" class="headerlink" title="使用小数据类型"></a>使用小数据类型</h2><h2 id="减少线程数"><a href="#减少线程数" class="headerlink" title="减少线程数"></a>减少线程数</h2><h2 id="去垃圾回收机制"><a href="#去垃圾回收机制" class="headerlink" title="去垃圾回收机制"></a>去垃圾回收机制</h2><h2 id="System-arraycopy"><a href="#System-arraycopy" class="headerlink" title="System.arraycopy ()"></a>System.arraycopy ()</h2><h1 id="临时内存"><a href="#临时内存" class="headerlink" title="临时内存"></a>临时内存</h1><h2 id="减少不必要的对象拷贝，重写对象的clone方法"><a href="#减少不必要的对象拷贝，重写对象的clone方法" class="headerlink" title="减少不必要的对象拷贝，重写对象的clone方法"></a>减少不必要的对象拷贝，重写对象的clone方法</h2><h2 id="容器大小预估"><a href="#容器大小预估" class="headerlink" title="容器大小预估"></a>容器大小预估</h2><p>容器在扩容时会产生大量临时对象，对容器大小进行预估传入初始值可以减少容器的扩容</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;常驻内存&quot;&gt;&lt;a href=&quot;#常驻内存&quot; class=&quot;headerlink&quot; title=&quot;常驻内存&quot;&gt;&lt;/a&gt;常驻内存&lt;/h1&gt;&lt;h2 id=&quot;排查内存泄漏&quot;&gt;&lt;a href=&quot;#排查内存泄漏&quot; class=&quot;headerlink&quot; title=&quot;排查内存泄
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="http://polyval.github.io/Wiki/categories/Java/"/>
+    
+    
+      <category term="Java" scheme="http://polyval.github.io/Wiki/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://polyval.github.io/Wiki/wiki/Java/TODO/"/>
+    <id>http://polyval.github.io/Wiki/wiki/Java/TODO/</id>
+    <published>2018-10-15T13:36:50.273Z</published>
+    <updated>2018-10-21T02:38:24.061Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="技能"><a href="#技能" class="headerlink" title="技能"></a>技能</h2><p>熟悉Java常见问题定位、Python</p><p>熟悉React</p><p>熟悉Git、Linux常用命令</p><p>了解Spring Cloud、微服务、分布式</p><h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><h3 id="EmlCacheService的内存优化"><a href="#EmlCacheService的内存优化" class="headerlink" title="EmlCacheService的内存优化"></a>EmlCacheService的内存优化</h3><ul><li><p>Java内存分析与优化</p></li><li><p>MAT堆栈分析</p></li><li><p>看一下EmlCacheService的线程池怎么用的</p></li><li><p>String.intern()</p><blockquote><p>byte[] 转String用了new String[byte]。无可厚非，但是造成了String的大量重复。</p></blockquote></li></ul><h3 id="WebTopo专项"><a href="#WebTopo专项" class="headerlink" title="WebTopo专项"></a>WebTopo专项</h3><ul><li><p>CS转BS</p></li><li><p>React</p></li><li>WebSocket</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;技能&quot;&gt;&lt;a href=&quot;#技能&quot; class=&quot;headerlink&quot; title=&quot;技能&quot;&gt;&lt;/a&gt;技能&lt;/h2&gt;&lt;p&gt;熟悉Java常见问题定位、Python&lt;/p&gt;
+&lt;p&gt;熟悉React&lt;/p&gt;
+&lt;p&gt;熟悉Git、Linux常用命令&lt;/p&gt;
+&lt;p&gt;了解Spr
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="http://polyval.github.io/Wiki/categories/Java/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://polyval.github.io/Wiki/wiki/Go/Go%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8/"/>
+    <id>http://polyval.github.io/Wiki/wiki/Go/Go语言入门/</id>
+    <published>2018-10-14T02:45:25.790Z</published>
+    <updated>2018-10-14T03:00:25.274Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="GO语言特性"><a href="#GO语言特性" class="headerlink" title="GO语言特性"></a>GO语言特性</h1><h2 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h2><h2 id="风格"><a href="#风格" class="headerlink" title="风格"></a>风格</h2><h3 id="代码风格强制统一"><a href="#代码风格强制统一" class="headerlink" title="代码风格强制统一"></a>代码风格强制统一</h3><h4 id="public变量必须大写字母开头，private必须小写"><a href="#public变量必须大写字母开头，private必须小写" class="headerlink" title="public变量必须大写字母开头，private必须小写"></a>public变量必须大写字母开头，private必须小写</h4><h4 id="花括号"><a href="#花括号" class="headerlink" title="花括号"></a>花括号</h4><p>花括号必须这么写</p><p>if expression {<br>…<br>} </p><h3 id="不支持函数和操作符重载"><a href="#不支持函数和操作符重载" class="headerlink" title="不支持函数和操作符重载"></a>不支持函数和操作符重载</h3><h2 id="函数多返回值"><a href="#函数多返回值" class="headerlink" title="函数多返回值"></a>函数多返回值</h2>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;GO语言特性&quot;&gt;&lt;a href=&quot;#GO语言特性&quot; class=&quot;headerlink&quot; title=&quot;GO语言特性&quot;&gt;&lt;/a&gt;GO语言特性&lt;/h1&gt;&lt;h2 id=&quot;协程&quot;&gt;&lt;a href=&quot;#协程&quot; class=&quot;headerlink&quot; title=&quot;协程&quot;&gt;&lt;
+      
+    
+    </summary>
+    
+      <category term="Go" scheme="http://polyval.github.io/Wiki/categories/Go/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://polyval.github.io/Wiki/wiki/Java/Spring%20Boot/"/>
+    <id>http://polyval.github.io/Wiki/wiki/Java/Spring Boot/</id>
+    <published>2018-10-07T12:15:41.532Z</published>
+    <updated>2018-10-07T12:25:26.066Z</updated>
+    
+    <content type="html"><![CDATA[<p>Spring Boot简化了构建基于Spring框架的应用的步骤，尤其是简化了spring的配置流程。与我司的云龙平台在创建微服务的时候做的工作类似。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Spring Boot简化了构建基于Spring框架的应用的步骤，尤其是简化了spring的配置流程。与我司的云龙平台在创建微服务的时候做的工作类似。&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="http://polyval.github.io/Wiki/categories/Java/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://polyval.github.io/Wiki/wiki/Java/Netty/"/>
+    <id>http://polyval.github.io/Wiki/wiki/Java/Netty/</id>
+    <published>2018-10-07T05:15:02.544Z</published>
+    <updated>2018-10-07T09:36:34.825Z</updated>
+    
+    <content type="html"><![CDATA[<p>Netty可以简化高性能网络应用程序的开发。Netty是基于Java NIO技术封装的一套框架，提供了一个更易于操作的使用模式和接口。</p><h3 id="NIO"><a href="#NIO" class="headerlink" title="NIO"></a>NIO</h3><p>NIO全称是NoneBlocking IO，是一种同步非阻塞等IO模型。区别与BIO，BIO的全称是Blocking IO，阻塞IO。那这个阻塞是什么意思呢？</p><ol><li>Accept是阻塞的，只有新连接来了，Accept才会返回，主线程才能继</li><li>Read是阻塞的，只有请求消息来了，Read才能返回，子线程才能继续处理</li><li>Write是阻塞的，只有客户端把消息收了，Write才能返回，子线程才能继续读取下一个请求</li></ol><h4 id="NIO是如何做到非阻塞的"><a href="#NIO是如何做到非阻塞的" class="headerlink" title="NIO是如何做到非阻塞的"></a>NIO是如何做到非阻塞的</h4><p>它用的是事件机制。它可以用一个线程把Accept，读写操作，请求处理的逻辑全干了。如果什么事都没得做，它也不会死循环，它会将线程休眠起来，直到下一个事件来了再继续干活，这样的一个线程称之为NIO线程。 </p><h4 id="Linux-IO模型"><a href="#Linux-IO模型" class="headerlink" title="Linux IO模型"></a>Linux IO模型</h4><p><strong>网络IO的本质是socket的读取，socket在linux系统被抽象为流，IO可以理解为对流的操作</strong>。对于一次IO访问（以read举例），<strong>数据会先被拷贝到操作系统内核的缓冲区中，然后才会从操作系统内核的缓冲区拷贝到应用程序的地址空间</strong>。所以说，当一个read操作发生时，它会经历两个阶段：</p><blockquote><ol><li>第一阶段：等待数据准备 (Waiting for the data to be ready)。</li><li>第二阶段：将数据从内核拷贝到进程中 (Copying the data from the kernel to the process)。</li></ol></blockquote><p>对于socket流而言，</p><blockquote><ol><li>第一步：通常涉及等待网络上的数据分组到达，然后被复制到内核的某个缓冲区。</li><li>第二步：把数据从内核缓冲区复制到应用进程缓冲区。</li></ol></blockquote><p><a href="https://www.jianshu.com/p/aed6067eeac9" rel="external nofollow noopener noreferrer" target="_blank">同步、异步、阻塞、非阻塞概念参考</a></p><p>网络IO的模型大致有如下几种</p><ul><li><strong>同步模型（synchronous IO）</strong></li><li>阻塞IO（bloking IO）</li><li>非阻塞IO（non-blocking IO）</li><li>多路复用IO（multiplexing IO）</li><li>信号驱动式IO（signal-driven IO）</li><li><strong>异步IO（asynchronous IO）</strong></li></ul><p>所有的系统I/O都分为两个阶段：等待就绪和操作。举例来说，读函数，分为等待系统可读和真正的读；同理，写函数分为等待网卡可以写和真正的写。</p><p>NIO一个重要的特点是：socket主要的读、写、注册和接收函数，在等待就绪阶段都是非阻塞的，真正的I/O操作是同步阻塞的（消耗CPU但性能非常高）。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Netty可以简化高性能网络应用程序的开发。Netty是基于Java NIO技术封装的一套框架，提供了一个更易于操作的使用模式和接口。&lt;/p&gt;
+&lt;h3 id=&quot;NIO&quot;&gt;&lt;a href=&quot;#NIO&quot; class=&quot;headerlink&quot; title=&quot;NIO&quot;&gt;&lt;/a&gt;NI
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="http://polyval.github.io/Wiki/categories/Java/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://polyval.github.io/Wiki/wiki/Java/Java%E5%9F%BA%E7%A1%80/"/>
+    <id>http://polyval.github.io/Wiki/wiki/Java/Java基础/</id>
+    <published>2018-10-07T04:51:16.950Z</published>
+    <updated>2018-10-07T04:59:50.573Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="静态代码块"><a href="#静态代码块" class="headerlink" title="静态代码块"></a>静态代码块</h3><h4 id="什么是静态代码块"><a href="#什么是静态代码块" class="headerlink" title="什么是静态代码块"></a>什么是静态代码块</h4><p>静态代码块用于给类初始化，随类的加载而执行。</p><h4 id="静态代码块的作用"><a href="#静态代码块的作用" class="headerlink" title="静态代码块的作用"></a>静态代码块的作用</h4><p>用于复杂的类静态变量初始化，比如往map里面塞值。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;静态代码块&quot;&gt;&lt;a href=&quot;#静态代码块&quot; class=&quot;headerlink&quot; title=&quot;静态代码块&quot;&gt;&lt;/a&gt;静态代码块&lt;/h3&gt;&lt;h4 id=&quot;什么是静态代码块&quot;&gt;&lt;a href=&quot;#什么是静态代码块&quot; class=&quot;headerlink&quot; titl
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="http://polyval.github.io/Wiki/categories/Java/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>线程状态</title>
@@ -30,6 +300,31 @@
       
       
         &lt;h3 id=&quot;线程的状态转换关系&quot;&gt;&lt;a href=&quot;#线程的状态转换关系&quot; class=&quot;headerlink&quot; title=&quot;线程的状态转换关系&quot;&gt;&lt;/a&gt;线程的状态转换关系&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;/Wiki/wiki/Java/线程状态/线程状态.png&quot; a
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="http://polyval.github.io/Wiki/categories/Java/"/>
+    
+    
+      <category term="Java" scheme="http://polyval.github.io/Wiki/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java内存溢出的情况</title>
+    <link href="http://polyval.github.io/Wiki/wiki/Java/Java%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E7%9A%84%E6%83%85%E5%86%B5/"/>
+    <id>http://polyval.github.io/Wiki/wiki/Java/Java内存溢出的情况/</id>
+    <published>2018-10-06T16:28:21.000Z</published>
+    <updated>2018-10-11T04:52:43.709Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1、java-lang-OutOfMemoryError-Java-heap-space"><a href="#1、java-lang-OutOfMemoryError-Java-heap-space" class="headerlink" title="1、java.lang.OutOfMemoryError:Java heap space"></a>1、<code>java.lang.OutOfMemoryError:Java heap space</code></h3><p>Java应用程序在启动时会指定所需要的内存大小，它被分割成两个不同的区域：<code>Heap space（堆空间）</code>和<code>Permgen（永久代）</code>：</p><p>JVM内存模型示意图</p><p> 这两个区域的大小可以在JVM（Java虚拟机）启动时通过参数</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-Xmx</span><br></pre></td></tr></table></figure><p>和</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-XX:MaxPermSize</span><br></pre></td></tr></table></figure><p>设置，如果你没有显式设置，则将使用特定平台的默认值。</p><p>当应用程序试图向堆空间添加更多的数据，但堆却没有足够的空间来容纳这些数据时，将会触发<code>java.lang.OutOfMemoryError: Java heap space</code>异常。需要注意的是：即使有足够的物理内存可用，只要达到堆空间设置的大小限制，此异常仍然会被触发。</p><h4 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h4><p>触发<code>java.lang.OutOfMemoryError: Java heap space</code>最常见的原因就是应用程序需要的堆空间是XXL号的，但是JVM提供的却是S号。解决方法也很简单，提供更大的堆空间即可。除了前面的因素还有更复杂的成因：</p><ul><li>流量/数据量峰值：应用程序在设计之初均有用户量和数据量的限制，某一时刻，当用户数量或数据量突然达到一个峰值，并且这个峰值已经超过了设计之初预期的阈值，那么以前正常的功能将会停止，并触发<code>java.lang.OutOfMemoryError: Java heap space</code>异常。</li><li>内存泄漏：特定的编程错误会导致你的应用程序不停的消耗更多的内存，每次使用有内存泄漏风险的功能就会留下一些不能被回收的对象到堆空间中，随着时间的推移，泄漏的对象会消耗所有的堆空间，最终触发<code>java.lang.OutOfMemoryError: Java heap space</code>错误。</li></ul><h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><h5 id="①、简单示例"><a href="#①、简单示例" class="headerlink" title="①、简单示例"></a>①、简单示例</h5><p>首先看一个非常简单的示例，下面的代码试图创建2 x 1024 x 1024个元素的整型数组，当你尝试编译并指定12M堆空间运行时（java -Xmx12m OOM）将会失败并抛出<code>java.lang.OutOfMemoryError: Java heap space</code>错误，而当你指定13M堆空间时，将正常的运行。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class OOM &#123;</span><br><span class="line">    static final int SIZE=2*1024*1024;</span><br><span class="line">    public static void main(String[] a) &#123;</span><br><span class="line">        int[] i = new int[SIZE];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>运行如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">D:\&gt;javac OOM.java</span><br><span class="line">D:\&gt;java -Xmx12m OOM</span><br><span class="line">Exception in thread &quot;main&quot; java.lang.OutOfMemoryError: Java heap space</span><br><span class="line">        at OOM.main(OOM.java:4)</span><br><span class="line">D:\&gt;java -Xmx13m OOM</span><br></pre></td></tr></table></figure><h5 id="②、内存泄漏示例"><a href="#②、内存泄漏示例" class="headerlink" title="②、内存泄漏示例"></a>②、内存泄漏示例</h5><p>在Java中，当开发者创建一个新对象（比如：<code>new Integer(5)</code>）时，不需要自己开辟内存空间，而是把它交给JVM。在应用程序整个生命周期类，JVM负责检查哪些对象可用，哪些对象未被使用。未使用对象将被丢弃，其占用的内存也将被回收，这一过程被称为垃圾回收。JVM负责垃圾回收的模块集合被称为垃圾回收器（<code>GC</code>）。</p><p>Java的内存自动管理机制依赖于GC定期查找未使用对象并删除它们。Java中的内存泄漏是由于GC无法识别一些已经不再使用的对象，而这些未使用的对象一直留在堆空间中，这种堆积最终会导致<code>java.lang.OutOfMemoryError: Java heap space</code>错误。</p><p>我们可以非常容易的写出导致内存泄漏的Java代码：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public class KeylessEntry &#123;</span><br><span class="line">    </span><br><span class="line">    static class Key &#123;</span><br><span class="line">        Integer id;</span><br><span class="line">        </span><br><span class="line">        Key(Integer id) &#123;</span><br><span class="line">            this.id = id;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        @Override</span><br><span class="line">        public int hashCode() &#123;</span><br><span class="line">            return id.hashCode();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Map&lt;Key,String&gt; m = new HashMap&lt;Key,String&gt;();</span><br><span class="line">        while(true) &#123;</span><br><span class="line">            for(int i=0;i&lt;10000;i++) &#123;</span><br><span class="line">                if(!m.containsKey(new Key(i))) &#123;</span><br><span class="line">                    m.put(new Key(i), &quot;Number:&quot; + i);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>代码中<code>HashMap</code>为本地缓存，第一次while循环，会将10000个元素添加到缓存中。后面的while循环中，由于key已经存在于缓存中，缓存的大小将一直会维持在10000。但事实真的如此吗？由于<code>Key</code>实体没有实现<code>equals()</code>方法，导致for循环中每次执行<code>m.containsKey(new Key(i))</code>结果均为<code>false</code>，其结果就是<code>HashMap</code>中的元素将一直增加。</p><p>随着时间的推移，越来越多的<code>Key</code>对象进入堆空间且不能被垃圾收集器回收（m为局部变量，GC会认为这些对象一直可用，所以不会回收），直到所有的堆空间被占用，最后抛出<code>java.lang.OutOfMemoryError:Java heap space</code>。</p><blockquote><p>上面的代码直接运行可能很久也不会抛出异常，可以在启动时使用-Xmx参数，设置堆内存大小，或者在for循环后打印HashMap的大小，执行后会发现HashMap的size一直再增长。</p></blockquote><p>解决方法也非常简单，只要<code>Key</code>实现自己的<code>equals</code>方法即可：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Override</span><br><span class="line">public boolean equals(Object o) &#123;</span><br><span class="line">    boolean response = false;</span><br><span class="line">    if (o instanceof Key) &#123;</span><br><span class="line">        response = (((Key)o).id).equals(this.id);</span><br><span class="line">    &#125;</span><br><span class="line">    return response;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><p>第一个解决方案是显而易见的，你应该确保有足够的堆空间来正常运行你的应用程序，在JVM的启动配置中增加如下配置：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-Xmx1024m</span><br></pre></td></tr></table></figure><p>上面的配置分配1024M堆空间给你的应用程序，当然你也可以使用其他单位，比如用G表示GB，K表示KB。下面的示例都表示最大堆空间为1GB：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">java -Xmx1073741824 com.mycompany.MyClass</span><br><span class="line">java -Xmx1048576k com.mycompany.MyClass</span><br><span class="line">java -Xmx1024m com.mycompany.MyClass</span><br><span class="line">java -Xmx1g com.mycompany.MyClass</span><br></pre></td></tr></table></figure><p>然后，更多的时候，单纯地增加堆空间不能解决所有的问题。如果你的程序存在内存泄漏，一味的增加堆空间也只是推迟<code>java.lang.OutOfMemoryError: Java heap space</code>错误出现的时间而已，并未解决这个隐患。除此之外，垃圾收集器在GC时，应用程序会停止运行直到GC完成，而增加堆空间也会导致GC时间延长，进而影响程序的吞吐量。</p><p>如果你想完全解决这个问题，那就好好提升自己的编程技能吧，当然运用好<code>Debuggers, profilers, heap dump analyzers</code>等工具，可以让你的程序最大程度的避免内存泄漏问题。</p><h3 id="2、java-lang-OutOfMemoryError-GC-overhead-limit-exceeded"><a href="#2、java-lang-OutOfMemoryError-GC-overhead-limit-exceeded" class="headerlink" title="2、java.lang.OutOfMemoryError:GC overhead limit exceeded"></a>2、<code>java.lang.OutOfMemoryError:GC overhead limit exceeded</code></h3><p>默认情况下，当应用程序花费超过98%的时间用来做GC并且回收了不到2%的堆内存时，会抛出<code>java.lang.OutOfMemoryError:GC overhead limit exceeded</code>错误。具体的表现就是你的应用几乎耗尽所有可用内存，并且GC多次均未能清理干净。</p><h4 id="原因分析-1"><a href="#原因分析-1" class="headerlink" title="原因分析"></a>原因分析</h4><p><code>java.lang.OutOfMemoryError:GC overhead limit exceeded</code>错误是一个信号，示意你的应用程序在垃圾收集上花费了太多时间但却没有什么卵用。默认超过98%的时间用来做GC却回收了不到2%的内存时将会抛出此错误。那如果没有此限制会发生什么呢？GC进程将被重启，100%的CPU将用于GC，而没有CPU资源用于其他正常的工作。如果一个工作本来只需要几毫秒即可完成，现在却需要几分钟才能完成，我想这种结果谁都没有办法接受。</p><p>所以<code>java.lang.OutOfMemoryError:GC overhead limit exceeded</code>也可以看做是一个<code>fail-fast（快速失败）</code>实战的实例。</p><h4 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h4><p>下面的代码初始化一个<code>map</code>并在无限循环中不停的添加键值对，运行后将会抛出<code>GC overhead limit exceeded</code>错误：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class Wrapper &#123;</span><br><span class="line">    public static void main(String args[]) throws Exception &#123;</span><br><span class="line">        Map map = System.getProperties();</span><br><span class="line">        Random r = new Random();</span><br><span class="line">        while (true) &#123;</span><br><span class="line">            map.put(r.nextInt(), &quot;value&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>当我们使用如下参数启动程序时：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -Xmx100m -XX:+UseParallelGC Wrapper</span><br></pre></td></tr></table></figure><p>我们很快就可以看到程序抛出<code>java.lang.OutOfMemoryError: GC overhead limit exceeded</code>错误。但如果在启动时设置不同的堆空间大小或者使用不同的GC算法，比如这样：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -Xmx10m -XX:+UseParallelGC Wrapper</span><br></pre></td></tr></table></figure><p>我们将看到如下错误：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread &quot;main&quot; java.lang.OutOfMemoryError: Java heap space</span><br><span class="line">    at java.util.Hashtable.rehash(Unknown Source)</span><br><span class="line">    at java.util.Hashtable.addEntry(Unknown Source)</span><br><span class="line">    at java.util.Hashtable.put(Unknown Source)</span><br><span class="line">    at cn.moondev.Wrapper.main(Wrapper.java:12)</span><br></pre></td></tr></table></figure><p>使用以下GC算法：<code>-XX:+UseConcMarkSweepGC</code> 或者<code>-XX:+UseG1GC</code>，启动命令如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java -Xmx100m -XX:+UseConcMarkSweepGC Wrapper</span><br><span class="line">java -Xmx100m -XX:+UseG1GC Wrapper</span><br></pre></td></tr></table></figure><p>得到的结果是这样的：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Exception: java.lang.OutOfMemoryError thrown from </span><br><span class="line">the UncaughtExceptionHandler in thread &quot;main&quot;</span><br></pre></td></tr></table></figure><p>错误已经被默认的异常处理程序捕获，并且没有任何错误的堆栈信息输出。</p><p>以上这些变化可以说明，在资源有限的情况下，你根本无法无法预测你的应用是怎样挂掉的，什么时候会挂掉，所以在开发时，你不能仅仅保证自己的应用程序在特定的环境下正常运行。</p><h4 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h4><p>首先是一个毫无诚意的解决方案，如果你仅仅是不想看到<code>java.lang.OutOfMemoryError:GC overhead limit exceeded</code>的错误信息，可以在应用程序启动时添加如下JVM参数：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-XX:-UseGCOverheadLimit</span><br></pre></td></tr></table></figure><p>但是强烈建议不要使用这个选项，因为这样并没有解决任何问题，只是推迟了错误出现的时间，错误信息也变成了我们更熟悉的<code>java.lang.OutOfMemoryError: Java heap space</code>而已。</p><p>另一个解决方案，如果你的应用程序确实内存不足，增加堆内存会解决<code>GC overhead limit</code>问题，就如下面这样，给你的应用程序1G的堆内存：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -Xmx1024m com.yourcompany.YourClass</span><br></pre></td></tr></table></figure><p>但如果你想确保你已经解决了潜在的问题，而不是掩盖<code>java.lang.OutOfMemoryError: GC overhead limit exceeded</code>错误，那么你不应该仅止步于此。你要记得还有<code>profilers</code>和<code>memory dump analyzers</code>这些工具，你需要花费更多的时间和精力来查找问题。还有一点需要注意，这些工具在Java运行时有显著的开销，因此不建议在生产环境中使用。</p><h3 id="3、java-lang-OutOfMemoryError-Permgen-space"><a href="#3、java-lang-OutOfMemoryError-Permgen-space" class="headerlink" title="3、java.lang.OutOfMemoryError:Permgen space"></a>3、<code>java.lang.OutOfMemoryError:Permgen space</code></h3><p>Java中堆空间是JVM管理的最大一块内存空间，可以在JVM启动时指定堆空间的大小，其中堆被划分成两个不同的区域：新生代（Young）和老年代（Tenured），新生代又被划分为3个区域：<code>Eden</code>、<code>From Survivor</code>、<code>To Survivor</code></p><p><code>java.lang.OutOfMemoryError: PermGen space</code>错误就表明持久代所在区域的内存已被耗尽。</p><h4 id="原因分析-2"><a href="#原因分析-2" class="headerlink" title="原因分析"></a>原因分析</h4><p>要理解<code>java.lang.OutOfMemoryError: PermGen space</code>出现的原因，首先需要理解<code>Permanent Generation Space</code>的用处是什么。持久代主要存储的是每个类的信息，比如：<strong>类加载器引用</strong>、<strong>运行时常量池（所有常量、字段引用、方法引用、属性）</strong>、<strong>字段(Field)数据</strong>、<strong>方法(Method)数据</strong>、<strong>方法代码</strong>、<strong>方法字节码</strong>等等。我们可以推断出，<code>PermGen</code>的大小取决于被加载类的数量以及类的大小。</p><p>因此，我们可以得出出现<code>java.lang.OutOfMemoryError: PermGen space</code>错误的原因是：太多的类或者太大的类被加载到<code>permanent generation</code>（持久代）。</p><h4 id="示例-2"><a href="#示例-2" class="headerlink" title="示例"></a>示例</h4><h5 id="①、最简单的示例"><a href="#①、最简单的示例" class="headerlink" title="①、最简单的示例"></a>①、最简单的示例</h5><p>正如前面所描述的，<code>PermGen</code>的使用与加载到JVM类的数量有密切关系，下面是一个最简单的示例：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import javassist.ClassPool;</span><br><span class="line">public class MicroGenerator &#123;</span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line">        for (int i = 0; i &lt; 100_000_000; i++) &#123;</span><br><span class="line">            generate(&quot;cn.moondev.User&quot; + i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static Class generate(String name) throws Exception &#123;</span><br><span class="line">        ClassPool pool = ClassPool.getDefault();</span><br><span class="line">        return pool.makeClass(name).toClass();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>运行时请设置JVM参数：<code>-XX:MaxPermSize=5m</code>，值越小越好。需要注意的是JDK8已经完全移除持久代空间，取而代之的是元空间（<code>Metaspace</code>），所以示例最好的JDK1.7或者1.6下运行。</p><p>代码在运行时不停的生成类并加载到持久代中，直到撑满持久代内存空间，最后抛出<code>java.lang.OutOfMemoryError:Permgen space</code>。代码中类的生成使用了<code>javassist</code>库。</p><h5 id="②、Redeploy-time"><a href="#②、Redeploy-time" class="headerlink" title="②、Redeploy-time"></a>②、Redeploy-time</h5><p>更复杂和实际的一个例子就是Redeploy（重新部署，你可以想象一下你开发时，点击eclipse的reploy按钮或者使用idea时按ctrl + F5时的过程）。在从服务器卸载应用程序时，当前的<code>classloader</code>以及加载的<code>class</code>在没有实例引用的情况下，持久代的内存空间会被GC清理并回收。如果应用中有类的实例对当前的<code>classloader</code>的引用，那么<code>Permgen</code>区的<code>class</code>将无法被卸载，导致<code>Permgen</code>区的内存一直增加直到出现<code>Permgen space</code>错误。</p><p>不幸的是，许多第三方库以及糟糕的资源处理方式（比如：线程、JDBC驱动程序、文件系统句柄）使得卸载以前使用的类加载器变成了一件不可能的事。反过来就意味着在每次重新部署过程中，应用程序所有的类的先前版本将仍然驻留在<code>Permgen</code>区中，你的每次部署都将生成几十甚至几百M的垃圾。</p><p>就以线程和JDBC驱动来说说。很多人都会使用线程来处理一下周期性或者耗时较长的任务，这个时候一定要注意线程的生命周期问题，你需要确保线程不能比你的应用程序活得还长。否则，如果应用程序已经被卸载，线程还在继续运行，这个线程通常会维持对应用程序的<code>classloader</code>的引用，造成的结果就不再多说。多说一句，<strong>开发者有责任处理好这个问题，特别是如果你是第三方库的提供者的话，一定要提供线程关闭接口来处理清理工作</strong>。</p><p>让我们想象一个使用JDBC驱动程序连接到关系数据库的示例应用程序。当应用程序部署到服务器上的时：服务器创建一个<code>classloader</code>实例来加载应用所有的类（包含相应的JDBC驱动）。根据JDBC规范，JDBC驱动程序（比如：<code>com.mysql.jdbc.Driver</code>）会在初始化时将自己注册到<code>java.sql.DriverManager</code>中。该注册过程中会将驱动程序的一个实例存储在DriverManager的静态字段内，代码可以参考：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">// com.mysql.jdbc.Driver源码</span><br><span class="line">package com.mysql.jdbc;</span><br><span class="line"></span><br><span class="line">public class Driver extends NonRegisteringDriver implements java.sql.Driver &#123;</span><br><span class="line">    public Driver() throws SQLException &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    static &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            DriverManager.registerDriver(new Driver());</span><br><span class="line">        &#125; catch (SQLException var1) &#123;</span><br><span class="line">            throw new RuntimeException(&quot;Can\&apos;t register driver!&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">// // // // // // // // // //</span><br><span class="line">// 再看下DriverManager对应代码</span><br><span class="line">private final static CopyOnWriteArrayList&lt;DriverInfo&gt; registeredDrivers = new CopyOnWriteArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">public static synchronized void registerDriver(java.sql.Driver driver,DriverAction da) throws SQLException &#123;</span><br><span class="line">    if(driver != null) &#123;</span><br><span class="line">        registeredDrivers.addIfAbsent(new DriverInfo(driver, da));</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        throw new NullPointerException();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>现在，当从服务器上卸载应用程序的时候，<code>java.sql.DriverManager</code>仍将持有那个驱动程序的引用，进而持有用于加载应用程序的<code>classloader</code>的一个实例的引用。这个<code>classloader</code>现在仍然引用着应用程序的所有类。如果此程序启动时需要加载2000个类，占用约10MB永久代（PermGen）内存，那么只需要5~10次重新部署，就会将默认大小的永久代（PermGen）塞满，然后就会触发<code>java.lang.OutOfMemoryError: PermGen space</code>错误并崩溃。</p><h4 id="解决方案-2"><a href="#解决方案-2" class="headerlink" title="解决方案"></a>解决方案</h4><h5 id="①-解决初始化时的OutOfMemoryError"><a href="#①-解决初始化时的OutOfMemoryError" class="headerlink" title="① 解决初始化时的OutOfMemoryError"></a>① 解决初始化时的<code>OutOfMemoryError</code></h5><p>当在应用程序启动期间触发由于<code>PermGen</code>耗尽引起的<code>OutOfMemoryError</code>时，解决方案很简单。 应用程序需要更多的空间来加载所有的类到<code>PermGen</code>区域，所以我们只需要增加它的大小。 为此，请更改应用程序启动配置，并添加（或增加，如果存在）-XX：MaxPermSize参数，类似于以下示例：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -XX:MaxPermSize=512m com.yourcompany.YourClass</span><br></pre></td></tr></table></figure><h5 id="②-解决Redeploy时的OutOfMemoryError"><a href="#②-解决Redeploy时的OutOfMemoryError" class="headerlink" title="② 解决Redeploy时的OutOfMemoryError"></a>② 解决<code>Redeploy</code>时的<code>OutOfMemoryError</code></h5><p>分析dump文件：首先，找出引用在哪里被持有；其次，给你的web应用程序添加一个关闭的hook，或者在应用程序卸载后移除引用。你可以使用如下命令导出dump文件：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jmap -dump:format=b,file=dump.hprof &lt;process-id&gt;</span><br></pre></td></tr></table></figure><p>如果是你自己代码的问题请及时修改，如果是第三方库，请试着搜索一下是否存在”关闭”接口，如果没有给开发者提交一个bug或者issue吧。</p><h5 id="③-解决运行时OutOfMemoryError"><a href="#③-解决运行时OutOfMemoryError" class="headerlink" title="③ 解决运行时OutOfMemoryError"></a>③ 解决运行时<code>OutOfMemoryError</code></h5><p>首先你需要检查是否允许GC从<code>PermGen</code>卸载类，JVM的标准配置相当保守，只要类一创建，即使已经没有实例引用它们，其仍将保留在内存中，特别是当应用程序需要动态创建大量的类但其生命周期并不长时，允许JVM卸载类对应用大有助益，你可以通过在启动脚本中添加以下配置参数来实现：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-XX:+CMSClassUnloadingEnabled</span><br></pre></td></tr></table></figure><p>默认情况下，这个配置是未启用的，如果你启用它，GC将扫描<code>PermGen</code>区并清理已经不再使用的类。但请注意，这个配置只在<code>UseConcMarkSweepGC</code>的情况下生效，如果你使用其他GC算法，比如：<code>ParallelGC</code>或者<code>Serial GC</code>时，这个配置无效。所以使用以上配置时，请配合：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-XX:+UseConcMarkSweepGC</span><br></pre></td></tr></table></figure><p>如果你已经确保JVM可以卸载类，但是仍然出现内存溢出问题，那么你应该继续分析dump文件，使用以下命令生成dump文件：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jmap -dump:file=dump.hprof,format=b &lt;process-id&gt;</span><br></pre></td></tr></table></figure><p>当你拿到生成的堆转储文件，并利用像Eclipse Memory Analyzer Toolkit这样的工具来寻找应该卸载却没被卸载的类加载器，然后对该类加载器加载的类进行排查，找到可疑对象，分析使用或者生成这些类的代码，查找产生问题的根源并解决它。</p><h3 id="4、java-lang-OutOfMemoryError-Metaspace"><a href="#4、java-lang-OutOfMemoryError-Metaspace" class="headerlink" title="4、java.lang.OutOfMemoryError:Metaspace"></a>4、<code>java.lang.OutOfMemoryError:Metaspace</code></h3><p>前文已经提过，<code>PermGen</code>区域用于存储类的名称和字段，类的方法，方法的字节码，常量池，JIT优化等，但从Java8开始，Java中的内存模型发生了重大变化：引入了称为<code>Metaspace</code>的新内存区域，而删除了<code>PermGen</code>区域。请注意：不是简单的将<code>PermGen</code>区所存储的内容直接移到<code>Metaspace</code>区，<code>PermGen</code>区中的某些部分，已经移动到了普通堆里面。</p><h4 id="原因分析-3"><a href="#原因分析-3" class="headerlink" title="原因分析"></a>原因分析</h4><p>Java8做出如此改变的原因包括但不限于：</p><ul><li>应用程序所需要的<code>PermGen</code>区大小很难预测，设置太小会触发<code>PermGen OutOfMemoryError</code>错误，过度设置导致资源浪费。</li><li>提升GC性能，在HotSpot中的每个垃圾收集器需要专门的代码来处理存储在<code>PermGen</code>中的类的元数据信息。从<code>PermGen</code>分离类的元数据信息到<code>Metaspace</code>，由于<code>Metaspace</code>的分配具有和<code>Java Heap</code>相同的地址空间，因此<code>Metaspace</code>和<code>Java Heap</code>可以无缝的管理，而且简化了<code>FullGC</code>的过程，以至将来可以并行的对元数据信息进行垃圾收集，而没有GC暂停。</li><li>支持进一步优化，比如：G1并发类的卸载，也算为将来做准备吧</li></ul><p>正如你所看到的，元空间大小的要求取决于加载的类的数量以及这种类声明的大小。 所以很容易看到<code>java.lang.OutOfMemoryError: Metaspace</code>主要原因：太多的类或太大的类加载到元空间。</p><h4 id="示例-3"><a href="#示例-3" class="headerlink" title="示例"></a>示例</h4><p>正如上文中所解释的，元空间的使用与加载到JVM中的类的数量密切相关。 下面的代码是最简单的例子：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class Metaspace &#123;</span><br><span class="line">    static javassist.ClassPool cp = javassist.ClassPool.getDefault();</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws Exception&#123;</span><br><span class="line">        for (int i = 0; ; i++) &#123; </span><br><span class="line">            Class c = cp.makeClass(&quot;eu.plumbr.demo.Generated&quot; + i).toClass();</span><br><span class="line">            System.out.println(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>程序运行中不停的生成新类，所有的这些类的定义将被加载到<code>Metaspace</code>区，直到空间被完全占用并且抛出<code>java.lang.OutOfMemoryError:Metaspace</code>。当使用<code>-XX：MaxMetaspaceSize = 32m</code>启动时，大约加载30000多个类时就会死机。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">31023</span><br><span class="line">31024</span><br><span class="line">Exception in thread &quot;main&quot; javassist.CannotCompileException: by java.lang.OutOfMemoryError: Metaspace</span><br><span class="line">    at javassist.ClassPool.toClass(ClassPool.java:1170)</span><br><span class="line">    at javassist.ClassPool.toClass(ClassPool.java:1113)</span><br><span class="line">    at javassist.ClassPool.toClass(ClassPool.java:1071)</span><br><span class="line">    at javassist.CtClass.toClass(CtClass.java:1275)</span><br><span class="line">    at cn.moondev.book.Metaspace.main(Metaspace.java:12)</span><br><span class="line">    .....</span><br></pre></td></tr></table></figure><h4 id="解决方案-3"><a href="#解决方案-3" class="headerlink" title="解决方案"></a>解决方案</h4><p>第一个解决方案是显而易见的，既然应用程序会耗尽内存中的<code>Metaspace</code>区空间，那么应该增加其大小，更改启动配置增加如下参数：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 告诉JVM：Metaspace允许增长到512，然后才能抛出异常</span><br><span class="line">-XX：MaxMetaspaceSize = 512m</span><br></pre></td></tr></table></figure><p>另一个方法就是删除此参数来完全解除对<code>Metaspace</code>大小的限制（默认是没有限制的）。默认情况下，对于64位服务器端JVM，MetaspaceSize默认大小是21M（初始限制值），一旦达到这个限制值，FullGC将被触发进行类卸载，并且这个限制值将会被重置，新的限制值依赖于<code>Metaspace</code>的剩余容量。如果没有足够空间被释放，这个限制值将会上升，反之亦然。在技术上<code>Metaspace</code>的尺寸可以增长到交换空间，而这个时候本地内存分配将会失败（更具体的分析，可以参考：<a href="https://link.jianshu.com?t=http%3A%2F%2Fifeve.com%2Fjava-permgen-removed%2F" rel="external nofollow noopener noreferrer" target="_blank">Java PermGen 去哪里了?</a>）。</p><p>你可以通过修改各种启动参数来“快速修复”这些内存溢出错误，但你需要正确区分你是否只是推迟或者隐藏了<code>java.lang.OutOfMemoryError</code>的症状。如果你的应用程序确实存在内存泄漏或者本来就加载了一些不合理的类，那么所有这些配置都只是推迟问题出现的时间而已，实际也不会改善任何东西。</p><h3 id="5、java-lang-OutOfMemoryError-Unable-to-create-new-native-thread"><a href="#5、java-lang-OutOfMemoryError-Unable-to-create-new-native-thread" class="headerlink" title="5、java.lang.OutOfMemoryError:Unable to create new native thread"></a>5、<code>java.lang.OutOfMemoryError:Unable to create new native thread</code></h3><p>一个思考线程的方法是将线程看着是执行任务的工人，如果你只有一个工人，那么他同时只能执行一项任务，但如果你有十几个工人，就可以同时完成你几个任务。就像这些工人都在物理世界，JVM中的线程完成自己的工作也是需要一些空间的</p><p>出现<code>java.lang.OutOfMemoryError:Unable to create new native thread</code>就意味着Java应用程序已达到其可以启动线程数量的极限了。</p><h4 id="原因分析-4"><a href="#原因分析-4" class="headerlink" title="原因分析"></a>原因分析</h4><p>当JVM向OS请求创建一个新线程时，而OS却无法创建新的native线程时就会抛出<code>Unable to create new native thread</code>错误。一台服务器可以创建的线程数依赖于物理配置和平台，建议运行下文中的示例代码来测试找出这些限制。总体上来说，抛出此错误会经过以下几个阶段：</p><ul><li>运行在JVM内的应用程序请求创建一个新的线程</li><li>JVM向OS请求创建一个新的native线程</li><li>OS尝试创建一个新的native线程，这时需要分配内存给新的线程</li><li>OS拒绝分配内存给线程，因为32位Java进程已经耗尽内存地址空间（2-4GB内存地址已被命中）或者OS的虚拟内存已经完全耗尽</li><li><code>Unable to create new native thread</code>错误将被抛出</li></ul><h4 id="示例-4"><a href="#示例-4" class="headerlink" title="示例"></a>示例</h4><p>下面的示例不能的创建并启动新的线程。当代码运行时，很快达到OS的线程数限制，并抛出<code>Unable to create new native thread</code>错误。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">while(true)&#123;</span><br><span class="line">    new Thread(new Runnable()&#123;</span><br><span class="line">        public void run() &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                Thread.sleep(10000000);</span><br><span class="line">            &#125; catch(InterruptedException e) &#123; &#125;        </span><br><span class="line">        &#125;    </span><br><span class="line">    &#125;).start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="解决方案-4"><a href="#解决方案-4" class="headerlink" title="解决方案"></a>解决方案</h4><p>有时，你可以通过在OS级别增加线程数限制来绕过这个错误。如果你限制了JVM可在用户空间创建的线程数，那么你可以检查并增加这个限制：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// macOS 10.12上执行</span><br><span class="line">$ ulimit -u</span><br><span class="line">709</span><br></pre></td></tr></table></figure><p>当你的应用程序产生成千上万的线程，并抛出此异常，表示你的程序已经出现了很严重的编程错误，我不觉得应该通过修改参数来解决这个问题，不管是OS级别的参数还是JVM启动参数。更可取的办法是分析你的应用是否真的需要创建如此多的线程来完成任务？是否可以使用线程池或者说线程池的数量是否合适？是否可以更合理的拆分业务来实现…..</p><h3 id="6、java-lang-OutOfMemoryError-Out-of-swap-space"><a href="#6、java-lang-OutOfMemoryError-Out-of-swap-space" class="headerlink" title="6、java.lang.OutOfMemoryError:Out of swap space?"></a>6、<code>java.lang.OutOfMemoryError:Out of swap space?</code></h3><p>Java应用程序在启动时会指定所需要的内存大小，可以通过<code>-Xmx</code>和其他类似的启动参数来指定。在JVM请求的总内存大于可用物理内存的情况下，操作系统会将内存中的数据交换到磁盘上去。</p><p><code>Out of swap space?</code>表示交换空间也将耗尽，并且由于缺少物理内存和交换空间，再次尝试分配内存也将失败。</p><h4 id="原因分析-5"><a href="#原因分析-5" class="headerlink" title="原因分析"></a>原因分析</h4><p>当应用程序向JVM native heap请求分配内存失败并且native heap也即将耗尽时，JVM会抛出<code>Out of swap space</code>错误。该错误消息中包含分配失败的大小（以字节为单位）和请求失败的原因。</p><blockquote><p>Native Heap Memory是JVM内部使用的Memory，这部分的Memory可以通过JDK提供的JNI的方式去访问，这部分Memory效率很高，但是管理需要自己去做，如果没有把握最好不要使用，以防出现内存泄露问题。JVM 使用Native Heap Memory用来优化代码载入（JTI代码生成），临时对象空间申请，以及JVM内部的一些操作。</p></blockquote><p>这个问题往往发生在Java进程已经开始交换的情况下，现代的GC算法已经做得足够好了，当时当面临由于交换引起的延迟问题时，GC暂停的时间往往会让大多数应用程序不能容忍。</p><p><code>java.lang.OutOfMemoryError:Out of swap space?</code>往往是由操作系统级别的问题引起的，例如：</p><ul><li>操作系统配置的交换空间不足。</li><li>系统上的另一个进程消耗所有内存资源。</li></ul><p>还有可能是本地内存泄漏导致应用程序失败，比如：应用程序调用了native code连续分配内存，但却没有被释放。</p><h4 id="解决方案-5"><a href="#解决方案-5" class="headerlink" title="解决方案"></a>解决方案</h4><p>解决这个问题有几个办法，通常最简单的方法就是增加交换空间，不同平台实现的方式会有所不同，比如在Linux下可以通过如下命令实现：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 原作者使用，由于我手里并没有Linux环境，所以并未测试</span><br><span class="line"># 创建并附加一个大小为640MB的新交换文件</span><br><span class="line">swapoff -a </span><br><span class="line">dd if=/dev/zero of=swapfile bs=1024 count=655360</span><br><span class="line">mkswap swapfile</span><br><span class="line">swapon swapfile</span><br></pre></td></tr></table></figure><p>Java GC会扫描内存中的数据，如果是对交换空间运行垃圾回收算法会使GC暂停的时间增加几个数量级，因此你应该慎重考虑使用上文增加交换空间的方法。</p><p>如果你的应用程序部署在JVM需要同其他进程激烈竞争获取资源的物理机上，建议将服务隔离到单独的虚拟机中</p><p>但在许多情况下，您唯一真正可行的替代方案是：</p><ul><li>升级机器以包含更多内存</li><li>优化应用程序以减少其内存占用</li></ul><p>当您转向优化路径时，使用内存转储分析程序来检测内存中的大分配是一个好的开始。</p><h3 id="7、java-lang-OutOfMemoryError-Requested-array-size-exceeds-VM-limit"><a href="#7、java-lang-OutOfMemoryError-Requested-array-size-exceeds-VM-limit" class="headerlink" title="7、java.lang.OutOfMemoryError:Requested array size exceeds VM limit"></a>7、<code>java.lang.OutOfMemoryError:Requested array size exceeds VM limit</code></h3><p>Java对应用程序可以分配的最大数组大小有限制。不同平台限制有所不同，但通常在1到21亿个元素之间。</p><p>当你遇到<code>Requested array size exceeds VM limit</code>错误时，意味着你的应用程序试图分配大于Java虚拟机可以支持的数组。</p><h4 id="原因分析-6"><a href="#原因分析-6" class="headerlink" title="原因分析"></a>原因分析</h4><p>该错误由JVM中的<code>native code</code>抛出。 JVM在为数组分配内存之前，会执行特定于平台的检查：分配的数据结构是否在此平台中是可寻址的。</p><p>你很少见到这个错误是因为Java数组的索引是int类型。 Java中的最大正整数为2 ^ 31 - 1 = 2,147,483,647。 并且平台特定的限制可以非常接近这个数字，例如：我的环境上(64位macOS，运行Jdk1.8)可以初始化数组的长度高达2,147,483,645（Integer.MAX_VALUE-2）。如果再将数组的长度增加1到Integer.MAX_VALUE-1会导致熟悉的OutOfMemoryError：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread &quot;main&quot; java.lang.OutOfMemoryError: Requested array size exceeds VM limit</span><br></pre></td></tr></table></figure><p>但是，在使用OpenJDK 6的32位Linux上，在分配具有大约11亿个元素的数组时，您将遇到<code>Requested array size exceeded VM limit</code>的错误。 要理解你的特定环境的限制，运行下文中描述的小测试程序。</p><h4 id="示例-5"><a href="#示例-5" class="headerlink" title="示例"></a>示例</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">for (int i = 3; i &gt;= 0; i--) &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        int[] arr = new int[Integer.MAX_VALUE-i];</span><br><span class="line">        System.out.format(&quot;Successfully initialized an array with %,d elements.\n&quot;, Integer.MAX_VALUE-i);</span><br><span class="line">    &#125; catch (Throwable t) &#123;</span><br><span class="line">        t.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>该示例重复四次，并在每个回合中初始化一个长原语数组。 该程序尝试初始化的数组的大小在每次迭代时增加1，最终达到Integer.MAX_VALUE。 现在，当使用Hotspot 7在64位Mac OS X上启动代码片段时，应该得到类似于以下内容的输出：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">java.lang.OutOfMemoryError: Java heap space</span><br><span class="line">    at eu.plumbr.demo.ArraySize.main(ArraySize.java:8)</span><br><span class="line">java.lang.OutOfMemoryError: Java heap space</span><br><span class="line">    at eu.plumbr.demo.ArraySize.main(ArraySize.java:8)</span><br><span class="line">java.lang.OutOfMemoryError: Requested array size exceeds VM limit</span><br><span class="line">    at eu.plumbr.demo.ArraySize.main(ArraySize.java:8)</span><br><span class="line">java.lang.OutOfMemoryError: Requested array size exceeds VM limit</span><br><span class="line">    at eu.plumbr.demo.ArraySize.main(ArraySize.java:8)</span><br></pre></td></tr></table></figure><p>注意，在出现<code>Requested array size exceeded VM limit</code>之前，出现了更熟悉的<code>java.lang.OutOfMemoryError: Java heap space</code>。 这是因为初始化2 ^ 31-1个元素的数组需要腾出8G的内存空间，大于JVM使用的默认值。</p><h4 id="解决方案-6"><a href="#解决方案-6" class="headerlink" title="解决方案"></a>解决方案</h4><p><code>java.lang.OutOfMemoryError:Requested array size exceeds VM limit</code>可能会在以下任一情况下出现：</p><ul><li>数组增长太大，最终大小在平台限制和<code>Integer.MAX_INT</code>之间</li><li>你有意分配大于<code>2 ^ 31-1</code>个元素的数组</li></ul><p>在第一种情况下，检查你的代码库，看看你是否真的需要这么大的数组。也许你可以减少数组的大小，或者将数组分成更小的数据块，然后分批处理数据。</p><p>在第二种情况下，记住Java数组是由int索引的。因此，当在平台中使用标准数据结构时，数组不能超过2 ^ 31-1个元素。事实上，在编译时就会出错：<code>error：integer number too large</code>。</p><h3 id="8、Out-of-memory-Kill-process-or-sacrifice-child"><a href="#8、Out-of-memory-Kill-process-or-sacrifice-child" class="headerlink" title="8、Out of memory:Kill process or sacrifice child"></a>8、<code>Out of memory:Kill process or sacrifice child</code></h3><p>为了理解这个错误，我们需要补充一点操作系统的基础知识。操作系统是建立在进程的概念之上，这些进程在内核中作业，其中有一个非常特殊的进程，名叫“内存杀手（Out of memory killer）”。当内核检测到系统内存不足时，OOM killer被激活，然后选择一个进程杀掉。哪一个进程这么倒霉呢？选择的算法和想法都很朴实：谁占用内存最多，谁就被干掉。如果你对OOM Killer感兴趣的话，建议你阅读参考资料2中的文章。</p><p>当可用虚拟虚拟内存(包括交换空间)消耗到让整个操作系统面临风险时，就会产生<code>Out of memory:Kill process or sacrifice child</code>错误。在这种情况下，OOM Killer会选择“流氓进程”并杀死它。</p><h4 id="原因分析-7"><a href="#原因分析-7" class="headerlink" title="原因分析"></a>原因分析</h4><p>默认情况下，Linux内核允许进程请求比系统中可用内存更多的内存，但大多数进程实际上并没有使用完他们所分配的内存。这就跟现实生活中的宽带运营商类似，他们向所有消费者出售一个100M的带宽，远远超过用户实际使用的带宽，一个10G的链路可以非常轻松的服务100个(10G/100M)用户，但实际上宽带运行商往往会把10G链路用于服务150人或者更多，以便让链路的利用率更高，毕竟空闲在那儿也没什么意义。</p><p>Linux内核采用的机制跟宽带运营商差不多，一般情况下都没有问题，但当大多数应用程序都消耗完自己的内存时，麻烦就来了，因为这些应用程序的内存需求加起来超出了物理内存（包括 swap）的容量，内核（OOM killer）必须杀掉一些进程才能腾出空间保障系统正常运行。就如同上面的例子中，如果150人都占用100M的带宽，那么总的带宽肯定超过了10G这条链路能承受的范围。</p><h4 id="示例-6"><a href="#示例-6" class="headerlink" title="示例"></a>示例</h4><p>当你在Linux上运行如下代码：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args)&#123;</span><br><span class="line">    List&lt;int[]&gt; l = new java.util.ArrayList();</span><br><span class="line">    for (int i = 10000; i &lt; 100000; i++) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            l.add(new int[100000000]);</span><br><span class="line">        &#125; catch (Throwable t) &#123;</span><br><span class="line">            t.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>在Linux的系统日志中<code>/var/log/kern.log</code>会出现以下日志：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Jun  4 07:41:59 plumbr kernel: [70667120.897649] Out of memory: Kill process 29957 (java) score 366 or sacrifice child</span><br><span class="line">Jun  4 07:41:59 plumbr kernel: [70667120.897701] Killed process 29957 (java) total-vm:2532680kB, anon-rss:1416508kB, file-rss:0kB</span><br></pre></td></tr></table></figure><p>注意：你可能需要调整交换文件和堆大小，否则你将很快见到熟悉的<code>Java heap space</code>异常。在原作者的测试用例中，使用<code>-Xmx2g</code>指定的2g堆，并具有以下交换配置：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 注意：原作者使用，由于我手里并没有Linux环境，所以并未测试</span><br><span class="line">swapoff -a </span><br><span class="line">dd if=/dev/zero of=swapfile bs=1024 count=655360</span><br><span class="line">mkswap swapfile</span><br><span class="line">swapon swapfile</span><br></pre></td></tr></table></figure><h4 id="解决方案-7"><a href="#解决方案-7" class="headerlink" title="解决方案"></a>解决方案</h4><p>解决这个问题最有效也是最直接的方法就是升级内存，其他方法诸如：调整OOM Killer配置、水平扩展应用，将内存的负载分摊到若干小实例上….. 我们不建议的做法是增加交换空间，具体原因已经在前文说过。参考资料②中详细的介绍了怎样微调OOM Killer配置以及OOM Killer选择进程算法的实现，建议你参考阅读。</p><h4 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h4><p>① 想要了解更多PermGen与Metaspace的内容推荐你阅读：</p><ul><li><a href="https://link.jianshu.com?t=http%3A%2F%2Fwww.infoq.com%2Fcn%2Fnews%2F2013%2F03%2Fjava-8-permgen-metaspace" rel="external nofollow noopener noreferrer" target="_blank">Java 8会解决PermGen OutOfMemoryError问题吗?</a></li><li><a href="https://link.jianshu.com?t=http%3A%2F%2Fifeve.com%2Fjava-permgen-removed%2F" rel="external nofollow noopener noreferrer" target="_blank">Java PermGen 去哪里了?</a></li></ul><p>② 如果你对OOM Killer感兴趣的话，强烈建议你阅读这篇文章：</p><ul><li><a href="https://link.jianshu.com?t=http%3A%2F%2Fwww.vpsee.com%2F2013%2F10%2Fhow-to-configure-the-linux-oom-killer%2F" rel="external nofollow noopener noreferrer" target="_blank">理解和配置 Linux 下的 OOM Killer</a></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;1、java-lang-OutOfMemoryError-Java-heap-space&quot;&gt;&lt;a href=&quot;#1、java-lang-OutOfMemoryError-Java-heap-space&quot; class=&quot;headerlink&quot; title=&quot;1、ja
       
     
     </summary>
@@ -68,8 +363,8 @@
   
   <entry>
     <title>CPU占用过高定位</title>
-    <link href="http://polyval.github.io/Wiki/wiki/Java/Java%E5%AE%9E%E6%88%98/CPU%E5%8D%A0%E7%94%A8%E8%BF%87%E9%AB%98%E5%AE%9A%E4%BD%8D/"/>
-    <id>http://polyval.github.io/Wiki/wiki/Java/Java实战/CPU占用过高定位/</id>
+    <link href="http://polyval.github.io/Wiki/wiki/Java/CPU%E5%8D%A0%E7%94%A8%E8%BF%87%E9%AB%98%E5%AE%9A%E4%BD%8D/"/>
+    <id>http://polyval.github.io/Wiki/wiki/Java/CPU占用过高定位/</id>
     <published>2018-10-06T16:28:21.000Z</published>
     <updated>2018-10-11T04:44:09.302Z</updated>
     
@@ -86,7 +381,82 @@
     
       <category term="Java" scheme="http://polyval.github.io/Wiki/categories/Java/"/>
     
-      <category term="Java实战" scheme="http://polyval.github.io/Wiki/categories/Java/Java%E5%AE%9E%E6%88%98/"/>
+    
+      <category term="Java" scheme="http://polyval.github.io/Wiki/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>操作系统是如何实现虚拟内存的</title>
+    <link href="http://polyval.github.io/Wiki/wiki/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%9A%84/"/>
+    <id>http://polyval.github.io/Wiki/wiki/操作系统/操作系统是如何实现虚拟内存的/</id>
+    <published>2018-10-06T16:28:21.000Z</published>
+    <updated>2018-10-11T04:48:14.995Z</updated>
+    
+    <content type="html"><![CDATA[<p>要明白操作系统是如何实现虚拟内存的，首先应该明白操作系统为什么要需要虚拟内存</p><h2 id="为什么需要虚拟内存"><a href="#为什么需要虚拟内存" class="headerlink" title="为什么需要虚拟内存"></a>为什么需要虚拟内存</h2><p>早期的程序中访问的内存地址都是实际的物理内存地址。</p><p>程序需要加载在内存上运行，即形成进程。起初，只有一个进程信息可以被加载到内存，需要运行另一个进程时，需要将当前进程的信息先存储到磁盘上，然后从磁盘上读取另一个进程的信息。但是磁盘I/O是很慢的，导致任务切换的效率很低 。因此，人们希望将多个进程可以共同存放在内存上，这就出现了一个问题：如何避免一个进程读取、篡改另一个进程的内存信息，即对进程间实现<strong>隔离</strong>和<strong>保护</strong>。</p><p>同时，程序在编写时，其访问数据和指令跳转时的目标地址很多是固定的。但是程序在加载在内存时，不可能说每次我们都能够分配固定地址的内存给它。尤其是在我们想运行同一程序的多个实例的时候，由于同一程序使用的物理地址是一样的，一起运行就会有冲突。</p><p>另外，程序使用的内存会被物理内存所限制，即程序使用的内存不能超过物理内存。</p><p>内存虚拟化就是为了解决这些问题出现的，它将程序给的地址看作是虚拟地址(Virtual Address)，然后通过将虚拟地址转换为实际的物理地址，通过操作系统对这个转化过程的控制，来实现<strong>隔离、保护、和易用</strong>。</p><h2 id="如何实现虚拟内存"><a href="#如何实现虚拟内存" class="headerlink" title="如何实现虚拟内存"></a>如何实现虚拟内存</h2><p>我们可以把我们为什么需要虚拟内存抽象成虚拟内存要实现的几个目标。</p><h3 id="虚拟内存的几个目标"><a href="#虚拟内存的几个目标" class="headerlink" title="虚拟内存的几个目标"></a>虚拟内存的几个目标</h3><ul><li><p><strong>不可见性</strong></p><blockquote><p>即对于程序来说，并不知道内存被虚拟化了，程序认为自己拥有独自的物理内存</p></blockquote></li><li><p><strong>高效率</strong></p><blockquote><p>虚拟内存的效率要高,不能让程序运行变得太慢(时间效率),也不能因为实现虚拟内存占用太大空间(空间效率)。为了保证时间效率，需要用到硬件的支持。</p></blockquote></li><li><p><strong>保护</strong></p><blockquote><p>操作系统需要保证进程间相互隔离，同时也要将操作系统与进程隔离开来。</p></blockquote></li></ul><p>实现虚拟内存的关键技术是：地址转化，实现地址转化的硬件称为内存管理单元<strong>MMU</strong>(Memory Management Unit)。我们先来看看地址转化最初的原型：<strong>base and bounds</strong>，也叫<strong>动态重定位</strong>(dynamic relocation)。</p><h3 id="动态重定位"><a href="#动态重定位" class="headerlink" title="动态重定位"></a>动态重定位</h3><p>在动态重定位方法中，每个CPU需要两个寄存器来帮助它实现地址转化：base register 和 bounds register。</p><p>程序在编写和编译时，其使用的内存地址从0开始。当程序运行时，如OS打算在32KB处开始载入程序，则OS将base寄存器的值设为32KB。程序的地址转化成：<br>$$<br>实际物理地址 = 虚拟地址 + base<br>$$<br>因此，base寄存器实现了地址转化的作用，而bounds寄存器的作用则是进行保护，限制地址引用的范围。</p><p>当进行进程间切换时，需要保存base-bounds寄存器的值，以便恢复进程。这个值保存在进程控制块PCB(process control block)里。</p><h4 id="动态重定位的缺点"><a href="#动态重定位的缺点" class="headerlink" title="动态重定位的缺点"></a>动态重定位的缺点</h4><p>动态重定位的缺点在于它会造成<strong>内部碎片(internal fragmentation)</strong>，造成内存的浪费。如图所示，由于进程的堆和栈不是很大，其中的内存就被浪费掉了</p><p><img src="/Wiki/wiki/操作系统/操作系统是如何实现虚拟内存的/内部碎片.png" alt="内部碎片">。</p><p><strong>为了解决内部碎片的问题，出现了分段技术。</strong></p><h3 id="分段-Segmentation"><a href="#分段-Segmentation" class="headerlink" title="分段(Segmentation)"></a>分段(Segmentation)</h3><p>分段技术的出现是为了解决程序因占用连续的内存空间而产生内部碎片的问题，利用分段解决内部碎片问题的思想很简单：将进程的内存空间按照逻辑进行分段，每段可存放在物理内存的不同位置，在动态重定位一对base-bounds寄存器的基础上，<strong>给进程的每段都分配一对base-bounds寄存器</strong>。常见分段方式分为三段：代码段、栈和堆。比如说我们要对某个代码段的虚拟地址进行寻址，只需要根据代码段的base-bounds寄存器，按照动态重定位的方式寻址即可。那么，给定一个虚拟地址，如何判断它是属于哪个段的呢？</p><h4 id="如何确定虚拟地址属于哪个段"><a href="#如何确定虚拟地址属于哪个段" class="headerlink" title="如何确定虚拟地址属于哪个段"></a>如何确定虚拟地址属于哪个段</h4><p>有两种方法进行确定。</p><h5 id="将地址前面几位当作段标志"><a href="#将地址前面几位当作段标志" class="headerlink" title="将地址前面几位当作段标志"></a>将地址前面几位当作段标志</h5><p>比如一个14位的虚拟内存，我们可以将其前两位当做段的标志位，如00表示代码段，01表示堆，11表示栈。</p><p><img src="/Wiki/wiki/操作系统/操作系统是如何实现虚拟内存的/段.png" alt="段"></p><h5 id="根据虚拟地址如何产生的来判断"><a href="#根据虚拟地址如何产生的来判断" class="headerlink" title="根据虚拟地址如何产生的来判断"></a>根据虚拟地址如何产生的来判断</h5><p>如果虚拟地址由程序计数器(program count)产生的，则为代码段，如果为栈指针，则为栈段，否则为堆段。</p><h4 id="MMU记录的其它信息"><a href="#MMU记录的其它信息" class="headerlink" title="MMU记录的其它信息"></a>MMU记录的其它信息</h4><p>除了每段的base-bounds寄存器外，MMU还记录了段的其它一些信息。</p><p><img src="/Wiki/wiki/操作系统/操作系统是如何实现虚拟内存的/段寄存器.png" alt="段寄存器"></p><p>因为栈是反方向扩张的，因此需要记录内存扩张的方向。Protection用来表示段的属性，可以用来共享一些段。</p><h4 id="分段的缺点"><a href="#分段的缺点" class="headerlink" title="分段的缺点"></a>分段的缺点</h4><p>每个程序都不一样，其各段所占用的内存空间大小也不一样，造成内存的占用情况如下图所示</p><p><img src="/Wiki/wiki/操作系统/操作系统是如何实现虚拟内存的/分段的缺点.png" alt="分段的缺点"></p><p>内存上出现了各种大小的小洞，如果我们需要分配一个新段，比这个新段大小小的内存空间对于我们来说都是没有用的，这就造成了内存的浪费，这种浪费称为<strong>外部碎片(external fragmentation)</strong>。为了解决这个问题，出现了各种方法，如<strong>内存整理</strong>(compact)，各种<strong>内存管理算法</strong>(best fit、first fit)。但是并没有完美的方法解决这个问题。</p><h3 id="分页-Paging"><a href="#分页-Paging" class="headerlink" title="分页(Paging)"></a>分页(Paging)</h3><p>分段中引起外部碎片的原因是每段的大小都不一样。分页对内存的处理方式是:将虚拟内存和物理内存分为若干个固定长度的单元，这个单元称为页。</p><h4 id="如何寻址"><a href="#如何寻址" class="headerlink" title="如何寻址"></a>如何寻址</h4><p>每个进程都对应一个<strong>页表</strong>(page table)，页表存储着虚拟内存页对应的实际物理内存页。虚拟地址需要分为两部分：虚拟页号VPN(virtual page number)和偏移量offset。通过页表可以知道VPN对应的PFN，通过offset进行准确寻址。</p><p><img src="/Wiki/wiki/操作系统/操作系统是如何实现虚拟内存的/分页.png" alt="分页"></p><h4 id="页表存放在哪"><a href="#页表存放在哪" class="headerlink" title="页表存放在哪"></a>页表存放在哪</h4><p>页表占用空间很大。举个例子，假设一个32位的地址空间，每页大小为4KB，则虚拟内存分为20位的VPN和12位的偏移量(10位1KB，4KB则为12位)。20位的VPN表示存在$2^{20}$条转化映射，假设每条映射占用4字节，则一个页表需要占用4M的大小。</p><p>由于页表太大，因此将内部存储在内存中。在MMU中的<strong>页表基(page-table base)寄存器</strong>中存放页表在内存中的起始位置。</p><h4 id="分页的缺点"><a href="#分页的缺点" class="headerlink" title="分页的缺点"></a>分页的缺点</h4><p>因为页表存放在内存上，在对虚拟地址进行转化时，首先需要从内存中的页表读到其对应物理页，相当于多了一次内存的读操作，<strong>因此分页会降低速度，同时页表的存储占用过多内存。</strong></p><h4 id="给分页加加速"><a href="#给分页加加速" class="headerlink" title="给分页加加速"></a>给分页加加速</h4><p>要想加加速，就需要硬件来帮个忙。<strong>TLB</strong> (Translation-Lookaside Buffer)，中文译为<strong>快表</strong>。TLB是集成在MMU上的缓存，用来存储部分页表记录。</p><p>查询页表时，首先去TLB查，查到了称为TLB命中(hit)，如果没查到，称为TLB失败(miss)，此时去内存中的页表查。缓存大小有限，当有新记录放入到TLB，需要进行缓存置换，缓存置换有许多方法，这里不再展开。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;要明白操作系统是如何实现虚拟内存的，首先应该明白操作系统为什么要需要虚拟内存&lt;/p&gt;
+&lt;h2 id=&quot;为什么需要虚拟内存&quot;&gt;&lt;a href=&quot;#为什么需要虚拟内存&quot; class=&quot;headerlink&quot; title=&quot;为什么需要虚拟内存&quot;&gt;&lt;/a&gt;为什么需要虚拟内存&lt;/h2
+      
+    
+    </summary>
+    
+      <category term="操作系统" scheme="http://polyval.github.io/Wiki/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+    
+      <category term="操作系统" scheme="http://polyval.github.io/Wiki/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>React Virtual DOM</title>
+    <link href="http://polyval.github.io/Wiki/wiki/%E5%89%8D%E7%AB%AF/React%20Vitual%20DOM/"/>
+    <id>http://polyval.github.io/Wiki/wiki/前端/React Vitual DOM/</id>
+    <published>2018-10-06T16:28:21.000Z</published>
+    <updated>2018-10-11T04:49:39.474Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="为什么说操作DOM慢"><a href="#为什么说操作DOM慢" class="headerlink" title="为什么说操作DOM慢"></a>为什么说操作DOM慢</h3><p>DOM对象本身是一个js对象，其实操作这个对象并不慢，慢的是操作这个对象后，会触发一些浏览器行为，比如布局(layout)和绘制(paint)。</p><h4 id="浏览器渲染主要流程"><a href="#浏览器渲染主要流程" class="headerlink" title="浏览器渲染主要流程"></a>浏览器渲染主要流程</h4><p><a href="https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/" rel="external nofollow noopener noreferrer" target="_blank">浏览器如何工作的</a></p><p>浏览器对HTMl的渲染分为5个步骤：</p><ol><li>处理<strong>HTML</strong>标记并构建出DOM树</li><li>处理<strong>CSS</strong>标记并构建CSSOM树</li><li>将两者<strong>关联</strong>生成Render Tree</li><li><strong>Layout</strong>根据Render Tree来布局，计算每个节点的几何信息</li><li>根据计算好的信息<strong>绘制</strong>整个页面</li></ol><p>其中，layout是最耗时的步骤。因此需要最小化layout的次数</p><h4 id="什么情况下浏览器会进行layout"><a href="#什么情况下浏览器会进行layout" class="headerlink" title="什么情况下浏览器会进行layout"></a>什么情况下浏览器会进行layout</h4><p>layout用来计算文档中元素的位置和大小，在HTML第一次被加载的时候，会有一次layout，称为reflow/如下操作也会触发reflow</p><ul><li>插入、删除、移动、更新DOM</li><li>改变页面内容，如输入框的文本</li><li>改变CSS样式</li><li>改变窗口大小</li></ul><h4 id="Vitual-DOM更快么"><a href="#Vitual-DOM更快么" class="headerlink" title="Vitual DOM更快么"></a>Vitual DOM更快么</h4><p>Virtual DOM并不比直接操作DOM快，只不过使用Vitual DOM可以减少不必要的DOM更新，从而减少比较耗时的layout和paint工作。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;为什么说操作DOM慢&quot;&gt;&lt;a href=&quot;#为什么说操作DOM慢&quot; class=&quot;headerlink&quot; title=&quot;为什么说操作DOM慢&quot;&gt;&lt;/a&gt;为什么说操作DOM慢&lt;/h3&gt;&lt;p&gt;DOM对象本身是一个js对象，其实操作这个对象并不慢，慢的是操作这个对象后，
+      
+    
+    </summary>
+    
+      <category term="前端" scheme="http://polyval.github.io/Wiki/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="React" scheme="http://polyval.github.io/Wiki/tags/React/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>性能瓶颈</title>
+    <link href="http://polyval.github.io/Wiki/wiki/Java/%E6%80%A7%E8%83%BD%E7%93%B6%E9%A2%88/"/>
+    <id>http://polyval.github.io/Wiki/wiki/Java/性能瓶颈/</id>
+    <published>2018-10-06T16:28:21.000Z</published>
+    <updated>2018-10-11T04:51:52.455Z</updated>
+    
+    <content type="html"><![CDATA[<p>一个好的程序，应该是能够充分利用CPU。如果一个程序在单CPU的机器上无论在多大的压力下都无法令CPU的使用率接近100% ,说明这个程序设计地有问题。</p><h3 id="常见的性能瓶颈"><a href="#常见的性能瓶颈" class="headerlink" title="常见的性能瓶颈"></a>常见的性能瓶颈</h3><h4 id="不恰当的同步导致的资源占用"><a href="#不恰当的同步导致的资源占用" class="headerlink" title="不恰当的同步导致的资源占用"></a>不恰当的同步导致的资源占用</h4><ul><li><p>锁加得不恰当</p></li><li><p>锁粒度过大</p><h4 id="不恰当的线程模型"><a href="#不恰当的线程模型" class="headerlink" title="不恰当的线程模型"></a>不恰当的线程模型</h4></li></ul><h4 id="效率低下的SQL或者不恰当的数据库设计"><a href="#效率低下的SQL或者不恰当的数据库设计" class="headerlink" title="效率低下的SQL或者不恰当的数据库设计"></a>效率低下的SQL或者不恰当的数据库设计</h4><h4 id="不恰当的GC参数"><a href="#不恰当的GC参数" class="headerlink" title="不恰当的GC参数"></a>不恰当的GC参数</h4><h4 id="线程数量不足"><a href="#线程数量不足" class="headerlink" title="线程数量不足"></a>线程数量不足</h4><h4 id="内存泄露导致的频繁GC"><a href="#内存泄露导致的频繁GC" class="headerlink" title="内存泄露导致的频繁GC"></a>内存泄露导致的频繁GC</h4><h3 id="通过线程堆栈识别性能瓶颈"><a href="#通过线程堆栈识别性能瓶颈" class="headerlink" title="通过线程堆栈识别性能瓶颈"></a>通过线程堆栈识别性能瓶颈</h3><h4 id="典型的堆栈特征"><a href="#典型的堆栈特征" class="headerlink" title="典型的堆栈特征"></a>典型的堆栈特征</h4><ol><li>绝大多数线程的堆栈表现在<strong>同一个调用上下文</strong>上，且只剩下非常少的空闲线程</li><li>绝大多数线程处于<strong>等待状态</strong>，只有几个工作的线程，总体性能上不去。可能的原因是，<strong>系统存在关键路径</strong>，在该关键路径上没有足够的能力给下个阶段输送大量的任务，导致其 它地方空闲。如在消息分发系统，消息分发一般是一个线程，而消息处理是多个线程，这 时候消息分发是瓶颈的话，那么从线程堆栈就会观察到上面提到的现象:即该关键路径 没有足够的能力给下个阶段输送大量的任务，导致其它地方空闲</li><li><strong>线程总的数量很少</strong>。这个一般与线程池的设计有关。</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;一个好的程序，应该是能够充分利用CPU。如果一个程序在单CPU的机器上无论在多大的压力下都无法令CPU的使用率接近100% ,说明这个程序设计地有问题。&lt;/p&gt;
+&lt;h3 id=&quot;常见的性能瓶颈&quot;&gt;&lt;a href=&quot;#常见的性能瓶颈&quot; class=&quot;headerlink&quot; t
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="http://polyval.github.io/Wiki/categories/Java/"/>
     
     
       <category term="Java" scheme="http://polyval.github.io/Wiki/tags/Java/"/>
@@ -94,27 +464,56 @@
   </entry>
   
   <entry>
-    <title>什么是微服务</title>
-    <link href="http://polyval.github.io/Wiki/wiki/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E4%BB%80%E4%B9%88%E6%98%AF%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
-    <id>http://polyval.github.io/Wiki/wiki/微服务/什么是微服务/</id>
-    <published>2018-04-19T16:28:21.000Z</published>
-    <updated>2018-04-23T03:37:44.502Z</updated>
+    <title></title>
+    <link href="http://polyval.github.io/Wiki/wiki/Java/Btrace-%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E8%B0%83%E8%AF%95/"/>
+    <id>http://polyval.github.io/Wiki/wiki/Java/Btrace-生产环境调试/</id>
+    <published>2018-10-02T13:31:18.736Z</published>
+    <updated>2018-10-03T03:04:51.081Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="什么是微服务"><a href="#什么是微服务" class="headerlink" title="什么是微服务"></a>什么是微服务</h3><p>微服务，又称微服务架构。是一种新兴的软件架构模式。微服务架构模式通过将多种细小的服务进行整合来形成软件，这些服务运行在自己独立的进程上，服务之间通过轻量级机制(常用的是HTTP API)进行通讯。</p><h4 id="微服务架构与传统架构的区别"><a href="#微服务架构与传统架构的区别" class="headerlink" title="微服务架构与传统架构的区别"></a>微服务架构与传统架构的区别</h4><p>传统软件架构模式是一体化架构(Monolithic Architecture)，一体化架构是指软件最终以一个整体的形态呈现出来，是一个单一的可执行程序，改变其中任何一个部分都需要重新生成和部署这个软件。而在微服务架构，服务就是一个运行的程序，运行在独立的进程上，如果你改变了某个服务涉及的代码，只需要重新部署这个服务即可。</p><h4 id="微服务的优点"><a href="#微服务的优点" class="headerlink" title="微服务的优点"></a>微服务的优点</h4><ul><li><p><strong>易于扩展</strong></p><blockquote><p>一体化应用进行扩展时需要针对整个应用进行扩展 ，而微服务架构可以根据服务进行扩展</p></blockquote></li></ul><p><img src="/Wiki/wiki/微服务/什么是微服务/sketch.png" alt="img"></p><ul><li><p><strong>便于持续交付</strong></p><blockquote><p>改变其中某个部分只需要重新生成和部署对应的服务</p></blockquote></li><li><p><strong>服务可重用</strong></p></li><li><p><strong>容错性更强</strong></p><blockquote><p>通过功能分散，使得应用不会轻易因为一个错误而崩溃</p></blockquote></li></ul><h4 id="微服务的缺点"><a href="#微服务的缺点" class="headerlink" title="微服务的缺点"></a>微服务的缺点</h4><ul><li><strong>远程调用会有更多的延时</strong></li><li><strong>测试更麻烦</strong></li></ul>]]></content>
+    <content type="html"><![CDATA[<h3 id="Btrace可以做什么"><a href="#Btrace可以做什么" class="headerlink" title="Btrace可以做什么"></a>Btrace可以做什么</h3><p>Btace可以动态的，在不需要重启的情况下监控系统运行情况，方便的获取程序运行时的数据信息。</p><ul><li>获取参数值、返回值</li><li>查看堆栈信息</li><li>分析方法的耗时情况</li></ul>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h3 id=&quot;什么是微服务&quot;&gt;&lt;a href=&quot;#什么是微服务&quot; class=&quot;headerlink&quot; title=&quot;什么是微服务&quot;&gt;&lt;/a&gt;什么是微服务&lt;/h3&gt;&lt;p&gt;微服务，又称微服务架构。是一种新兴的软件架构模式。微服务架构模式通过将多种细小的服务进行整合来形成软件，这些
+        &lt;h3 id=&quot;Btrace可以做什么&quot;&gt;&lt;a href=&quot;#Btrace可以做什么&quot; class=&quot;headerlink&quot; title=&quot;Btrace可以做什么&quot;&gt;&lt;/a&gt;Btrace可以做什么&lt;/h3&gt;&lt;p&gt;Btace可以动态的，在不需要重启的情况下监控系统运行情况，方便的获
       
     
     </summary>
     
-      <category term="微服务" scheme="http://polyval.github.io/Wiki/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+      <category term="Java" scheme="http://polyval.github.io/Wiki/categories/Java/"/>
     
     
-      <category term="微服务" scheme="http://polyval.github.io/Wiki/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://polyval.github.io/Wiki/wiki/psychology/%E9%9D%A2%E8%B4%A8(confrontation)/"/>
+    <id>http://polyval.github.io/Wiki/wiki/psychology/面质(confrontation)/</id>
+    <published>2018-05-13T13:38:03.543Z</published>
+    <updated>2018-05-13T13:55:22.944Z</updated>
+    
+    <content type="html"><![CDATA[<p>面质(confrontation)</p><p>指出来访者身上存在的矛盾、不一致性。</p><p>常见的矛盾有</p><ul><li><p>语言的不一致</p><blockquote><p>你说没事，但是你又说他让你觉得烦</p></blockquote></li><li><p>语言和行为的不一致</p><blockquote><p>你说你想取得好成绩，但是你却把大多数时间花在睡觉和看电视剧上。</p></blockquote></li><li><p>行为的不一致</p><blockquote><p>你虽然在笑，但是你却紧咬着牙关</p></blockquote></li><li><p>感受的不一致</p><blockquote><p>你妹妹让你很生气，但是你也有点高兴，因为现在别人终于知道她是什么样的人了</p></blockquote></li><li><p>价值观与行为的不一致</p><blockquote><p>你说你尊重别人的选择，但是你却想去说服他们选择堕胎是错的</p></blockquote></li><li><p>价值观与感觉的不一致</p><blockquote><p>你觉得应该多多联系保持关系，但是你却对这种联系感到很不习惯</p></blockquote></li></ul><ul><li><p>自我认知与实际经历的不一致</p><blockquote><p>你说没人喜欢你，但是你之前不是说有人给你写过情书么</p></blockquote></li><li><p>理想和现实自我的不一致</p><blockquote><p>你想达到你妈的高要求，但是你感觉其实自己很普通</p></blockquote></li><li><p>双方意见的不一致</p><blockquote><p>你说你还不够努力，但是我觉得你已经做得很好了</p></blockquote></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;面质(confrontation)&lt;/p&gt;
+&lt;p&gt;指出来访者身上存在的矛盾、不一致性。&lt;/p&gt;
+&lt;p&gt;常见的矛盾有&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;语言的不一致&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;你说没事，但是你又说他让你觉得烦&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;
+      
+    
+    </summary>
+    
+      <category term="psychology" scheme="http://polyval.github.io/Wiki/categories/psychology/"/>
+    
     
   </entry>
   
