@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    
+    <title>AQS | polyval&#39;s Wiki</title>
+    
+    
+        <meta name="keywords" content="Java,并发">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="AbstractQueuedSynchronizer是一个抽象类，为Java中各种Synchronizers(同步器)的实现提供了一个模版框架。 Synchronizers是什么？Synchronizers是实现多线程通信、同步的工具和手段。如锁、Semaphore、阻塞队列、CyclicBarrier、CountDownLatch等。同步器通常包含如下几个部分来实现多线程同步  状态（state">
+<meta name="keywords" content="Java,并发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AQS">
+<meta property="og:url" content="http://polyval.github.io/Wiki/wiki/Java/AQS/index.html">
+<meta property="og:site_name" content="polyval&#39;s Wiki">
+<meta property="og:description" content="AbstractQueuedSynchronizer是一个抽象类，为Java中各种Synchronizers(同步器)的实现提供了一个模版框架。 Synchronizers是什么？Synchronizers是实现多线程通信、同步的工具和手段。如锁、Semaphore、阻塞队列、CyclicBarrier、CountDownLatch等。同步器通常包含如下几个部分来实现多线程同步  状态（state">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://polyval.github.io/Wiki/wiki/Java/AQS/6222919-5b6f37fd54f6f00b.png">
+<meta property="og:image" content="http://polyval.github.io/Wiki/wiki/Java/AQS/19151122_tpXi.jpg">
+<meta property="og:updated_time" content="2018-11-02T03:23:41.033Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AQS">
+<meta name="twitter:description" content="AbstractQueuedSynchronizer是一个抽象类，为Java中各种Synchronizers(同步器)的实现提供了一个模版框架。 Synchronizers是什么？Synchronizers是实现多线程通信、同步的工具和手段。如锁、Semaphore、阻塞队列、CyclicBarrier、CountDownLatch等。同步器通常包含如下几个部分来实现多线程同步  状态（state">
+<meta name="twitter:image" content="http://polyval.github.io/Wiki/wiki/Java/AQS/6222919-5b6f37fd54f6f00b.png">
+    
+
+    
+
+    
+        <link rel="icon" href="/Wiki/favicon.ico">
+    
+
+    <link rel="stylesheet" href="/Wiki/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/Wiki/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/Wiki/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/Wiki/css/style.css">
+    <script src="/Wiki/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/Wiki/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+    
+    
+        <link rel="stylesheet" href="/Wiki/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/Wiki/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+    
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+</head>
+</html>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/Wiki/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">polyval&#39;s Wiki</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/Wiki/">首页</a>
+                
+                    <a class="main-nav-link" href="/Wiki/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/Wiki/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/Wiki/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/Wiki/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/Wiki/',
+        CONTENT_URL: '/Wiki/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/Wiki/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/Wiki/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/Wiki/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/Wiki/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/Wiki/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/Wiki/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id="categories">
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id="allExpand" href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree"> 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            Java
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/Java/CPU占用过高定位/">CPU占用过高定位</a></li>  <li class="file"><a href="/Wiki/wiki/Java/CAS/">CAS</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Condition/">Condition</a></li>  <li class="file"><a href="/Wiki/wiki/Java/CountDownLatch/">CountDownLatch&CyclicBarrier</a></li>  <li class="file"><a href="/Wiki/wiki/Java/HashMap/">HashMap</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java内存优化/">Java内存优化</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java分析工具/">Java分析工具</a></li>  <li class="file"><a href="/Wiki/wiki/Java/ReentrantLock/">ReentrantLock</a></li>  <li class="file"><a href="/Wiki/wiki/Java/ReentrantReadWriteLock/">ReentrantReadWriteLock</a></li>  <li class="file"><a href="/Wiki/wiki/Java/性能瓶颈/">性能瓶颈</a></li>  <li class="file"><a href="/Wiki/wiki/Java/线程状态/">线程状态</a></li>  <li class="file active"><a href="/Wiki/wiki/Java/AQS/">AQS</a></li>  <li class="file"><a href="/Wiki/wiki/Java/什么是Java内存模型/">什么是Java内存模型</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java内存溢出的情况/">Java内存溢出的情况</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            云计算
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/云计算/云计算/">云计算</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分布式
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/分布式/CAP定理/">CAP定理</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            前端
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/前端/React Vitual DOM/">React Virtual DOM</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            工具
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/工具/Git/">Git</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            微服务
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/微服务/Spring Cloud/">Spring Cloud</a></li>  <li class="file"><a href="/Wiki/wiki/微服务/什么是微服务/">什么是微服务</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            操作系统
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/操作系统/Linux命令/">Linux命令</a></li>  <li class="file"><a href="/Wiki/wiki/操作系统/操作系统是如何实现虚拟内存的/">操作系统是如何实现虚拟内存的</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-Java/AQS" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/Wiki/categories/Java/">Java</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/Wiki/tags/Java/">Java</a>, <a class="tag-link" href="/Wiki/tags/并发/">并发</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/Wiki/wiki/Java/AQS/">
+            <time datetime="2018-10-21T03:28:21.000Z" itemprop="datePublished">2018-10-21</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/raw/writing/source/_posts/Java/AQS.md" rel="external nofollow noopener noreferrer" target="_blank"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/edit/writing/source/_posts/Java/AQS.md" rel="external nofollow noopener noreferrer" target="_blank"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/commits/writing/source/_posts/Java/AQS.md" rel="external nofollow noopener noreferrer" target="_blank"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            AQS
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">Catalogue</strong>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Synchronizers是什么？"><span class="toc-number">1.</span> <span class="toc-text">Synchronizers是什么？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#同步器最重要的两类方法"><span class="toc-number">1.1.</span> <span class="toc-text">同步器最重要的两类方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#AQS提供的功能"><span class="toc-number">2.</span> <span class="toc-text">AQS提供的功能</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#同步状态"><span class="toc-number">2.1.</span> <span class="toc-text">同步状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#阻塞-Blocking"><span class="toc-number">2.2.</span> <span class="toc-text">阻塞(Blocking)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#同步队列"><span class="toc-number">2.3.</span> <span class="toc-text">同步队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Condition队列"><span class="toc-number">2.4.</span> <span class="toc-text">Condition队列</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#详解"><span class="toc-number">3.</span> <span class="toc-text">详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Node"><span class="toc-number">3.1.</span> <span class="toc-text">Node</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#共享模式和独占模式是什么意思？"><span class="toc-number">3.1.1.</span> <span class="toc-text">共享模式和独占模式是什么意思？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#acquire"><span class="toc-number">3.2.</span> <span class="toc-text">acquire</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#release"><span class="toc-number">3.3.</span> <span class="toc-text">release</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#acquireShared"><span class="toc-number">3.4.</span> <span class="toc-text">acquireShared</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#releaseShared"><span class="toc-number">3.5.</span> <span class="toc-text">releaseShared</span></a></li></ol></li></ol>
+                </div>
+            
+        
+        
+            <p><strong>AbstractQueuedSynchronizer</strong>是一个抽象类，为Java中各种<strong>Synchronizers</strong>(<strong>同步器</strong>)的实现提供了一个模版框架。</p>
+<h1 id="Synchronizers是什么？"><a href="#Synchronizers是什么？" class="headerlink" title="Synchronizers是什么？"></a>Synchronizers是什么？</h1><p>Synchronizers是实现多线程通信、同步的工具和手段。如锁、Semaphore、阻塞队列、CyclicBarrier、CountDownLatch等。同步器通常包含如下几个部分来实现多线程同步</p>
+<ul>
+<li>状态（state）</li>
+<li>访问控制（access control）</li>
+<li>状态转化（state change）</li>
+<li>通知策略（Notification Strategy）</li>
+<li>Test and Set方法</li>
+<li>Set方法</li>
+</ul>
+<p>当然，不是所有同步器都需要这些东西，有些同步器也可能通过其他方式来实现同步。</p>
+<p><strong>访问控制</strong>利用同步器的同步<strong>状态</strong>来决定线程是否可以进入临界区(发生竞争的代码段)。线程进入后，改变<strong>状态</strong>，从而阻塞(可能)其他线程。有时候，当一个线程改变状态后，可能需要<strong>通知</strong>其他线程状态发生了改变。这几个过程如下两个例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Lock</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">boolean</span> isLocked = <span class="keyword">false</span>; <span class="comment">// state</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">lock</span><span class="params">()</span></span></span><br><span class="line"><span class="function">  <span class="keyword">throws</span> InterruptedException</span>&#123;</span><br><span class="line">    <span class="comment">// access control</span></span><br><span class="line">    <span class="keyword">while</span>(isLocked)&#123; <span class="comment">// </span></span><br><span class="line">      <span class="comment">//wait strategy - related to notification strategy</span></span><br><span class="line">      wait();</span><br><span class="line">    &#125;</span><br><span class="line">    isLocked = <span class="keyword">true</span>; <span class="comment">// state change</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">unlock</span><span class="params">()</span></span>&#123;</span><br><span class="line">    isLocked = <span class="keyword">false</span>;</span><br><span class="line">    notify(); <span class="comment">//notification strategy</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BoundedSemaphore</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> signals = <span class="number">0</span>; <span class="comment">// state</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> bound   = <span class="number">0</span>; <span class="comment">// state</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">BoundedSemaphore</span><span class="params">(<span class="keyword">int</span> upperBound)</span></span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.bound = upperBound;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">take</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException</span>&#123;</span><br><span class="line">    <span class="comment">// access control</span></span><br><span class="line">    <span class="keyword">while</span>(<span class="keyword">this</span>.signals == bound) wait();</span><br><span class="line">    <span class="comment">//state change</span></span><br><span class="line">    <span class="keyword">this</span>.signals++;</span><br><span class="line">    <span class="keyword">this</span>.notify();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">release</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException</span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="keyword">this</span>.signals == <span class="number">0</span>) wait();</span><br><span class="line">    <span class="comment">//state change</span></span><br><span class="line">    <span class="keyword">this</span>.signals--;</span><br><span class="line">    <span class="keyword">this</span>.notify(); <span class="comment">// notification strategy</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="同步器最重要的两类方法"><a href="#同步器最重要的两类方法" class="headerlink" title="同步器最重要的两类方法"></a>同步器最重要的两类方法</h2><p>同步器最重要的两类方法是：acquire和release方法。acquire方法阻塞调用这个方法的线程直到同步状态满足访问控制要求，release方法改变同步状态，这个同步状态的改变有可能使得一个或多个阻塞线程恢复。</p>
+<p>acquire的逻辑如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">while (当前同步状态不允许进行acquire) &#123;	</span><br><span class="line"></span><br><span class="line">	如果当前线程不在队列则将其加入队列；</span><br><span class="line">	</span><br><span class="line">	有可能阻塞当前线程；</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">如果当前线程在队列中则出队列</span><br></pre></td></tr></table></figure></p>
+<p>release的逻辑如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">更新同步状态</span><br><span class="line">if (同步状态有可能使某些阻塞线程acquire)</span><br><span class="line">	去阻塞这些线程</span><br></pre></td></tr></table></figure>
+<p>具体参考<a href="http://tutorials.jenkov.com/java-concurrency/anatomy-of-a-synchronizer.html" rel="external nofollow noopener noreferrer" target="_blank">synchronizer</a>，<a href="http://gee.cs.oswego.edu/dl/papers/aqs.pdf" rel="external nofollow noopener noreferrer" target="_blank">Doug Lea的论文</a></p>
+<h1 id="AQS提供的功能"><a href="#AQS提供的功能" class="headerlink" title="AQS提供的功能"></a>AQS提供的功能</h1><p>作为一个框架，AQS主要提供了对<strong>同步状态的原子操作</strong>、<strong>阻塞与唤醒线程</strong>、<strong>队列管理线程等功能</strong>，在上一节我们知道了我们需要对同步状态进行改变，这个改变需要保证原子性，通过同步状态来实现访问控制，从而实现线程的阻塞与唤醒。</p>
+<h2 id="同步状态"><a href="#同步状态" class="headerlink" title="同步状态"></a>同步状态</h2><p>AQS中通过一个带volatile语义的int变量来维护同步状态。提供<strong>getState</strong>、<strong>setState</strong>和<strong>compareAndSetState</strong>方法来访问和更新状态，AQS的具体实现类需要根据这些方法来实现<code>tryAcquire</code>和<code>tryRelease</code>方法。</p>
+<h2 id="阻塞-Blocking"><a href="#阻塞-Blocking" class="headerlink" title="阻塞(Blocking)"></a>阻塞(Blocking)</h2><p>java.util.concurrent.locks提供了LockSupport类来实现线程的阻塞与唤醒。</p>
+<p><code>LockSupport.park</code>阻塞线程，<code>LockSupport.unpark</code>唤醒线程。</p>
+<h2 id="同步队列"><a href="#同步队列" class="headerlink" title="同步队列"></a>同步队列</h2><p>同步队列用来维护线程队列，它是一个FIFO队列。来完成线程获取锁的排队工作。</p>
+<h2 id="Condition队列"><a href="#Condition队列" class="headerlink" title="Condition队列"></a>Condition队列</h2><p>等待队列，通过内部ConditionObject构成，当Condition调用await()方法后，线程将会加入等待队列中，而当Condition调用signal()方法后，线程将从等待队列转移动同步队列中进行锁竞争。Condition提供的方法类似于Object对象的监视器方法wait()、notify()和notifyAll()。关于Condition，参考</p>
+<h1 id="详解"><a href="#详解" class="headerlink" title="详解"></a>详解</h1><p>同步队列是一个FIFO双向队列，在该队列中，一个Node节点表示一个线程。</p>
+<h2 id="Node"><a href="#Node" class="headerlink" title="Node"></a>Node</h2><p>每个线程用一个Node表示。Node有个重要的字段<strong>waitStatus</strong>，表示节点线程的状态。其值含义如下：</p>
+<ul>
+<li>SIGNAL，表示当前节点的后继节点处于或即将处于阻塞状态，当前节点在release或者cancel的时候需要唤醒后继节点</li>
+<li>CANCELLED，表示当前节点线程由于超时或者中断而被取消</li>
+<li>CONDITION，表示当前节点在条件队列中，节点线程等待在Condition上，当其他线程对Condition调用了signal()后，改节点将会从条件队列中转移到同步队列中，加入到同步状态的获取中</li>
+<li>PROPAGATE，在共享模式下，后续节点传播唤醒的操作。</li>
+<li>默认值</li>
+</ul>
+<p>除了<strong>waitStatus</strong>，Node还保存了线程的引用、前驱节点、后继节点和条件队列中用到的下一节点(nextWaiter)。其中，还有两个静态变量</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** Marker to indicate a node is waiting in shared mode */</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> Node SHARED = <span class="keyword">new</span> Node();</span><br><span class="line"><span class="comment">/** Marker to indicate a node is waiting in exclusive mode */</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> Node EXCLUSIVE = <span class="keyword">null</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="共享模式和独占模式是什么意思？"><a href="#共享模式和独占模式是什么意思？" class="headerlink" title="共享模式和独占模式是什么意思？"></a>共享模式和独占模式是什么意思？</h3><p>共享模式指的是允许多个线程获取同一个锁而且可能获取成功，独占模式指的是一个锁如果被一个线程持有，其他线程必须等待。</p>
+<p>同步队列结构图如下：</p>
+<p><img src="/Wiki/wiki/Java/AQS/6222919-5b6f37fd54f6f00b.png" alt=""></p>
+<p>我们先来看看独占模式下的<code>acquire</code>和<code>release</code>两个重要方法。</p>
+<h2 id="acquire"><a href="#acquire" class="headerlink" title="acquire"></a>acquire</h2><p>acquire的流程图如下</p>
+<p><img src="/Wiki/wiki/Java/AQS/19151122_tpXi.jpg" alt="è¾å¥å¾çè¯´æ"></p>
+<p>acquire方法是AQS提供的模版方法，其中tryAcquire方法由子类来实现。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">acquire</span><span class="params">(<span class="keyword">int</span> arg)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!tryAcquire(arg) &amp;&amp;</span><br><span class="line">        acquireQueued(addWaiter(Node.EXCLUSIVE), arg))</span><br><span class="line">        selfInterrupt();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>tryAcquire</code>，由子类实现，去尝试获取锁</li>
+<li><code>addWaiter</code>，创建一个新节点加入到队尾</li>
+<li><code>acquireQueued</code>，如果前驱节点为头节点，循环去获取锁，否则线程等待。</li>
+</ul>
+<p>我们来看一下三个线程同时去争取锁的时候发生了什么。</p>
+<p>首先，<code>tryAcquire</code>中，一般是通过CAS来实现对锁的竞争，这三个线程其中一个CAS成功，另外两个失败。它们的<code>tryAcquire</code>返回false；</p>
+<p><code>addWaiter</code>方法将这两个失败的线程以EXCLUSIVE类型节点加入同步队列。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> Node <span class="title">addWaiter</span><span class="params">(Node mode)</span> </span>&#123;</span><br><span class="line">    Node node = <span class="keyword">new</span> Node(Thread.currentThread(), mode);</span><br><span class="line">    <span class="comment">// Try the fast path of enq; backup to full enq on failure</span></span><br><span class="line">    Node pred = tail;</span><br><span class="line">    <span class="comment">// 如果队尾节点不为null</span></span><br><span class="line">    <span class="keyword">if</span> (pred != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="comment">// 直接CAS入队尾</span></span><br><span class="line">        node.prev = pred;</span><br><span class="line">        <span class="keyword">if</span> (compareAndSetTail(pred, node)) &#123;</span><br><span class="line">            pred.next = node;</span><br><span class="line">            <span class="keyword">return</span> node;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 队尾为空或者CAS失败</span></span><br><span class="line">    enq(node);</span><br><span class="line">    <span class="keyword">return</span> node;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>首先判断是否存在尾节点，如果存在，则CAS将新生成的节点设置为尾节点。如果CAS失败或者尾节点不存在，则用enq将其加入尾节点，总之，<code>addWaiter</code>就是将创建新节点加入到队尾。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> Node <span class="title">enq</span><span class="params">(<span class="keyword">final</span> Node node)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (;;) &#123;</span><br><span class="line">        Node t = tail;</span><br><span class="line">        <span class="comment">// 尾节点不存在，需要初始化</span></span><br><span class="line">        <span class="keyword">if</span> (t == <span class="keyword">null</span>) &#123; <span class="comment">// Must initialize</span></span><br><span class="line">            <span class="keyword">if</span> (compareAndSetHead(<span class="keyword">new</span> Node()))</span><br><span class="line">                tail = head;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 尾节点有了</span></span><br><span class="line">            node.prev = t;</span><br><span class="line">            <span class="keyword">if</span> (compareAndSetTail(t, node)) &#123;</span><br><span class="line">                t.next = node;</span><br><span class="line">                <span class="keyword">return</span> t;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里两个线程进入，其中一个线程发现尾节点为空，则CAS生成尾节点，另外一个节点CAS失败或者在if时就判断尾节点生成了，直接将自己设成尾节点即可。</p>
+<p><code>acquireQueued</code>方法大概过程如下：</p>
+<p>对于同时进入的线程2和线程3，对于线程2前一个节点为头节点，会再尝试获取锁一次，如果失败，则将头节点的waitStatus改成SIGNAL，下次循环的时候会再次去尝试获取锁，如果还是失败，其waitStatus为SIGNAL，则通过LockSupport将线程挂起；对于线程3，由于它的前驱节点为线程2，根据FIFO，需要等至少线程2获取到锁3才去获取锁，因此3只需将2点waitStatus改成SIGNAL，然后再检查一下自己是否有资格去获取锁，没有则挂起。</p>
+<p><strong>这里有个问题，这个FIFO顺序是否就实现了公平锁呢？</strong></p>
+<p>让我们看看线程1释放锁后这个锁是怎么传递到。</p>
+<h2 id="release"><a href="#release" class="headerlink" title="release"></a>release</h2><p>线程1在释放锁的时候的操作如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">release</span><span class="params">(<span class="keyword">int</span> arg)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (tryRelease(arg)) &#123;</span><br><span class="line">        Node h = head;</span><br><span class="line">        <span class="keyword">if</span> (h != <span class="keyword">null</span> &amp;&amp; h.waitStatus != <span class="number">0</span>)</span><br><span class="line">            <span class="comment">// 唤醒后继节点</span></span><br><span class="line">            unparkSuccessor(h);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>tryRelease</code>同样由子类来实现，在<code>tryRelease</code>中，1会释放掉锁。会将state从1改成0，此时，如果线程4来了，那么这个锁就有可能被4给拿去而不是依次从2到3，因此上节中的问题，FIFO同步队列并不能保证锁的公平获取，它只能保证入了队列的线程获取锁的一个先后顺序，这也是为什么<strong>ReentrantLock</strong>中需要实现公平锁的逻辑。</p>
+<p>当1释放锁后，判断队列中是否有节点，如果有节点，则去通知节点来拿锁。unparkSuccessor主要做三件事情：</p>
+<ol>
+<li>将队头的waitStatus设置为0.</li>
+<li>通过从队列尾部向队列头部移动，找到最后一个waitStatus&lt;=0的那个节点，也就是离队头最近的没有被cancelled的那个节点，队头这个时候指向这个节点。</li>
+<li>将这个节点唤醒，这个时候线程1已经出队列了。</li>
+</ol>
+<h2 id="acquireShared"><a href="#acquireShared" class="headerlink" title="acquireShared"></a>acquireShared</h2><p>共享模式与独占模式acquire逻辑大致相同，区别在于入队列后获取锁成功后的操作，如果获取锁成功，共享模式会判断后继节点是否是共享模式，如果是，则立即对其进行唤醒操作。</p>
+<h2 id="releaseShared"><a href="#releaseShared" class="headerlink" title="releaseShared"></a>releaseShared</h2><p>共享模式下的release逻辑也是要保证释放锁的时候往后传播，使得所有共享模式的节点都可以被唤醒。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">doReleaseShared</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * Ensure that a release propagates, even if there are other</span></span><br><span class="line"><span class="comment">     * in-progress acquires/releases.  This proceeds in the usual</span></span><br><span class="line"><span class="comment">     * way of trying to unparkSuccessor of head if it needs</span></span><br><span class="line"><span class="comment">     * signal. But if it does not, status is set to PROPAGATE to</span></span><br><span class="line"><span class="comment">     * ensure that upon release, propagation continues.</span></span><br><span class="line"><span class="comment">     * Additionally, we must loop in case a new node is added</span></span><br><span class="line"><span class="comment">     * while we are doing this. Also, unlike other uses of</span></span><br><span class="line"><span class="comment">     * unparkSuccessor, we need to know if CAS to reset status</span></span><br><span class="line"><span class="comment">     * fails, if so rechecking.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">for</span> (;;) &#123;</span><br><span class="line">        Node h = head;</span><br><span class="line">        <span class="keyword">if</span> (h != <span class="keyword">null</span> &amp;&amp; h != tail) &#123;</span><br><span class="line">            <span class="keyword">int</span> ws = h.waitStatus;</span><br><span class="line">            <span class="keyword">if</span> (ws == Node.SIGNAL) &#123;</span><br><span class="line">                <span class="keyword">if</span> (!compareAndSetWaitStatus(h, Node.SIGNAL, <span class="number">0</span>))</span><br><span class="line">                    <span class="keyword">continue</span>;            <span class="comment">// loop to recheck cases</span></span><br><span class="line">                unparkSuccessor(h);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (ws == <span class="number">0</span> &amp;&amp;</span><br><span class="line">                     !compareAndSetWaitStatus(h, <span class="number">0</span>, Node.PROPAGATE))</span><br><span class="line">                <span class="keyword">continue</span>;                <span class="comment">// loop on failed CAS</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (h == head)                   <span class="comment">// loop if head changed</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/Wiki/wiki/微服务/Spring Cloud/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    Spring Cloud
+                
+            </div>
+        </a>
+    
+    
+        <a href="/Wiki/wiki/Java/CPU占用过高定位/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">CPU占用过高定位</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            polyval &copy; 2018 
+            <a rel="external nofollow noopener noreferrer" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png"></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten" rel="external nofollow noopener noreferrer" target="_blank">wikitten</a>
+            
+                <br><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span></span> | 
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"><span id="busuanzi_value_site_uv"></span></i></span>
+            
+        </div>
+    </div>
+</footer>
+        
+
+    
+        <script src="/Wiki/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/Wiki/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/Wiki/js/main.js"></script>
+
+    </div>
+</body>

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    
+    <title>CountDownLatch&amp;CyclicBarrier | polyval&#39;s Wiki</title>
+    
+    
+        <meta name="keywords" content="Java,并发">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="CountDownLatch的作用是使得一个或多个线程等待直到其他线程完成操作。 CyclicBarrier的作用是可以让一组线程达到一个屏障时被阻塞，直到最后一个线程达到屏障时，所有被阻塞的线程才能继续执行。 实际场景：多线程去后台查数据，需要所有数据全部获取到后再处理。 CountDownLatch原理还是利用AQS来实现，其对外暴露的三个重要方法为。  CountDownLatch(int)">
+<meta name="keywords" content="Java,并发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CountDownLatch&amp;CyclicBarrier">
+<meta property="og:url" content="http://polyval.github.io/Wiki/wiki/Java/CountDownLatch/index.html">
+<meta property="og:site_name" content="polyval&#39;s Wiki">
+<meta property="og:description" content="CountDownLatch的作用是使得一个或多个线程等待直到其他线程完成操作。 CyclicBarrier的作用是可以让一组线程达到一个屏障时被阻塞，直到最后一个线程达到屏障时，所有被阻塞的线程才能继续执行。 实际场景：多线程去后台查数据，需要所有数据全部获取到后再处理。 CountDownLatch原理还是利用AQS来实现，其对外暴露的三个重要方法为。  CountDownLatch(int)">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-11-05T04:52:33.302Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CountDownLatch&amp;CyclicBarrier">
+<meta name="twitter:description" content="CountDownLatch的作用是使得一个或多个线程等待直到其他线程完成操作。 CyclicBarrier的作用是可以让一组线程达到一个屏障时被阻塞，直到最后一个线程达到屏障时，所有被阻塞的线程才能继续执行。 实际场景：多线程去后台查数据，需要所有数据全部获取到后再处理。 CountDownLatch原理还是利用AQS来实现，其对外暴露的三个重要方法为。  CountDownLatch(int)">
+    
+
+    
+
+    
+        <link rel="icon" href="/Wiki/favicon.ico">
+    
+
+    <link rel="stylesheet" href="/Wiki/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/Wiki/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/Wiki/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/Wiki/css/style.css">
+    <script src="/Wiki/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/Wiki/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+    
+    
+        <link rel="stylesheet" href="/Wiki/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/Wiki/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+    
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+</head>
+</html>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/Wiki/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">polyval&#39;s Wiki</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/Wiki/">首页</a>
+                
+                    <a class="main-nav-link" href="/Wiki/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/Wiki/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/Wiki/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/Wiki/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/Wiki/',
+        CONTENT_URL: '/Wiki/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/Wiki/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/Wiki/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/Wiki/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/Wiki/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/Wiki/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/Wiki/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id="categories">
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id="allExpand" href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree"> 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            Java
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/Java/CPU占用过高定位/">CPU占用过高定位</a></li>  <li class="file"><a href="/Wiki/wiki/Java/CAS/">CAS</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Condition/">Condition</a></li>  <li class="file active"><a href="/Wiki/wiki/Java/CountDownLatch/">CountDownLatch&CyclicBarrier</a></li>  <li class="file"><a href="/Wiki/wiki/Java/HashMap/">HashMap</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java内存优化/">Java内存优化</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java分析工具/">Java分析工具</a></li>  <li class="file"><a href="/Wiki/wiki/Java/ReentrantLock/">ReentrantLock</a></li>  <li class="file"><a href="/Wiki/wiki/Java/ReentrantReadWriteLock/">ReentrantReadWriteLock</a></li>  <li class="file"><a href="/Wiki/wiki/Java/性能瓶颈/">性能瓶颈</a></li>  <li class="file"><a href="/Wiki/wiki/Java/线程状态/">线程状态</a></li>  <li class="file"><a href="/Wiki/wiki/Java/AQS/">AQS</a></li>  <li class="file"><a href="/Wiki/wiki/Java/什么是Java内存模型/">什么是Java内存模型</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java内存溢出的情况/">Java内存溢出的情况</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            云计算
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/云计算/云计算/">云计算</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分布式
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/分布式/CAP定理/">CAP定理</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            前端
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/前端/React Vitual DOM/">React Virtual DOM</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            工具
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/工具/Git/">Git</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            微服务
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/微服务/Spring Cloud/">Spring Cloud</a></li>  <li class="file"><a href="/Wiki/wiki/微服务/什么是微服务/">什么是微服务</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            操作系统
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/操作系统/Linux命令/">Linux命令</a></li>  <li class="file"><a href="/Wiki/wiki/操作系统/操作系统是如何实现虚拟内存的/">操作系统是如何实现虚拟内存的</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-Java/CountDownLatch" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/Wiki/categories/Java/">Java</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/Wiki/tags/Java/">Java</a>, <a class="tag-link" href="/Wiki/tags/并发/">并发</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/Wiki/wiki/Java/CountDownLatch/">
+            <time datetime="2018-11-03T12:18:21.000Z" itemprop="datePublished">2018-11-03</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/raw/writing/source/_posts/Java/CountDownLatch.md" rel="external nofollow noopener noreferrer" target="_blank"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/edit/writing/source/_posts/Java/CountDownLatch.md" rel="external nofollow noopener noreferrer" target="_blank"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/commits/writing/source/_posts/Java/CountDownLatch.md" rel="external nofollow noopener noreferrer" target="_blank"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            CountDownLatch&amp;CyclicBarrier
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">Catalogue</strong>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CountDownLatch原理"><span class="toc-number">1.</span> <span class="toc-text">CountDownLatch原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CyclicBarrier"><span class="toc-number">2.</span> <span class="toc-text">CyclicBarrier</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CyclicBarrier和CountDownLatch区别"><span class="toc-number">3.</span> <span class="toc-text">CyclicBarrier和CountDownLatch区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Semaphore"><span class="toc-number">4.</span> <span class="toc-text">Semaphore</span></a></li></ol>
+                </div>
+            
+        
+        
+            <p><code>CountDownLatch</code>的作用是使得一个或多个线程等待直到其他线程完成操作。</p>
+<p><code>CyclicBarrier</code>的作用是可以让一组线程达到一个屏障时被阻塞，直到最后一个线程达到屏障时，所有被阻塞的线程才能继续执行。</p>
+<p>实际场景：多线程去后台查数据，需要所有数据全部获取到后再处理。</p>
+<h1 id="CountDownLatch原理"><a href="#CountDownLatch原理" class="headerlink" title="CountDownLatch原理"></a><code>CountDownLatch</code>原理</h1><p>还是利用AQS来实现，其对外暴露的三个重要方法为。</p>
+<ul>
+<li>CountDownLatch(int) 其实就是设置sync的state。这个值表示countDown方法需要被调用多少次调用await的方法才会被唤醒。</li>
+<li>await，调用的是sync.acquireSharedInterruptibly(1); 调用该方法的线程会阻塞到state为0</li>
+<li>countDown，调用的是sync.releaseShared(1); 调用该方法state计数减1</li>
+</ul>
+<p>原理很简单。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// 阻塞到state为0</span><br><span class="line">protected int tryAcquireShared(int acquires) &#123;</span><br><span class="line">    return (getState() == 0) ? 1 : -1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">protected boolean tryReleaseShared(int releases) &#123;</span><br><span class="line">    // Decrement count; signal when transition to zero</span><br><span class="line">    for (;;) &#123;</span><br><span class="line">        int c = getState();</span><br><span class="line">        if (c == 0)</span><br><span class="line">            return false;</span><br><span class="line">        // 计数减1</span><br><span class="line">        int nextc = c-1;</span><br><span class="line">        if (compareAndSetState(c, nextc))</span><br><span class="line">            return nextc == 0;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="CyclicBarrier"><a href="#CyclicBarrier" class="headerlink" title="CyclicBarrier"></a><code>CyclicBarrier</code></h1><p>一个高级队构造函数：CyclicBarrier(int parties, Runnable barrierAction)，barrierAction任务会在所有线程到达屏障后执行。</p>
+<h1 id="CyclicBarrier和CountDownLatch区别"><a href="#CyclicBarrier和CountDownLatch区别" class="headerlink" title="CyclicBarrier和CountDownLatch区别"></a><code>CyclicBarrier</code>和<code>CountDownLatch</code>区别</h1><p><code></code>CountDownLatch<code>的计数器只能使用一次，</code>CyclicBarrier<code>可以用</code>reset`方法将计数器重置。因此CyclicBarrier可以处理更加复杂的业务场景。CountDownLatch一般用于某些线程等待若干个其他线程执行完任务之后，它才执行；而CyclicBarrier一般用于一组线程互相等待至某个状态，然后这一组线程再同时执行；</p>
+<h1 id="Semaphore"><a href="#Semaphore" class="headerlink" title="Semaphore"></a>Semaphore</h1><p><code>Semaphore</code>可以用来控制同时访问特定资源的线程数量。实现比较简单，可参看<a href="https://www.jianshu.com/p/0090341c6b80" rel="external nofollow noopener noreferrer" target="_blank">Semaphore</a></p>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/Wiki/wiki/Java/HashMap/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    HashMap
+                
+            </div>
+        </a>
+    
+    
+        <a href="/Wiki/wiki/Java/ReentrantLock/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">ReentrantLock</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            polyval &copy; 2018 
+            <a rel="external nofollow noopener noreferrer" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png"></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten" rel="external nofollow noopener noreferrer" target="_blank">wikitten</a>
+            
+                <br><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span></span> | 
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"><span id="busuanzi_value_site_uv"></span></i></span>
+            
+        </div>
+    </div>
+</footer>
+        
+
+    
+        <script src="/Wiki/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/Wiki/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/Wiki/js/main.js"></script>
+
+    </div>
+</body>

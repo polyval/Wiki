@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="polyval&#39;s Wiki">
 <meta property="og:description" content="常驻内存排查内存泄漏重用对象String.intern()在某服务中，通过与其他进程通讯获取到格式为byte[]的字段，将byte[]转化成String的时候利用new String(byte[])方法，但是string很多是相同的，产生了大量相同的string对象，而且这些对象是程序中当作缓存来用一直存在于内存中，采用String.intern()对String对象进行缓存，降低了内存占用30M">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-10-22T05:08:42.122Z">
+<meta property="og:updated_time" content="2018-10-29T04:35:10.386Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java内存优化">
 <meta name="twitter:description" content="常驻内存排查内存泄漏重用对象String.intern()在某服务中，通过与其他进程通讯获取到格式为byte[]的字段，将byte[]转化成String的时候利用new String(byte[])方法，但是string很多是相同的，产生了大量相同的string对象，而且这些对象是程序中当作缓存来用一直存在于内存中，采用String.intern()对String对象进行缓存，降低了内存占用30M">
@@ -159,31 +159,13 @@
         
         
          <ul class="unstyled" id="tree"> 
-                    <li class="directory">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
-                            &nbsp;
-                            Go
-                        </a>
-                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/Go/Go语言入门/"></a></li>  </ul> 
-                    </li> 
-                    
                     <li class="directory open">
                         <a href="#" data-role="directory">
                             <i class="fa fa-folder-open"></i>
                             &nbsp;
                             Java
                         </a>
-                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/Java/Btrace-生产环境调试/"></a></li>  <li class="file"><a href="/Wiki/wiki/Java/线程状态/">线程状态</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java分析工具/">Java分析工具</a></li>  <li class="file active"><a href="/Wiki/wiki/Java/Java内存优化/">Java内存优化</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Netty/"></a></li>  <li class="file"><a href="/Wiki/wiki/Java/TODO/"></a></li>  <li class="file"><a href="/Wiki/wiki/Java/性能瓶颈/">性能瓶颈</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Spring Boot/"></a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java基础/"></a></li>  <li class="file"><a href="/Wiki/wiki/Java/CPU占用过高定位/">CPU占用过高定位</a></li>  <li class="file"><a href="/Wiki/wiki/Java/什么是Java内存模型/">什么是Java内存模型</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java内存溢出的情况/">Java内存溢出的情况</a></li>  </ul> 
-                    </li> 
-                    
-                    <li class="directory">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
-                            &nbsp;
-                            psychology
-                        </a>
-                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/psychology/面质(confrontation)/"></a></li>  <li class="file"><a href="/Wiki/wiki/psychology/亲密关系中的沟通/">亲密关系中的沟通</a></li>  </ul> 
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/Java/CPU占用过高定位/">CPU占用过高定位</a></li>  <li class="file"><a href="/Wiki/wiki/Java/CAS/">CAS</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Condition/">Condition</a></li>  <li class="file"><a href="/Wiki/wiki/Java/CountDownLatch/">CountDownLatch&CyclicBarrier</a></li>  <li class="file"><a href="/Wiki/wiki/Java/HashMap/">HashMap</a></li>  <li class="file active"><a href="/Wiki/wiki/Java/Java内存优化/">Java内存优化</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java分析工具/">Java分析工具</a></li>  <li class="file"><a href="/Wiki/wiki/Java/ReentrantLock/">ReentrantLock</a></li>  <li class="file"><a href="/Wiki/wiki/Java/ReentrantReadWriteLock/">ReentrantReadWriteLock</a></li>  <li class="file"><a href="/Wiki/wiki/Java/性能瓶颈/">性能瓶颈</a></li>  <li class="file"><a href="/Wiki/wiki/Java/线程状态/">线程状态</a></li>  <li class="file"><a href="/Wiki/wiki/Java/AQS/">AQS</a></li>  <li class="file"><a href="/Wiki/wiki/Java/什么是Java内存模型/">什么是Java内存模型</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java内存溢出的情况/">Java内存溢出的情况</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -239,7 +221,7 @@
                         </a>
                          <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/操作系统/Linux命令/">Linux命令</a></li>  <li class="file"><a href="/Wiki/wiki/操作系统/操作系统是如何实现虚拟内存的/">操作系统是如何实现虚拟内存的</a></li>  </ul> 
                     </li> 
-                     <li class="file"><a href="/Wiki/wiki/程序员的自我修养/"></a></li>  <li class="file"><a href="/Wiki/wiki/高质量代码/"></a></li>  </ul> 
+                     </ul> 
     </div>
     <script>
         $(document).ready(function() {
@@ -390,19 +372,19 @@
     
 <nav id="article-nav">
     
-        <a href="/Wiki/wiki/Java/Java分析工具/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/Wiki/wiki/操作系统/Linux命令/" id="article-nav-newer" class="article-nav-link-wrap">
             <strong class="article-nav-caption">Newer</strong>
             <div class="article-nav-title">
                 
-                    Java分析工具
+                    Linux命令
                 
             </div>
         </a>
     
     
-        <a href="/Wiki/wiki/Java/TODO/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/Wiki/wiki/Java/Java分析工具/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">Older</strong>
-            <div class="article-nav-title"></div>
+            <div class="article-nav-title">Java分析工具</div>
         </a>
     
 </nav>

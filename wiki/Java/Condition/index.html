@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    
+    <title>Condition | polyval&#39;s Wiki</title>
+    
+    
+        <meta name="keywords" content="Java,并发">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Condition接口定义的几个方法如下：  其中，await方法类似于Object的wait方法，而signal和signalAll则分别对应于notify和notifyAll方法。 Condition其实现类在AQS中以内部类ConditionObject的形式存在。condition由锁的方法Lock.newCondition()来获取，且一个Lock可获取多个Condition，而不像Ob">
+<meta name="keywords" content="Java,并发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Condition">
+<meta property="og:url" content="http://polyval.github.io/Wiki/wiki/Java/Condition/index.html">
+<meta property="og:site_name" content="polyval&#39;s Wiki">
+<meta property="og:description" content="Condition接口定义的几个方法如下：  其中，await方法类似于Object的wait方法，而signal和signalAll则分别对应于notify和notifyAll方法。 Condition其实现类在AQS中以内部类ConditionObject的形式存在。condition由锁的方法Lock.newCondition()来获取，且一个Lock可获取多个Condition，而不像Ob">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://polyval.github.io/Wiki/wiki/Java/Condition/image-20181029220107248.png">
+<meta property="og:updated_time" content="2018-11-09T04:38:20.210Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Condition">
+<meta name="twitter:description" content="Condition接口定义的几个方法如下：  其中，await方法类似于Object的wait方法，而signal和signalAll则分别对应于notify和notifyAll方法。 Condition其实现类在AQS中以内部类ConditionObject的形式存在。condition由锁的方法Lock.newCondition()来获取，且一个Lock可获取多个Condition，而不像Ob">
+<meta name="twitter:image" content="http://polyval.github.io/Wiki/wiki/Java/Condition/image-20181029220107248.png">
+    
+
+    
+
+    
+        <link rel="icon" href="/Wiki/favicon.ico">
+    
+
+    <link rel="stylesheet" href="/Wiki/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/Wiki/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/Wiki/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/Wiki/css/style.css">
+    <script src="/Wiki/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/Wiki/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+    
+    
+        <link rel="stylesheet" href="/Wiki/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/Wiki/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+    
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+</head>
+</html>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/Wiki/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">polyval&#39;s Wiki</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/Wiki/">首页</a>
+                
+                    <a class="main-nav-link" href="/Wiki/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/Wiki/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/Wiki/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/Wiki/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/Wiki/',
+        CONTENT_URL: '/Wiki/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/Wiki/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/Wiki/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/Wiki/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/Wiki/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/Wiki/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/Wiki/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id="categories">
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id="allExpand" href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree"> 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            Java
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/Java/CPU占用过高定位/">CPU占用过高定位</a></li>  <li class="file"><a href="/Wiki/wiki/Java/CAS/">CAS</a></li>  <li class="file active"><a href="/Wiki/wiki/Java/Condition/">Condition</a></li>  <li class="file"><a href="/Wiki/wiki/Java/CountDownLatch/">CountDownLatch&CyclicBarrier</a></li>  <li class="file"><a href="/Wiki/wiki/Java/HashMap/">HashMap</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java内存优化/">Java内存优化</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java分析工具/">Java分析工具</a></li>  <li class="file"><a href="/Wiki/wiki/Java/ReentrantLock/">ReentrantLock</a></li>  <li class="file"><a href="/Wiki/wiki/Java/ReentrantReadWriteLock/">ReentrantReadWriteLock</a></li>  <li class="file"><a href="/Wiki/wiki/Java/性能瓶颈/">性能瓶颈</a></li>  <li class="file"><a href="/Wiki/wiki/Java/线程状态/">线程状态</a></li>  <li class="file"><a href="/Wiki/wiki/Java/AQS/">AQS</a></li>  <li class="file"><a href="/Wiki/wiki/Java/什么是Java内存模型/">什么是Java内存模型</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java内存溢出的情况/">Java内存溢出的情况</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            云计算
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/云计算/云计算/">云计算</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分布式
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/分布式/CAP定理/">CAP定理</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            前端
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/前端/React Vitual DOM/">React Virtual DOM</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            工具
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/工具/Git/">Git</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            微服务
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/微服务/Spring Cloud/">Spring Cloud</a></li>  <li class="file"><a href="/Wiki/wiki/微服务/什么是微服务/">什么是微服务</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            操作系统
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/操作系统/Linux命令/">Linux命令</a></li>  <li class="file"><a href="/Wiki/wiki/操作系统/操作系统是如何实现虚拟内存的/">操作系统是如何实现虚拟内存的</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-Java/Condition" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/Wiki/categories/Java/">Java</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/Wiki/tags/Java/">Java</a>, <a class="tag-link" href="/Wiki/tags/并发/">并发</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/Wiki/wiki/Java/Condition/">
+            <time datetime="2018-10-28T03:28:21.000Z" itemprop="datePublished">2018-10-28</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/raw/writing/source/_posts/Java/Condition.md" rel="external nofollow noopener noreferrer" target="_blank"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/edit/writing/source/_posts/Java/Condition.md" rel="external nofollow noopener noreferrer" target="_blank"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/commits/writing/source/_posts/Java/Condition.md" rel="external nofollow noopener noreferrer" target="_blank"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Condition
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">Catalogue</strong>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#await"><span class="toc-number">1.</span> <span class="toc-text">await</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Signal"><span class="toc-number">2.</span> <span class="toc-text">Signal</span></a></li></ol>
+                </div>
+            
+        
+        
+            <p>Condition接口定义的几个方法如下：</p>
+<p><img src="/Wiki/wiki/Java/Condition/image-20181029220107248.png" alt="image-20181029220107248"></p>
+<p>其中，await方法类似于Object的wait方法，而signal和signalAll则分别对应于notify和notifyAll方法。</p>
+<p>Condition其实现类在AQS中以内部类ConditionObject的形式存在。condition由锁的方法Lock.newCondition()来获取，且一个Lock可获取多个Condition，而不像Object只能设置一个条件。</p>
+<p>下面说一下ConditionObject的await和signal方法。</p>
+<h2 id="await"><a href="#await" class="headerlink" title="await"></a>await</h2><p>在调用该方法时，当前线程需要获取到与该Condition关联的锁，如果不加锁进入该方法，可能会导致其他线程调用signal方法时，还没进入到await方法，导致这个信号丢失，而不起任何效果。调用该方法后，线程释放锁，进入睡眠状态，在以下四种情况下线程会被唤醒</p>
+<ul>
+<li><p>其他线程调用<strong>signal</strong>方法，当前线程恰好被选中唤醒</p>
+</li>
+<li><p>其他线程调用<strong>signalAll</strong>方法</p>
+</li>
+<li><p>被其他线程<strong>中断</strong></p>
+<blockquote>
+<p>中断是让线程停止当前所做的事去做别的事情的一个标志。停止当前所做的事不代表线程就占用CPU在做什么，线程在睡眠也叫做线程所做的事。调用Thread.interrupt()方法可以设置目标线程的中断状态，至于线程如何响应中断，则看程序是如何写的。</p>
+</blockquote>
+</li>
+<li><p>发生虚假唤醒(spurious wakeup)</p>
+</li>
+</ul>
+<p>虚假唤醒时指线程在没有收到线程唤醒信号的时候醒了过来。await方法在jvm执行时实质是调用了底层<code>pthread_cond_wait</code>/<code>pthread_cond_timedwait</code>函数，而<code>pthread_cond_wait</code>可能在没收到信号时返回。同时，由于编码不规范也会产生虚假唤醒，举个例子</p>
+<blockquote>
+<p>线程A获取锁，发现队列空，因此wait，线程B向队列插入数据，改变条件变量，发出signal，线程C获取到锁，将数据移除，等到A获取锁从wait状态醒来时，应该是去队列移除数据的，但是此时的队列已经为空，这个唤醒是虚假唤醒。</p>
+</blockquote>
+<p><code>pthread_cond_wait</code>的作者认为既然编程不规范也会导致虚假唤醒，那么就交由上层来避免虚假唤醒，而不是底层来实现。</p>
+<p>由于虚假唤醒的存在，await方法应该在循环中调用。</p>
+<p>await的基本流程如下：</p>
+<ol>
+<li>生成并添加代表线程的Node节点到条件队列</li>
+<li>释放锁</li>
+<li>阻塞直到Node被移到同步队列</li>
+<li>重新获取锁 </li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">await</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (Thread.interrupted())</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> InterruptedException();</span><br><span class="line"> 	<span class="comment">//新节点入条件队列</span></span><br><span class="line">    Node node = addConditionWaiter();</span><br><span class="line">    <span class="comment">//当前线程已持有锁，但由于要被阻塞，为不影响其他线程，需要先释放锁</span></span><br><span class="line">    <span class="keyword">int</span> savedState = fullyRelease(node);</span><br><span class="line">    <span class="keyword">int</span> interruptMode = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 阻塞直到Node被移到锁队列</span></span><br><span class="line">    <span class="keyword">while</span> (!isOnSyncQueue(node)) &#123;</span><br><span class="line">        <span class="comment">// 阻塞</span></span><br><span class="line">        LockSupport.park(<span class="keyword">this</span>);</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 检测中断，一旦发生中断</span></span><br><span class="line"><span class="comment">         *  1.将条件队列中因中断而唤醒的节点进行转移(注意此处是中断)</span></span><br><span class="line"><span class="comment">         *  2.退出循环 -&gt; 接下来会在循环外进行中断处理</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">if</span> ((interruptMode = checkInterruptWhileWaiting(node)) != <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 重新尝试获取同步锁，获取成功后且被中断，当中断模式为抛出异常时，需要设置为重新中断，补充：acquireQueued会返回获取锁过程中线程是否有过中断，true则说明发生过中断</span></span><br><span class="line">    <span class="keyword">if</span> (acquireQueued(node, savedState) &amp;&amp; interruptMode != THROW_IE)</span><br><span class="line">        interruptMode = REINTERRUPT;</span><br><span class="line">    <span class="comment">// 若当前节点存在后继节点时，需要执行出队操作</span></span><br><span class="line">    <span class="keyword">if</span> (node.nextWaiter != <span class="keyword">null</span>) <span class="comment">// clean up if cancelled</span></span><br><span class="line">        unlinkCancelledWaiters();</span><br><span class="line">    <span class="comment">//interruptMode != 0 说明是需要进行中断处理的</span></span><br><span class="line">    <span class="keyword">if</span> (interruptMode != <span class="number">0</span>)</span><br><span class="line">        <span class="comment">//执行中断处理</span></span><br><span class="line">        reportInterruptAfterWait(interruptMode);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Signal"><a href="#Signal" class="headerlink" title="Signal"></a>Signal</h2><p>signal做的事情</p>
+<ol>
+<li>清除节点： 从条件队列中移除第一个节点</li>
+<li>节点转移： 将条件节点转换为同步节点，即从条件队列转移到同步队列</li>
+<li>唤醒节点： 将转移成功的节点重新唤醒 </li>
+</ol>
+<p>当cancellation(超时或者中断)和signal几乎同时发生时，会存在竞争，根据Java规范，如果中断先发生，await在重新获取到锁后，抛出InterruptException，如果中断后于signal，则不抛出异常，只需修改线程中断的标志位。</p>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/Wiki/wiki/Java/ReentrantReadWriteLock/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    ReentrantReadWriteLock
+                
+            </div>
+        </a>
+    
+    
+        <a href="/Wiki/wiki/Java/CAS/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">CAS</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            polyval &copy; 2018 
+            <a rel="external nofollow noopener noreferrer" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png"></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten" rel="external nofollow noopener noreferrer" target="_blank">wikitten</a>
+            
+                <br><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span></span> | 
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"><span id="busuanzi_value_site_uv"></span></i></span>
+            
+        </div>
+    </div>
+</footer>
+        
+
+    
+        <script src="/Wiki/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/Wiki/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/Wiki/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/Wiki/js/main.js"></script>
+
+    </div>
+</body>

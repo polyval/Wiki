@@ -158,27 +158,9 @@
                         <a href="#" data-role="directory">
                             <i class="fa fa-folder"></i>
                             &nbsp;
-                            Go
-                        </a>
-                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/Go/Go语言入门/"></a></li>  </ul> 
-                    </li> 
-                    
-                    <li class="directory">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
-                            &nbsp;
                             Java
                         </a>
-                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/Java/Btrace-生产环境调试/"></a></li>  <li class="file"><a href="/Wiki/wiki/Java/线程状态/">线程状态</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java分析工具/">Java分析工具</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java内存优化/">Java内存优化</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Netty/"></a></li>  <li class="file"><a href="/Wiki/wiki/Java/TODO/"></a></li>  <li class="file"><a href="/Wiki/wiki/Java/性能瓶颈/">性能瓶颈</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Spring Boot/"></a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java基础/"></a></li>  <li class="file"><a href="/Wiki/wiki/Java/CPU占用过高定位/">CPU占用过高定位</a></li>  <li class="file"><a href="/Wiki/wiki/Java/什么是Java内存模型/">什么是Java内存模型</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java内存溢出的情况/">Java内存溢出的情况</a></li>  </ul> 
-                    </li> 
-                    
-                    <li class="directory">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
-                            &nbsp;
-                            psychology
-                        </a>
-                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/psychology/面质(confrontation)/"></a></li>  <li class="file"><a href="/Wiki/wiki/psychology/亲密关系中的沟通/">亲密关系中的沟通</a></li>  </ul> 
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/Java/CPU占用过高定位/">CPU占用过高定位</a></li>  <li class="file"><a href="/Wiki/wiki/Java/CAS/">CAS</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Condition/">Condition</a></li>  <li class="file"><a href="/Wiki/wiki/Java/CountDownLatch/">CountDownLatch&CyclicBarrier</a></li>  <li class="file"><a href="/Wiki/wiki/Java/HashMap/">HashMap</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java内存优化/">Java内存优化</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java分析工具/">Java分析工具</a></li>  <li class="file"><a href="/Wiki/wiki/Java/ReentrantLock/">ReentrantLock</a></li>  <li class="file"><a href="/Wiki/wiki/Java/ReentrantReadWriteLock/">ReentrantReadWriteLock</a></li>  <li class="file"><a href="/Wiki/wiki/Java/性能瓶颈/">性能瓶颈</a></li>  <li class="file"><a href="/Wiki/wiki/Java/线程状态/">线程状态</a></li>  <li class="file"><a href="/Wiki/wiki/Java/AQS/">AQS</a></li>  <li class="file"><a href="/Wiki/wiki/Java/什么是Java内存模型/">什么是Java内存模型</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java内存溢出的情况/">Java内存溢出的情况</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -234,7 +216,7 @@
                         </a>
                          <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/操作系统/Linux命令/">Linux命令</a></li>  <li class="file"><a href="/Wiki/wiki/操作系统/操作系统是如何实现虚拟内存的/">操作系统是如何实现虚拟内存的</a></li>  </ul> 
                     </li> 
-                     <li class="file"><a href="/Wiki/wiki/程序员的自我修养/"></a></li>  <li class="file"><a href="/Wiki/wiki/高质量代码/"></a></li>  </ul> 
+                     </ul> 
     </div>
     <script>
         $(document).ready(function() {
@@ -306,6 +288,198 @@
 </aside>
             
             <section id="main">
+        <article id="post-Java/CAS" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/Wiki/categories/Java/">Java</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/Wiki/tags/Java/">Java</a>, <a class="tag-link" href="/Wiki/tags/并发/">并发</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/Wiki/wiki/Java/CAS/">
+            <time datetime="2018-10-23T03:28:21.000Z" itemprop="datePublished">2018-10-23</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/raw/writing/source/_posts/Java/CAS.md" rel="external nofollow noopener noreferrer" target="_blank"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/edit/writing/source/_posts/Java/CAS.md" rel="external nofollow noopener noreferrer" target="_blank"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/commits/writing/source/_posts/Java/CAS.md" rel="external nofollow noopener noreferrer" target="_blank"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/Wiki/wiki/Java/CAS/">CAS</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                
+                    
+                    <p></p><p>CAS，Compare and set。是Java中实现原子操作的重要手段，在Java并发工具中起着重要作用。</p>
+<p><img src="/Wiki/wiki/Java/CAS/201703090001_thumb.png" alt="201703090001"></p>
+<h1 id="CAS是什么"><a href="#CAS是什么" class="headerlink" title="CAS是什么"></a>CAS是什么</h1><p>CAS是一种多线程同步中常用的原子操作。在CAS中，有三个重要的参数：<strong>内存值V、旧的预期值A、要更新成为的值B</strong>，当且仅当内存值V等于旧的预期值A时，才把内存值V更改成B。基于CAS操作，可以实现乐观锁机制，乐观锁的思想是认为数据一般情况下不会发生冲突，所以在数据<strong>提交更新</strong>的时候，才会对冲突进行检测。乐观锁是种思想，而CAS是这种思想的一种实现方式。注意，CAS是一种操作，CAS一般配合自旋来实现乐观锁机制。</p>
+<p>让我们以<strong>AtomicInteger</strong>为例来看看CAS的应用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> jdk.internal.misc.Unsafe U = jdk.internal.misc.Unsafe.getUnsafe();</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> VALUE = U.objectFieldOffset(AtomicInteger.class, <span class="string">"value"</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">addAndGet</span><span class="params">(<span class="keyword">int</span> delta)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> U.getAndAddInt(<span class="keyword">this</span>, VALUE, delta) + delta;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>
+                
+            
+        
+        
+            </p></div>   
+            <div class="article-more-link">
+                <a href="/Wiki/wiki/Java/CAS/#more">Read More</a>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
+        <article id="post-操作系统/Linux命令" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/Wiki/categories/操作系统/">操作系统</a>
+    </div>
+
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/Wiki/wiki/操作系统/Linux命令/">
+            <time datetime="2018-10-21T05:08:29.000Z" itemprop="datePublished">2018-10-21</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/raw/writing/source/_posts/操作系统/Linux命令.md" rel="external nofollow noopener noreferrer" target="_blank"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/edit/writing/source/_posts/操作系统/Linux命令.md" rel="external nofollow noopener noreferrer" target="_blank"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/commits/writing/source/_posts/操作系统/Linux命令.md" rel="external nofollow noopener noreferrer" target="_blank"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/Wiki/wiki/操作系统/Linux命令/">Linux命令</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+            
+        
+        
+            <h1 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h1><p><code>ps -ef | grep &quot;&quot;</code></p>
+<h1 id="zgrep"><a href="#zgrep" class="headerlink" title="zgrep"></a>zgrep</h1><h1 id="xargs"><a href="#xargs" class="headerlink" title="xargs"></a>xargs</h1><h1 id="find"><a href="#find" class="headerlink" title="find"></a>find</h1><p><code>find . -name &quot;&quot; | xargs zgrep &quot;&quot;</code></p>
+<h1 id="查找端口被占用的程序"><a href="#查找端口被占用的程序" class="headerlink" title="查找端口被占用的程序"></a>查找端口被占用的程序</h1><p><code>lsof -i :&lt;port&gt;</code></p>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
         <article id="post-Java/Java内存优化" class="article article-type-post" itemscope="" itemprop="blogPost">
     <div class="article-inner">
         
@@ -395,9 +569,59 @@
 
 
     
-        <article id="post-Java/TODO" class="article article-type-post" itemscope="" itemprop="blogPost">
+        <article id="post-Java/Java分析工具" class="article article-type-post" itemscope="" itemprop="blogPost">
     <div class="article-inner">
         
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/Wiki/categories/Java/">Java</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/Wiki/tags/Java/">Java</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/Wiki/wiki/Java/Java分析工具/">
+            <time datetime="2018-10-21T03:28:21.000Z" itemprop="datePublished">2018-10-21</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/raw/writing/source/_posts/Java/Java分析工具.md" rel="external nofollow noopener noreferrer" target="_blank"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/edit/writing/source/_posts/Java/Java分析工具.md" rel="external nofollow noopener noreferrer" target="_blank"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/commits/writing/source/_posts/Java/Java分析工具.md" rel="external nofollow noopener noreferrer" target="_blank"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/Wiki/wiki/Java/Java分析工具/">Java分析工具</a>
+        </h1>
+    
+
+            </header>
         
         
         <div class="article-entry" itemprop="articleBody">
@@ -423,11 +647,115 @@
                 
                 
                     
-                    <p></p><h2 id="技能"><a href="#技能" class="headerlink" title="技能"></a>技能</h2><p>熟悉Java常见问题定位、Python</p>
-<p>熟悉React</p>
-<p>熟悉Git、Linux常用命令</p>
-<p>了解Spring Cloud、微服务、分布式</p>
-<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><h3 id="EmlCacheService的内存优化"><a href="#EmlCacheService的内存优化" class="headerlink" title="EmlCacheService的内存优化"></a>EmlCacheService的内存优化</h3><ul>
+                    <p></p><h1 id="jmap"><a href="#jmap" class="headerlink" title="jmap"></a>jmap</h1><h2 id="输出对象实例个数"><a href="#输出对象实例个数" class="headerlink" title="输出对象实例个数"></a>输出对象实例个数</h2><p><code>jmap -histo &lt;pid&gt; &gt; a.log</code></p>
+<p>查看应用代码实例的个数，对于出现内存泄露的情况，可以快速定位出是哪个对象引起的。</p>
+<h2 id="输出堆文件"><a href="#输出堆文件" class="headerlink" title="输出堆文件"></a>输出堆文件</h2><p><code>jmap -dump:format=b,file = a.dat &lt;pid&gt;</code></p>
+<h2 id="查看进程堆内存使用情况"><a href="#查看进程堆内存使用情况" class="headerlink" title="查看进程堆内存使用情况"></a>查看进程堆内存使用情况</h2><p><code>jmap -heap &lt;pid&gt;</code></p>
+<h1 id="jhat"><a href="#jhat" class="headerlink" title="jhat"></a>jhat</h1><h4 id="查看dump文件"><a href="#查看dump文件" class="headerlink" title="查看dump文件"></a>查看dump文件</h4><p><code>jhat -port 9998 /tmp/var/dump.dat</code></p>
+<p>
+                
+            
+        
+        
+            </p></div>   
+            <div class="article-more-link">
+                <a href="/Wiki/wiki/Java/Java分析工具/#more">Read More</a>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
+        <article id="post-分布式/CAP定理" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/Wiki/categories/分布式/">分布式</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/Wiki/tags/分布式/">分布式</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/Wiki/wiki/分布式/CAP定理/">
+            <time datetime="2018-10-21T03:28:21.000Z" itemprop="datePublished">2018-10-21</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/raw/writing/source/_posts/分布式/CAP定理.md" rel="external nofollow noopener noreferrer" target="_blank"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/edit/writing/source/_posts/分布式/CAP定理.md" rel="external nofollow noopener noreferrer" target="_blank"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/commits/writing/source/_posts/分布式/CAP定理.md" rel="external nofollow noopener noreferrer" target="_blank"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/Wiki/wiki/分布式/CAP定理/">CAP定理</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                
+                    
+                    <p></p><h2 id="CAP定理"><a href="#CAP定理" class="headerlink" title="CAP定理"></a>CAP定理</h2><p>分布式系统中有三个指标</p>
+<ul>
+<li>Consistency 一致性</li>
+<li>Avaliability 可用性</li>
+<li>Partition tolerance 分区容错</li>
 <p>
                 
             
@@ -435,135 +763,7 @@
         
             </p></ul></div>   
             <div class="article-more-link">
-                <a href="/Wiki/wiki/Java/TODO/#more">Read More</a>
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
-        <article id="post-Go/Go语言入门" class="article article-type-post" itemscope="" itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-                
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-            
-        
-        
-            <h1 id="GO语言特性"><a href="#GO语言特性" class="headerlink" title="GO语言特性"></a>GO语言特性</h1><h2 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h2><h2 id="风格"><a href="#风格" class="headerlink" title="风格"></a>风格</h2><h3 id="代码风格强制统一"><a href="#代码风格强制统一" class="headerlink" title="代码风格强制统一"></a>代码风格强制统一</h3><h4 id="public变量必须大写字母开头，private必须小写"><a href="#public变量必须大写字母开头，private必须小写" class="headerlink" title="public变量必须大写字母开头，private必须小写"></a>public变量必须大写字母开头，private必须小写</h4><h4 id="花括号"><a href="#花括号" class="headerlink" title="花括号"></a>花括号</h4><p>花括号必须这么写</p>
-<p>if expression {<br>…<br>} </p>
-<h3 id="不支持函数和操作符重载"><a href="#不支持函数和操作符重载" class="headerlink" title="不支持函数和操作符重载"></a>不支持函数和操作符重载</h3><h2 id="函数多返回值"><a href="#函数多返回值" class="headerlink" title="函数多返回值"></a>函数多返回值</h2>
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
-        <article id="post-Java/Spring Boot" class="article article-type-post" itemscope="" itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-                
-                
-                    
-                    
-                
-                    
-                    
-                
-            
-        
-        
-            <p>Spring Boot简化了构建基于Spring框架的应用的步骤，尤其是简化了spring的配置流程。与我司的云龙平台在创建微服务的时候做的工作类似。</p>
-
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
-        <article id="post-Java/Netty" class="article article-type-post" itemscope="" itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-                
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                
-                    
-                    <p></p><p>Netty可以简化高性能网络应用程序的开发。Netty是基于Java NIO技术封装的一套框架，提供了一个更易于操作的使用模式和接口。</p>
-<h3 id="NIO"><a href="#NIO" class="headerlink" title="NIO"></a>NIO</h3><p>NIO全称是NoneBlocking IO，是一种同步非阻塞等IO模型。区别与BIO，BIO的全称是Blocking IO，阻塞IO。那这个阻塞是什么意思呢？</p>
-<ol>
-<li>Accept是阻塞的，只有新连接来了，Accept才会返回，主线程才能继</li>
-<li>Read是阻塞的，只有请求消息来了，Read才能返回，子线程才能继续处理</li>
-<p>
-                
-            
-        
-        
-            </p></ol></div>   
-            <div class="article-more-link">
-                <a href="/Wiki/wiki/Java/Netty/#more">Read More</a>
+                <a href="/Wiki/wiki/分布式/CAP定理/#more">Read More</a>
             </div>
         
         <footer class="article-footer">
