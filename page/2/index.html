@@ -160,7 +160,7 @@
                             &nbsp;
                             Java
                         </a>
-                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/Java/CPU占用过高定位/">CPU占用过高定位</a></li>  <li class="file"><a href="/Wiki/wiki/Java/CAS/">CAS</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Condition/">Condition</a></li>  <li class="file"><a href="/Wiki/wiki/Java/CountDownLatch/">CountDownLatch&CyclicBarrier</a></li>  <li class="file"><a href="/Wiki/wiki/Java/HashMap/">HashMap</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java内存优化/">Java内存优化</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java分析工具/">Java分析工具</a></li>  <li class="file"><a href="/Wiki/wiki/Java/ReentrantLock/">ReentrantLock</a></li>  <li class="file"><a href="/Wiki/wiki/Java/ReentrantReadWriteLock/">ReentrantReadWriteLock</a></li>  <li class="file"><a href="/Wiki/wiki/Java/性能瓶颈/">性能瓶颈</a></li>  <li class="file"><a href="/Wiki/wiki/Java/线程状态/">线程状态</a></li>  <li class="file"><a href="/Wiki/wiki/Java/AQS/">AQS</a></li>  <li class="file"><a href="/Wiki/wiki/Java/什么是Java内存模型/">什么是Java内存模型</a></li>  <li class="file"><a href="/Wiki/wiki/Java/笔记/"></a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java内存溢出的情况/">Java内存溢出的情况</a></li>  </ul> 
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/Java/CPU占用过高定位/">CPU占用过高定位</a></li>  <li class="file"><a href="/Wiki/wiki/Java/CAS/">CAS</a></li>  <li class="file"><a href="/Wiki/wiki/Java/CountDownLatch/">CountDownLatch&CyclicBarrier</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Condition/">Condition</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java内存优化/">Java内存优化</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java分析工具/">Java分析工具</a></li>  <li class="file"><a href="/Wiki/wiki/Java/HashMap/">HashMap</a></li>  <li class="file"><a href="/Wiki/wiki/Java/ReentrantLock/">ReentrantLock</a></li>  <li class="file"><a href="/Wiki/wiki/Java/ReentrantReadWriteLock/">ReentrantReadWriteLock</a></li>  <li class="file"><a href="/Wiki/wiki/Java/性能瓶颈/">性能瓶颈</a></li>  <li class="file"><a href="/Wiki/wiki/Java/线程状态/">线程状态</a></li>  <li class="file"><a href="/Wiki/wiki/Java/AQS/">AQS</a></li>  <li class="file"><a href="/Wiki/wiki/Java/什么是Java内存模型/">什么是Java内存模型</a></li>  <li class="file"><a href="/Wiki/wiki/Java/笔记/"></a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java内存溢出的情况/">Java内存溢出的情况</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -584,7 +584,7 @@
 
 
     
-        <article id="post-Java/Java分析工具" class="article article-type-post" itemscope="" itemprop="blogPost">
+        <article id="post-Java/AQS" class="article article-type-post" itemscope="" itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -600,13 +600,13 @@
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/Wiki/tags/Java/">Java</a>
+        <a class="tag-link" href="/Wiki/tags/Java/">Java</a>, <a class="tag-link" href="/Wiki/tags/并发/">并发</a>
     </div>
 
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/Wiki/wiki/Java/Java分析工具/">
+        <a href="/Wiki/wiki/Java/AQS/">
             <time datetime="2018-10-21T03:28:21.000Z" itemprop="datePublished">2018-10-21</time>
         </a>
     </div>
@@ -618,13 +618,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href="https://github.com/polyval/Wiki/raw/writing/source/_posts/Java/Java分析工具.md" rel="external nofollow noopener noreferrer" target="_blank"> Source </a>
+                                <a href="https://github.com/polyval/Wiki/raw/writing/source/_posts/Java/AQS.md" rel="external nofollow noopener noreferrer" target="_blank"> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href="https://github.com/polyval/Wiki/edit/writing/source/_posts/Java/Java分析工具.md" rel="external nofollow noopener noreferrer" target="_blank"> Edit </a>
+                                <a href="https://github.com/polyval/Wiki/edit/writing/source/_posts/Java/AQS.md" rel="external nofollow noopener noreferrer" target="_blank"> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href="https://github.com/polyval/Wiki/commits/writing/source/_posts/Java/Java分析工具.md" rel="external nofollow noopener noreferrer" target="_blank"> History </a>
+                                <a href="https://github.com/polyval/Wiki/commits/writing/source/_posts/Java/AQS.md" rel="external nofollow noopener noreferrer" target="_blank"> History </a>
                             </div>
                         
                     </div>
@@ -632,7 +632,7 @@
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/Wiki/wiki/Java/Java分析工具/">Java分析工具</a>
+            <a class="article-title" href="/Wiki/wiki/Java/AQS/">AQS</a>
         </h1>
     
 
@@ -662,19 +662,19 @@
                 
                 
                     
-                    <p></p><h1 id="jmap"><a href="#jmap" class="headerlink" title="jmap"></a>jmap</h1><h2 id="输出对象实例个数"><a href="#输出对象实例个数" class="headerlink" title="输出对象实例个数"></a>输出对象实例个数</h2><p><code>jmap -histo &lt;pid&gt; &gt; a.log</code></p>
-<p>查看应用代码实例的个数，对于出现内存泄露的情况，可以快速定位出是哪个对象引起的。</p>
-<h2 id="输出堆文件"><a href="#输出堆文件" class="headerlink" title="输出堆文件"></a>输出堆文件</h2><p><code>jmap -dump:format=b,file = a.dat &lt;pid&gt;</code></p>
-<h2 id="查看进程堆内存使用情况"><a href="#查看进程堆内存使用情况" class="headerlink" title="查看进程堆内存使用情况"></a>查看进程堆内存使用情况</h2><p><code>jmap -heap &lt;pid&gt;</code></p>
-<h1 id="jhat"><a href="#jhat" class="headerlink" title="jhat"></a>jhat</h1><h4 id="查看dump文件"><a href="#查看dump文件" class="headerlink" title="查看dump文件"></a>查看dump文件</h4><p><code>jhat -port 9998 /tmp/var/dump.dat</code></p>
+                    <p></p><p><strong>AbstractQueuedSynchronizer</strong>是一个抽象类，为Java中各种<strong>Synchronizers</strong>(<strong>同步器</strong>)的实现提供了一个模版框架。</p>
+<h1 id="Synchronizers是什么？"><a href="#Synchronizers是什么？" class="headerlink" title="Synchronizers是什么？"></a>Synchronizers是什么？</h1><p>Synchronizers是实现多线程通信、同步的工具和手段。如锁、Semaphore、阻塞队列、CyclicBarrier、CountDownLatch等。同步器通常包含如下几个部分来实现多线程同步</p>
+<ul>
+<li>状态（state）</li>
+<li>访问控制（access control）</li>
 <p>
                 
             
         
         
-            </p></div>   
+            </p></ul></div>   
             <div class="article-more-link">
-                <a href="/Wiki/wiki/Java/Java分析工具/#more">Read More</a>
+                <a href="/Wiki/wiki/Java/AQS/#more">Read More</a>
             </div>
         
         <footer class="article-footer">
