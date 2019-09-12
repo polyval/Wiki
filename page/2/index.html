@@ -160,7 +160,7 @@
                             &nbsp;
                             Java
                         </a>
-                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/Java/CPU占用过高定位/">CPU占用过高定位</a></li>  <li class="file"><a href="/Wiki/wiki/Java/CAS/">CAS</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Condition/">Condition</a></li>  <li class="file"><a href="/Wiki/wiki/Java/CountDownLatch/">CountDownLatch&CyclicBarrier</a></li>  <li class="file"><a href="/Wiki/wiki/Java/HashMap/">HashMap</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java内存优化/">Java内存优化</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java分析工具/">Java分析工具</a></li>  <li class="file"><a href="/Wiki/wiki/Java/ReentrantLock/">ReentrantLock</a></li>  <li class="file"><a href="/Wiki/wiki/Java/ReentrantReadWriteLock/">ReentrantReadWriteLock</a></li>  <li class="file"><a href="/Wiki/wiki/Java/性能瓶颈/">性能瓶颈</a></li>  <li class="file"><a href="/Wiki/wiki/Java/线程状态/">线程状态</a></li>  <li class="file"><a href="/Wiki/wiki/Java/AQS/">AQS</a></li>  <li class="file"><a href="/Wiki/wiki/Java/什么是Java内存模型/">什么是Java内存模型</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java内存溢出的情况/">Java内存溢出的情况</a></li>  </ul> 
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/Java/CPU占用过高定位/">CPU占用过高定位</a></li>  <li class="file"><a href="/Wiki/wiki/Java/CAS/">CAS</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Condition/">Condition</a></li>  <li class="file"><a href="/Wiki/wiki/Java/CountDownLatch/">CountDownLatch&CyclicBarrier</a></li>  <li class="file"><a href="/Wiki/wiki/Java/HashMap/">HashMap</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java内存优化/">Java内存优化</a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java分析工具/">Java分析工具</a></li>  <li class="file"><a href="/Wiki/wiki/Java/ReentrantLock/">ReentrantLock</a></li>  <li class="file"><a href="/Wiki/wiki/Java/ReentrantReadWriteLock/">ReentrantReadWriteLock</a></li>  <li class="file"><a href="/Wiki/wiki/Java/性能瓶颈/">性能瓶颈</a></li>  <li class="file"><a href="/Wiki/wiki/Java/线程状态/">线程状态</a></li>  <li class="file"><a href="/Wiki/wiki/Java/AQS/">AQS</a></li>  <li class="file"><a href="/Wiki/wiki/Java/什么是Java内存模型/">什么是Java内存模型</a></li>  <li class="file"><a href="/Wiki/wiki/Java/笔记/"></a></li>  <li class="file"><a href="/Wiki/wiki/Java/Java内存溢出的情况/">Java内存溢出的情况</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -205,7 +205,7 @@
                             &nbsp;
                             微服务
                         </a>
-                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/微服务/Spring Cloud/">Spring Cloud</a></li>  <li class="file"><a href="/Wiki/wiki/微服务/什么是微服务/">什么是微服务</a></li>  </ul> 
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Wiki/wiki/微服务/什么是微服务/">什么是微服务</a></li>  <li class="file"><a href="/Wiki/wiki/微服务/Spring Cloud/">Spring Cloud</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -288,6 +288,110 @@
 </aside>
             
             <section id="main">
+        <article id="post-Java/Condition" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/Wiki/categories/Java/">Java</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/Wiki/tags/Java/">Java</a>, <a class="tag-link" href="/Wiki/tags/并发/">并发</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/Wiki/wiki/Java/Condition/">
+            <time datetime="2018-10-28T03:28:21.000Z" itemprop="datePublished">2018-10-28</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/raw/writing/source/_posts/Java/Condition.md" rel="external nofollow noopener noreferrer" target="_blank"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/edit/writing/source/_posts/Java/Condition.md" rel="external nofollow noopener noreferrer" target="_blank"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/polyval/Wiki/commits/writing/source/_posts/Java/Condition.md" rel="external nofollow noopener noreferrer" target="_blank"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/Wiki/wiki/Java/Condition/">Condition</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                
+                    
+                    <p></p><p>Condition接口定义的几个方法如下：</p>
+<p><img src="/Wiki/wiki/Java/Condition/image-20181029220107248.png" alt="image-20181029220107248"></p>
+<p>其中，await方法类似于Object的wait方法，而signal和signalAll则分别对应于notify和notifyAll方法。</p>
+<p>Condition其实现类在AQS中以内部类ConditionObject的形式存在。condition由锁的方法Lock.newCondition()来获取，且一个Lock可获取多个Condition，而不像Object只能设置一个条件。</p>
+<p>下面说一下ConditionObject的await和signal方法。</p>
+<p>
+                
+            
+        
+        
+            </p></div>   
+            <div class="article-more-link">
+                <a href="/Wiki/wiki/Java/Condition/#more">Read More</a>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
         <article id="post-Java/CAS" class="article article-type-post" itemscope="" itemprop="blogPost">
     <div class="article-inner">
         
@@ -466,95 +570,6 @@
             <h1 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h1><p><code>ps -ef | grep &quot;&quot;</code></p>
 <h1 id="zgrep"><a href="#zgrep" class="headerlink" title="zgrep"></a>zgrep</h1><h1 id="xargs"><a href="#xargs" class="headerlink" title="xargs"></a>xargs</h1><h1 id="find"><a href="#find" class="headerlink" title="find"></a>find</h1><p><code>find . -name &quot;&quot; | xargs zgrep &quot;&quot;</code></p>
 <h1 id="查找端口被占用的程序"><a href="#查找端口被占用的程序" class="headerlink" title="查找端口被占用的程序"></a>查找端口被占用的程序</h1><p><code>lsof -i :&lt;port&gt;</code></p>
-
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
-        <article id="post-Java/Java内存优化" class="article article-type-post" itemscope="" itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/Wiki/categories/Java/">Java</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/Wiki/tags/Java/">Java</a>
-    </div>
-
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/Wiki/wiki/Java/Java内存优化/">
-            <time datetime="2018-10-21T03:28:21.000Z" itemprop="datePublished">2018-10-21</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href="https://github.com/polyval/Wiki/raw/writing/source/_posts/Java/Java内存优化.md" rel="external nofollow noopener noreferrer" target="_blank"> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href="https://github.com/polyval/Wiki/edit/writing/source/_posts/Java/Java内存优化.md" rel="external nofollow noopener noreferrer" target="_blank"> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href="https://github.com/polyval/Wiki/commits/writing/source/_posts/Java/Java内存优化.md" rel="external nofollow noopener noreferrer" target="_blank"> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/Wiki/wiki/Java/Java内存优化/">Java内存优化</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-                
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-            
-        
-        
-            <h1 id="常驻内存"><a href="#常驻内存" class="headerlink" title="常驻内存"></a>常驻内存</h1><h2 id="排查内存泄漏"><a href="#排查内存泄漏" class="headerlink" title="排查内存泄漏"></a>排查内存泄漏</h2><h2 id="重用对象"><a href="#重用对象" class="headerlink" title="重用对象"></a>重用对象</h2><h3 id="String-intern"><a href="#String-intern" class="headerlink" title="String.intern()"></a>String.intern()</h3><p>在某服务中，通过与其他进程通讯获取到格式为byte[]的字段，将byte[]转化成String的时候利用new String(byte[])方法，但是string很多是相同的，产生了大量相同的string对象，而且这些对象是程序中当作缓存来用一直存在于内存中，采用String.intern()对String对象进行缓存，降低了内存占用30M。</p>
-<h2 id="Integer-valueOf"><a href="#Integer-valueOf" class="headerlink" title="Integer.valueOf()"></a>Integer.valueOf()</h2><h3 id="只需一个实例的对象一定要使用单例"><a href="#只需一个实例的对象一定要使用单例" class="headerlink" title="只需一个实例的对象一定要使用单例"></a>只需一个实例的对象一定要使用单例</h3><h3 id="对象池技术"><a href="#对象池技术" class="headerlink" title="对象池技术"></a>对象池技术</h3><h2 id="使用小数据类型"><a href="#使用小数据类型" class="headerlink" title="使用小数据类型"></a>使用小数据类型</h2><h2 id="减少线程数"><a href="#减少线程数" class="headerlink" title="减少线程数"></a>减少线程数</h2><h2 id="去垃圾回收机制"><a href="#去垃圾回收机制" class="headerlink" title="去垃圾回收机制"></a>去垃圾回收机制</h2><h2 id="System-arraycopy"><a href="#System-arraycopy" class="headerlink" title="System.arraycopy ()"></a>System.arraycopy ()</h2><h1 id="临时内存"><a href="#临时内存" class="headerlink" title="临时内存"></a>临时内存</h1><h2 id="减少不必要的对象拷贝，重写对象的clone方法"><a href="#减少不必要的对象拷贝，重写对象的clone方法" class="headerlink" title="减少不必要的对象拷贝，重写对象的clone方法"></a>减少不必要的对象拷贝，重写对象的clone方法</h2><h2 id="容器大小预估"><a href="#容器大小预估" class="headerlink" title="容器大小预估"></a>容器大小预估</h2><p>容器在扩容时会产生大量临时对象，对容器大小进行预估传入初始值可以减少容器的扩容</p>
 
             </div>
         
@@ -786,7 +801,7 @@
         <footer id="footer">
     <div class="outer">
         <div id="footer-info" class="inner">
-            polyval &copy; 2018 
+            polyval &copy; 2019 
             <a rel="external nofollow noopener noreferrer" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png"></a>
             <br> Powered by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten" rel="external nofollow noopener noreferrer" target="_blank">wikitten</a>
             
